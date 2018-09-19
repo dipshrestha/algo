@@ -8,6 +8,7 @@ class TopSort extends FS{
     }
 
     _recursive(startNode, searchNode) {
+        debugger
         if (searchNode == startNode) return true; // found !
         if (this._visited(startNode)) return;
         this._visit(startNode);

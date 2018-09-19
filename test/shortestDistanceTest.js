@@ -94,35 +94,35 @@ describe('--- Shortest Distance Test DP ---', function() {
 describe('--- Shortest Distance Test dijkstra ---', function() {
     // TODO:
     it('a to g be equal to 9', function() {
-        var result = s.dijkstra("a", "g");
-        var expected = 9;
+        const result = s.dijkstra("a", "g");
+        const expected = 9;
         assert.equal(result, expected);
     });
 
     it('z to a be equal to Infinity', function() {
-        var result = s.dijkstra("z", "a");
-        var expected = Infinity;
+        const result = s.dijkstra("z", "a");
+        const expected = Infinity;
         assert.equal(result, expected);
     });
     it('b to e be equal to 6', function() {
-        var result = s.dijkstra("b", "e");
-        var expected = 6;
+        const result = s.dijkstra("b", "e");
+        const expected = 6;
         assert.equal(result, expected);
     });
 
     it('a to k be equal to 4', function() {
-        var result = s.dijkstra("a", "k");
-        var expected = 4;
+        const result = s.dijkstra("a", "k");
+        const expected = 4;
         assert.equal(result, expected);
     });
     it('a to i be equal to 9', function() {
-        var result = s.dijkstra("a", "i");
-        var expected = 9;
+        const result = s.dijkstra("a", "i");
+        const expected = 9;
         assert.equal(result, expected);
     });
     it('i to a be equal to 9', function() {
-        var result = s.dijkstra("i", "a");
-        var expected = 9;
+        const result = s.dijkstra("i", "a");
+        const expected = 9;
         assert.equal(result, expected);
     });
 

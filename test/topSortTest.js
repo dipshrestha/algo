@@ -31,8 +31,7 @@ describe('--- Topological Sort ---', function() {
         console.log(result);
         assert.deepEqual(result, expected);
     });
-
-    it.only('Recursive Search', function() {
+    it('Recursive Sort: a -> d', function() {
         const result = algo.traverseRec('a', 'd');
         const expected = []
         expected.push(new Edge('a', 'b', 5));
@@ -41,24 +40,13 @@ describe('--- Topological Sort ---', function() {
         console.log(result);
         assert.deepEqual(result, expected);
     });
-    it('Recursive Search', function() {
+    it.only('Recursive Sort: a -> e', function() {
         const result = algo.traverseRec('a', 'e');
         const expected = []
         expected.push(new Edge('a', 'b', 5));
-        expected.push(new Edge('b', 'c', 4));
-        expected.push(new Edge('c', 'd', 6));
+        //expected.push(new Edge('b', 'c', 4));
+        //expected.push(new Edge('c', 'd', 6));
         expected.push(new Edge('b', 'e', 8));
-        assert.deepEqual(result, expected);
-    });
-
-    it('Iterative Search', function() {
-        const result = algo.traverseIter('a', 'e');
-        const expected = []
-        expected.push(new Edge('a', 'b', 5));
-        expected.push(new Edge('b', 'f', 6));
-        expected.push(new Edge('f', 'g', 9));
-        expected.push(new Edge('b', 'e', 8));
-        console.log('result: ' + result)
         assert.deepEqual(result, expected);
     });
 });
