@@ -73,6 +73,22 @@ class GraphHelper {
         }
         return arr.reverse();
     }
+
+    reconstructPath(_s, _d, path, nodeNames) {
+        const arr = [];
+        const s = nodeNames ? nodeNames.indexOf(_s) : _s;
+        const d = nodeNames ? nodeNames.indexOf(_d) : _d;
+        if (path[s][d] == Infinity) return arr;
+        let tmp = s;
+
+        while (tmp != null & tmp != d) {
+            arr.push(tmp);
+            tmp = path[tmp][d];
+        }
+
+        arr.push(d);
+        return nodeNames ? arr.map(e => nodeNames[e]) : arr;
+    }
 }
 
 module.exports = { Graph, Edge, GraphHelper };

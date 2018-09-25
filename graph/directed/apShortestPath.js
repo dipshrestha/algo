@@ -9,16 +9,21 @@ class APShortestPath extends S {
 
     _init() {
         super._init();
-        this.path = [];
-        const len = this.V;
-        var dp = [len][len];
-        for (var i = 0; i < len; i++)
+        //this.path = [];
+        const len = this.g.V;
+        var dp = [len];
+        this.path = [len];
+        for (var i = 0; i < len; i++) {
+            let row = dp[i] = [];
+            let rowPath = this.path[i] = [];
             for (var j = 0; j < len; j++) {
-                //dp[i][j] = this.g.adjacencyMatrix[i][j];
-                //if (this.g.adjacencyMatrix[i][j] == undefined) {
-                //    this.g.adjacencyMatrix[i][j] = Infinity;
-                //}
+                row[j] = this.g.adjacencyMatrix[i][j];
+                if (row[j] != Infinity)
+                    rowPath[j] = j;
+                else
+                    rowPath[j] = null;
             }
+        }
 
         return dp;
     }
@@ -26,16 +31,16 @@ class APShortestPath extends S {
     find() {
         debugger
         var dp = this._init();
-        const len = this.V;
+        const len = this.g.V;
         for (var k = 0; k < len; k++)
             for (var i = 0; i < len; i++)
                 for (var j = 0; j < len; j++) {
                     if (dp[i][j] > dp[i][k] + dp[k][j]) {
                         dp[i][j] = dp[i][k] + dp[k][j];
-
+                        this.path[i][j] = this.path[i][k];
                     }
                 }
-        return dp;
+        return [dp, this.path];
     }
 }
 

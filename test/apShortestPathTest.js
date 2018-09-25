@@ -22,15 +22,14 @@ beforeEach('Setting up the graph', function() {
 });
 
 describe('--- AP Shortest Path Test ---', function() {
-    it.only('a to g be equal to 9', function() {
+    it.only('a to g be equal to 20', function() {
         var res = algo.find();
-        console.log(res)
-        /*var res = s.dp("a", "g");
-        var result = res[0];
-        var edges = res[1];
-        var expected = 9;
+        var indexS = algo.g.nodeNames.indexOf('a');
+        var indexE = algo.g.nodeNames.indexOf('g');
+        var result = res[0][indexS][indexE];
+        var path = res[1];
+        var expected = 20; 
         assert.equal(result, expected);
-        console.log(graphHelper.computePath("a", "g", edges));
-    */
+        console.log(graphHelper.reconstructPath("a", "g", path, algo.g.nodeNames));
     });
 });
