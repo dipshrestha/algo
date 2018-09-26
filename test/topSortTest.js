@@ -40,13 +40,4 @@ describe('--- Topological Sort ---', function() {
         console.log(result);
         assert.deepEqual(result, expected);
     });
-    it.only('Recursive Sort: a -> e', function() {
-        const result = algo.traverseRec('a', 'e');
-        const expected = []
-        expected.push(new Edge('a', 'b', 5));
-        //expected.push(new Edge('b', 'c', 4));
-        //expected.push(new Edge('c', 'd', 6));
-        expected.push(new Edge('b', 'e', 8));
-        assert.deepEqual(result, expected);
-    });
 });

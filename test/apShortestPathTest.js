@@ -22,7 +22,7 @@ beforeEach('Setting up the graph', function() {
 });
 
 describe('--- AP Shortest Path Test ---', function() {
-    it.only('a to g be equal to 20', function() {
+    it('a to g be equal to 20', function() {
         var res = algo.find();
         var indexS = algo.g.nodeNames.indexOf('a');
         var indexE = algo.g.nodeNames.indexOf('g');
