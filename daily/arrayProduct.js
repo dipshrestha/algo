@@ -28,6 +28,20 @@ class ArrayProduct {
     }
     return mem;
   }
+
+  // time: O(N^2)
+  // space: O(N)
+  iterativeWithDivision(WM) {
+    let mem = [],
+      tmp = 1;
+    for (let i = 0; i < WM.length; i++) {
+      tmp *= WM[i];
+    }
+    for (let i = 0; i < WM.length; i++) {
+      mem[i] = tmp/WM[i];
+    }
+    return mem;
+  }
 }
 
 module.exports = ArrayProduct;
