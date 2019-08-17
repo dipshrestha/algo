@@ -1,5 +1,5 @@
 const assert = require('assert');
-const NSteps = require('../dynamic/nSteps.js');
+const NSteps = require('../daily/nSteps.js');
 
 let algo = null;
 
