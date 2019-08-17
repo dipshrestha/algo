@@ -29,7 +29,7 @@ class ArrayProduct {
     return mem;
   }
 
-  // time: O(N^2)
+  // time: O(N)
   // space: O(N)
   iterativeWithDivision(WM) {
     let mem = [],
