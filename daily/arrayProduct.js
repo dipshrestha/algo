@@ -14,20 +14,6 @@ Follow-up: what if you can't use division?
 
 class ArrayProduct {
 
-  // time: O(N^2)
-  // space: O(N)
-  iterative(WM) {
-    let mem = []
-    for (let i = 0; i < WM.length; i++) {
-      let tmp = 1;
-      mem[i] = tmp;
-      for (let j = 0; j < WM.length; j++) {
-        if (i != j)
-          mem[i] *= WM[j]
-      }
-    }
-    return mem;
-  }
 }
 
 module.exports = ArrayProduct;
