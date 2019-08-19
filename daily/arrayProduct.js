@@ -14,6 +14,15 @@ Follow-up: what if you can't use division?
 
 class ArrayProduct {
 
+  constructor() {
+    this._init();
+  }
+
+  _init() {
+    this.V = [];
+    this.V[0] = 0; // initialize
+  }
+
   // time: O(N^2)
   // space: O(N)
   iterative(WM) {
@@ -38,9 +47,46 @@ class ArrayProduct {
       tmp *= WM[i];
     }
     for (let i = 0; i < WM.length; i++) {
-      mem[i] = tmp/WM[i];
+      mem[i] = tmp / WM[i];
     }
     return mem;
+  }
+
+  // time: O(N)
+  // space: O(N)
+  iterativeWithoutDivision(WM) {
+    let mem = [],
+      PR = [],
+      PL = [];
+    PR[WM.length - 1] = 1;
+    PR[WM.length - 2] = WM[WM.length - 1];
+    for (var i = WM.length - 3; i >= 0; i--)
+      PR[i] = PR[i + 1] * WM[i + 1];
+
+    PL[0] = 1;
+    PL[1] = PL[0] * WM[0];
+    for (var i = 2; i < WM.length; i++)
+      PL[i] = PL[i - 1] * WM[i - 1];
+
+    for (var i = 0; i < WM.length; i++) {
+      var r = PL[i] * PR[i];
+      mem[i] = r;
+    }
+    return mem;
+  }
+
+  // not needed
+  PL(WM, k) {
+    this.PL[0] = 1;
+    for (var i = 1; i < WM.length; i++)
+      this.PL[i] = this.PL[i - 1] * WM[i];
+  }
+
+  // not needed
+  PR(WM, k) {
+    this.PR[WM.length - 1] = 1;
+    for (var i = WM.length - 1; i > 0; i++)
+      this.PR[i] = this.PR[i + 1] * WM[i];
   }
 }
 

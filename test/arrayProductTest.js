@@ -19,6 +19,10 @@ describe('ArrayProduct', function() {
     const result = algo.iterativeWithDivision(WM)
     assert.deepEqual(result, expected);
   });
+  it('iterativeWithoutDivision', function() {
+    const result = algo.iterativeWithoutDivision(WM)
+    assert.deepEqual(result, expected);
+  });
 });
 
 describe('ArrayProduct', function() {
@@ -31,6 +35,10 @@ describe('ArrayProduct', function() {
   });
   it('iterativeWithDivision', function() {
     const result = algo.iterativeWithDivision(WM)
+    assert.deepEqual(result, expected);
+  });
+  it('iterativeWithoutDivision', function() {
+    const result = algo.iterativeWithoutDivision(WM)
     assert.deepEqual(result, expected);
   });
 });
