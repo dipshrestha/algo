@@ -30,7 +30,7 @@ beforeEach('Setting up the graph', function() {
     graphHelper = new GraphHelper();
 });
 
-describe.only('--- TSP ---', function() {
+describe('--- TSP ---', function() {
     it('TSP, start at a should be equal to 6', function() {
         var res = algo.traverseIter('a');
         var result = res[0];

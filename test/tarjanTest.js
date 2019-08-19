@@ -24,7 +24,7 @@ beforeEach('Setting up the graph', function() {
     graphHelper = new GraphHelper();
 });
 
-describe.only('--- Tarjan SCC ---', function() {
+describe('--- Tarjan SCC ---', function() {
     it('a to g be equal to 20', function() {
         var result = algo.traverseRec();
         console.log(result);
