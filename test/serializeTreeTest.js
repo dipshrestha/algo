@@ -1,31 +1,34 @@
 const assert = require('assert');
-const SerializeTree = require('../daily/serializeTree.js');
+const { SerializeDeseralizeTree, Node } = require('../daily/serializeTree.js');
 
 let algo = null;
 
 beforeEach('Setting up...', function() {
-    algo = new SerializeTree();
+  algo = new SerializeDeseralizeTree();
 });
 
-describe(' nStep(4) [1,2]', function() {
-    //var VM = [30, 14, 16, 9];
-    var WM = [1,2];
-    var W = 4;
-    const expected = 5;
+describe('SerializeDeseralizeTree 1', function() {
+  var node = new Node('root', new Node('left', new Node('left.left')), new Node('right'));
 
-    it('Iterative', function() {
-        const result = algo.iterative(WM, W)
-        console.log(algo.V);
-        assert.equal(result, expected);
-    });
-    it('Recursive', function() {
-        const result = algo.recursive(WM, W);
-        console.log(algo.V);
-        assert.equal(result, expected);
-    });
-    it('DP', function() {
-        const result = algo.dp(WM, W);
-        console.log(algo.V);
-        assert.equal(result, expected);
-    });
+  it('Iterative', function() {
+    const result = algo.iterativeSerializeWithArray(node);
+    const des = algo.iterativeDeserializeWithArray(result);
+    //console.log(result);
+    //console.log(des);
+    assert.equal(des.left.left.val, 'left.left');
+  });
+
+});
+
+describe('SerializeDeseralizeTree 2', function() {
+  var node = new Node('root', null, new Node('right', new Node('right.left'), new Node('right.right')));
+
+  it('Iterative', function() {
+    const result = algo.iterativeSerializeWithArray(node);
+    console.log(result);
+    const des = algo.iterativeDeserializeWithArray(result);
+    console.log(des);
+    assert.equal(des.right.left.val, 'right.left');
+  });
+
 });

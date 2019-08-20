@@ -19,8 +19,56 @@ node = Node('root', Node('left', Node('left.left')), Node('right'))
 assert deserialize(serialize(node)).left.left.val == 'left.left'
 */
 
-class SerializeTree {
+class Node {
 
+  constructor(val, left = null, right = null) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
 }
 
-module.exports = SerializeTree
+class SerializeDeseralizeTree {
+
+  // time: O(N)
+  // space: O(N)
+  iterativeSerializeWithArray(node) {
+    let x = []; // array with nodes
+    let i = 0;
+    let q = [];
+    let cur_node = null;
+    q.push(node);
+    x[0] = node.val;
+    while (q.length > 0) {
+      cur_node = q.shift();
+      if (cur_node != null) {
+        x[i * 2 + 1] = cur_node.left && cur_node.left.val || '';
+        x[i * 2 + 2] = cur_node.right && cur_node.right.val || '';
+        q.push(cur_node.left);
+        q.push(cur_node.right);
+      }
+      i++;
+    }
+    return x.join('|');
+  }
+
+  // time: O(N)
+  // space: O(N)
+  iterativeDeserializeWithArray(_arr) {
+    let arr = _arr.split('|')
+    let cur_node;
+    arr[0] = new Node(arr[0]);
+    for (var i = 0; i < arr.length / 2; i++) {
+      cur_node = arr[i];
+      if (cur_node != '') {
+        arr[i * 2 + 1] = arr[i * 2 + 1] && new Node(arr[i * 2 + 1]);
+        arr[i * 2 + 2] = arr[i * 2 + 2] && new Node(arr[i * 2 + 2]);
+        cur_node.left = arr[i * 2 + 1];
+        cur_node.right = arr[i * 2 + 2];
+      }
+    }
+    return arr[0];
+  }
+}
+
+module.exports = { SerializeDeseralizeTree, Node }
