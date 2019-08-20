@@ -17,8 +17,8 @@ describe('SerializeDeseralizeTree 1', function() {
     //console.log(des);
     assert.equal(des.left.left.val, 'left.left');
   });
-
 });
+
 
 describe('SerializeDeseralizeTree 2', function() {
   var node = new Node('root', null, new Node('right', new Node('right.left'), new Node('right.right')));
