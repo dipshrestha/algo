@@ -1,5 +1,5 @@
 const assert = require('assert');
-const Add2ToN = require('../daily/add2ToN.js');
+const Add2ToN = require('../daily/1_add2ToN.js');
 
 let algo = null;
 

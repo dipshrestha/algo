@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { SerializeDeseralizeTree, Node } = require('../daily/serializeTree.js');
+const { SerializeDeseralizeTree, Node } = require('../daily/3_serializeTree.js');
 
 let algo = null;
 

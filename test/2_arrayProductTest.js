@@ -1,5 +1,5 @@
 const assert = require('assert');
-const ArrayProduct = require('../daily/arrayProduct.js');
+const ArrayProduct = require('../daily/2_arrayProduct.js');
 
 let algo = null;
 

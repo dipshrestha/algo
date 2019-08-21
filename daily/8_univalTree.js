@@ -21,7 +21,7 @@ For example, the following tree has 5 unival subtrees:
 
 */
 
-const { Node } = require('../daily/serializeTree.js');
+const { Node } = require('../daily/3_serializeTree.js');
 
 class UnivalTree {
   constructor() {

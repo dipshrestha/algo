@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { cons, car, cdr } = require('../daily/constructPair.js');
+const { cons, car, cdr } = require('../daily/5_constructPair.js');
 
 describe('ConstructPair - cons(3, 4)', function() {
   var pair = cons(3, 4);
