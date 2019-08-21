@@ -21,18 +21,18 @@ function cons(a, b) {
   return pair;
 }
 
-function car(K) {
+function car(pair) {
   function X(a, b) {
     return a;
   }
-  return K(X);
+  return pair(X);
 }
 
-function cdr(K) {
+function cdr(pair) {
   function X(a, b) {
     return b;
   }
-  return K(X);
+  return pair(X);
 }
 
 module.exports = { cons, car, cdr };
