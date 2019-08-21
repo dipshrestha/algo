@@ -14,32 +14,25 @@ def cons(a, b):
 Implement car and cdr.
 */
 
-class ConstructPair {
-
-  // Time: O(N^2)
-  // Space: O(1)
-  iterative(WM, W) {
-    for (let i = 0; i < WM.length; i++) {
-      for (let j = i + 1; j < WM.length; j++) {
-        if (WM[i] + WM[j] == W) return true;
-      }
-    }
-    return false;
+function cons(a, b) {
+  function pair(f) {
+    return f(a, b);
   }
-
-  // https://leetcode.com/problems/two-sum/solution/
-  // Use a hashmap
-  // Time: O(N)
-  // Space: O(N)
-  iterativeBest(WM, W) {
-    let m = new Set();
-    //WM.foreach(e => m.add(e)); --> no need to do this initially
-    for (let i = 0; i < WM.length; i++) {
-      if (m.has(W - WM[i])) return true;
-      m.add(WM[i]);
-    }
-    return false;
-  }
+  return pair;
 }
 
-module.exports = ConstructPair;
+function car(K) {
+  function X(a, b) {
+    return a;
+  }
+  return K(X);
+}
+
+function cdr(K) {
+  function X(a, b) {
+    return b;
+  }
+  return K(X);
+}
+
+module.exports = { cons, car, cdr };
