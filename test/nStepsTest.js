@@ -13,7 +13,7 @@ describe(' nStep(4) [1,2]', function() {
     var W = 4;
     const expected = 5;
 
-    it('Iterative', function() {
+    it.skip('Iterative', function() {
         const result = algo.iterative(WM, W)
         console.log(algo.V);
         assert.equal(result, expected);
@@ -35,7 +35,7 @@ describe(' nStep(4) [1,2,3]', function() {
     var W = 4;
     const expected = 7;
 
-    it('Iterative', function() {
+    it.skip('Iterative', function() {
         const result = algo.iterative(WM, W)
         console.log(algo.V);
         assert.equal(result, expected);
