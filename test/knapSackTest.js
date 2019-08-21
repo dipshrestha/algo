@@ -47,7 +47,8 @@ describe('--- Test 2---', function() {
 });
 
 
-describe('--- Test 3 on 07/22/2019---', function() {
+// TODO
+describe.skip('--- Test 3 on 07/22/2019---', function() {
     var VM = [4,6,3,2,5]
     var WM = [2,3,5,4,6];
     var W = 10;
