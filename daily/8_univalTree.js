@@ -31,8 +31,8 @@ class UnivalTree {
   _init() {
     this.counter = 0;
   }
-  // time:  O(|WM| * N)
-  // space: O(|N|)
+  // time:  O(N)
+  // space: log(N) - height of tree for stack calls
   recursive(node) {
     this._recursive_helper(node);
     return this.counter;

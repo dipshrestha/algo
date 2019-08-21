@@ -1,5 +1,5 @@
 const assert = require('assert');
-const UnivalTree = require('../daily/univalTree.js');
+const UnivalTree = require('../daily/8_univalTree.js');
 const { Node } = require('../daily/serializeTree.js');
 
 let algo = null;
