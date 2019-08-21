@@ -15,7 +15,10 @@ describe('MissingPositive - 1', function() {
         const result = algo.iterative(WM)
         assert.equal(result, expected);
     });
-
+    it('iterativeBest', function() {
+        const result = algo.iterativeBest(WM)
+        assert.equal(result, expected);
+    });
 });
 //[ should give 3.
 
@@ -27,5 +30,22 @@ describe('MissingPositive - 2', function() {
         const result = algo.iterative(WM)
         assert.equal(result, expected);
     });
+    it('iterativeBest', function() {
+        const result = algo.iterativeBest(WM)
+        assert.equal(result, expected);
+    });
+});
 
+describe('MissingPositive - 3: duplicate', function() {
+    var WM = [1, 2, 2, 1, 1];
+    const expected = 3;
+
+    it('Iterative', function() {
+        const result = algo.iterative(WM)
+        assert.equal(result, expected);
+    });
+    it('iterativeBest', function() {
+        const result = algo.iterativeBest(WM)
+        assert.equal(result, expected);
+    });
 });

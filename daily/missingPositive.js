@@ -16,6 +16,7 @@
 
    // Time: O(N)
    // Space: O(N)
+   // NO NEED TO DO x-1 indexing
    iterative(WM) {
      var mem = [];
      for (let i = 0; i < WM.length; i++) {
@@ -28,6 +29,69 @@
        if (x != i) return i;
      }
      return mem.length;
+   }
+
+   // Time: O(N)
+   // Space: O(1)
+   iterativeBest1(WM) {
+     // fill elements <=0 with null
+     console.log(WM);
+     for (let i = 0; i < WM.length; i++) {
+       if (WM[i] <= 0) WM[i] = null;
+     }
+     console.log(WM);
+     for (let i = 0; i < WM.length; i++) {
+       let x = WM[i];
+       if (x < WM.length) WM[Math.abs(x)] *= -1;
+       //if (x < WM.length) WM[x] *= -1;
+     }
+     console.log(WM);
+     for (let i = 1; i < WM.length; i++) {
+       let x = WM[i];
+       if (x == null) return i;
+     }
+     return WM.length;
+   }
+   _swap(nums, i, j) {
+     var temp = nums[i];
+     nums[i] = nums[j];
+     nums[j] = temp;
+   }
+   // Time: O(N)
+   // Space: O(1)
+   iterativeBest(nums) {
+     let n = nums.length;
+     for (let i = 0; i < nums.length; i++) {
+       if (nums[i] >= 1 && nums[i] <= n) {
+         let pos = nums[i] - 1;
+         if (nums[pos] != pos + 1) {
+           this._swap(nums, pos, i);
+           i--;
+         }
+       }
+     }
+
+     for (let i = 0; i < n; i++) {
+       if (nums[i] != i + 1) {
+         return i + 1;
+       }
+     }
+     return n + 1;
+   }
+
+   //https://leetcode.com/problems/first-missing-positive/discuss/361903/48-ms-faster-than-96.85-of-JavaScript-online-submissions
+   iterativeBest_copied(nums) {
+     const len = nums.length;
+     for (let i = 0; i < len; i++) {
+       const value = Number(nums[i]);
+       if (value >= 1 && value <= len && typeof nums[value - 1] === 'number') {
+         nums[value - 1] = String(nums[value - 1]);
+       }
+     }
+     for (let i = 0; i < len; i++) {
+       if (typeof nums[i] === 'number') return i + 1;
+     }
+     return len + 1;
    }
  }
 
