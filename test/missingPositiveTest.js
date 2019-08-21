@@ -1,5 +1,5 @@
 const assert = require('assert');
-const MissingPositive = require(__dirname + '/../daily/MissingPositive.js');
+const MissingPositive = require('../daily/missingPositive.js');
 
 let algo = null;
 
