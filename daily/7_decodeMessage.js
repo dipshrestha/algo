@@ -45,16 +45,20 @@ class DecodeMessage {
     }
   }
 
+  // Time:  O(N)
+  // Space: O(1)
   iterative(str) {
     if (str.length == 0 || str == '') return 1;
     if (str.length < 2) return 1;
-    var p1 = 1, p2 = 1, f = 2;
+    var p1 = 1,
+      p2 = 1,
+      f = 2;
     for (var i = 2; i < str.length; i++) {
       p2 = p1;
       p1 = f;
       var obj = str.substr(-2); // last 2 digits
       if (obj < 27)
-        f = p1+ p2;
+        f = p1 + p2;
       else
         f = p1;
     }
