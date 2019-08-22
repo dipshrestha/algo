@@ -15,6 +15,10 @@ describe('DecodeMessage(111)', function() {
     const result = algo.recursive(str)
     assert.equal(result, expected);
   });
+  it('Iterative', function() {
+    const result = algo.iterative(str)
+    assert.equal(result, expected);
+  });
 });
 
 describe('DecodeMessage(1)', function() {
@@ -23,6 +27,11 @@ describe('DecodeMessage(1)', function() {
 
   it('Recursive', function() {
     const result = algo.recursive(str)
+    assert.equal(result, expected);
+  });
+
+  it('Iterative', function() {
+    const result = algo.iterative(str)
     assert.equal(result, expected);
   });
 });
@@ -35,6 +44,11 @@ describe('DecodeMessage(12)', function() {
     const result = algo.recursive(str)
     assert.equal(result, expected);
   });
+
+  it('Iterative', function() {
+    const result = algo.iterative(str)
+    assert.equal(result, expected);
+  });
 });
 
 describe('DecodeMessage(123)', function() {
@@ -43,6 +57,11 @@ describe('DecodeMessage(123)', function() {
 
   it('Recursive', function() {
     const result = algo.recursive(str)
+    assert.equal(result, expected);
+  });
+
+  it('Iterative', function() {
+    const result = algo.iterative(str)
     assert.equal(result, expected);
   });
 });
@@ -55,6 +74,10 @@ describe('DecodeMessage(121)', function() {
     const result = algo.recursive(str)
     assert.equal(result, expected);
   });
+  it('Iterative', function() {
+    const result = algo.iterative(str)
+    assert.equal(result, expected);
+  });
 });
 
 describe('DecodeMessage(1212)', function() {
@@ -65,6 +88,10 @@ describe('DecodeMessage(1212)', function() {
     const result = algo.recursive(str)
     assert.equal(result, expected);
   });
+  it('Iterative', function() {
+    const result = algo.iterative(str)
+    assert.equal(result, expected);
+  });
 });
 describe('DecodeMessage(12121)', function() {
   var str = '12121';
@@ -72,6 +99,10 @@ describe('DecodeMessage(12121)', function() {
 
   it('Recursive', function() {
     const result = algo.recursive(str)
+    assert.equal(result, expected);
+  });
+  it('Iterative', function() {
+    const result = algo.iterative(str)
     assert.equal(result, expected);
   });
 });
