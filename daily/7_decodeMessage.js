@@ -37,8 +37,10 @@ class DecodeMessage {
     if (str.length < 2) return 1;
     var obj = str.substr(-2); // last 2 digits
     if (obj < 27) {
+      // add the last 2
       return this.recursive(str.slice(0, -1)) + this.recursive(str.slice(0, -2));
     } else {
+      // same as the last one
       return this.recursive(str.slice(0, -1));
     }
   }
