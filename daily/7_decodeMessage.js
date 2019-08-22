@@ -50,10 +50,10 @@ class DecodeMessage {
   iterative(str) {
     if (str.length == 0 || str == '') return 1;
     if (str.length < 2) return 1;
-    var p1 = 1,
-      p2 = 1,
-      f = 2;
-    for (var i = 2; i < str.length; i++) {
+    var p1 = 1, // F(0) = 1
+      p2 = 1, // F(1) = 1
+      f = 1; // F(2) = 1 , can be 2 but for worst case 1
+    for (var i = 2; i <= str.length; i++) {
       p2 = p1;
       p1 = f;
       var obj = str.substr(-2); // last 2 digits
@@ -63,6 +63,24 @@ class DecodeMessage {
         f = p1;
     }
     return f;
+  }
+
+  // Time:  O(N)
+  // Space: O(N)
+  dp(str) {
+    if (str.length == 0 || str == '') return 1;
+    if (str.length < 2) return 1;
+    let x = [];
+    x[0] = x[1] = 1;
+    x[2] = 1;
+    for (var i = 2; i <= str.length; i++) {
+      var obj = str.substr(-2); // last 2 digits
+      if (obj < 27)
+        x[i] = x[i - 1] + x[i - 2];
+      else
+        x[i] = x[i - 1];
+    }
+    return x[str.length];
   }
 }
 

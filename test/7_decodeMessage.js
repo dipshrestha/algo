@@ -19,6 +19,10 @@ describe('DecodeMessage(111)', function() {
     const result = algo.iterative(str)
     assert.equal(result, expected);
   });
+  it('DP', function() {
+    const result = algo.dp(str)
+    assert.equal(result, expected);
+  });
 });
 
 describe('DecodeMessage(1)', function() {
@@ -32,6 +36,11 @@ describe('DecodeMessage(1)', function() {
 
   it('Iterative', function() {
     const result = algo.iterative(str)
+    assert.equal(result, expected);
+  });
+
+  it('DP', function() {
+    const result = algo.dp(str)
     assert.equal(result, expected);
   });
 });
@@ -49,7 +58,13 @@ describe('DecodeMessage(12)', function() {
     const result = algo.iterative(str)
     assert.equal(result, expected);
   });
+
+  it('DP', function() {
+    const result = algo.dp(str)
+    assert.equal(result, expected);
+  });
 });
+
 
 describe('DecodeMessage(123)', function() {
   var str = '123';
@@ -64,7 +79,13 @@ describe('DecodeMessage(123)', function() {
     const result = algo.iterative(str)
     assert.equal(result, expected);
   });
+
+  it('DP', function() {
+    const result = algo.dp(str)
+    assert.equal(result, expected);
+  });
 });
+
 
 describe('DecodeMessage(121)', function() {
   var str = '121';
@@ -78,7 +99,13 @@ describe('DecodeMessage(121)', function() {
     const result = algo.iterative(str)
     assert.equal(result, expected);
   });
+
+  it('DP', function() {
+    const result = algo.dp(str)
+    assert.equal(result, expected);
+  });
 });
+
 
 describe('DecodeMessage(1212)', function() {
   var str = '1212';
@@ -92,7 +119,13 @@ describe('DecodeMessage(1212)', function() {
     const result = algo.iterative(str)
     assert.equal(result, expected);
   });
+
+  it('DP', function() {
+    const result = algo.dp(str)
+    assert.equal(result, expected);
+  });
 });
+
 describe('DecodeMessage(12121)', function() {
   var str = '12121';
   const expected = 8;
@@ -103,6 +136,11 @@ describe('DecodeMessage(12121)', function() {
   });
   it('Iterative', function() {
     const result = algo.iterative(str)
+    assert.equal(result, expected);
+  });
+
+  it('DP', function() {
+    const result = algo.dp(str)
     assert.equal(result, expected);
   });
 });
