@@ -15,37 +15,31 @@ You can assume that the messages are decodable. For example, '001' is not allowe
 
 class DecodeMessage {
 
-  // Time: O(N)
-  // Space: O(N)
-  // NO NEED TO DO x-1 indexing
-  iterative(WM) {
-    var mem = [];
-    for (let i = 0; i < WM.length; i++) {
-      let x = WM[i];
-      if (x > 0) mem[x] = x;
-    }
-    //console.log(mem);
-    for (let i = 1; i < mem.length; i++) {
-      let x = mem[i];
-      if (x != i) return i;
-    }
-    return mem.length;
-  }
 
-  // Time: O(N)
-  // Space: O(1)
-  iterativeBest(WM) {
-    // move negative numbers to the end and find the end index of +ve numbers
-    var good = -1;
-    for (let i = 0; i < WM.length; i++) {
-      if (WM[i] > 0) {
-        if (good != i - 1) {
-          this._swap(WM, good + 1, i)
-          good += 1;
-        } else {
-          good = i;
-        }
-      }
+  // can recursive be top->down ?
+
+  /*
+  1 =   {1}
+  12 =  {12},  {1,2}
+  123 = {123} ,{1,23}, {12,3}
+  1234 = 1234/1,234/12,34
+
+  1 = 1
+  12 = 12/1,2
+  121 =  121 /1,21  /12,1
+  1214 = 1214/1,21,4/12,14/12,1,4/1,2,14
+  */
+
+  // Time:  O(2^N)
+  // Space: O(N)
+  recursive(str) {
+    if (str.length == 0 || str == '') return 1;
+    if (str.length < 2) return 1;
+    var obj = str.substr(-2); // last 2 digits
+    if (obj < 27) {
+      return this.recursive(str.slice(0, -1)) + this.recursive(str.slice(0, -2));
+    } else {
+      return this.recursive(str.slice(0, -1));
     }
   }
 }
