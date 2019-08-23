@@ -15,6 +15,27 @@ You can assume that the messages are decodable. For example, '001' is not allowe
 
 class DecodeMessage {
 
+  // It's a Fibonacci series
+  // F(1234)
+  //    F(0)  = 1
+  //    F(1)  = 1
+  //   F(12)  = 2
+  //  F(121)  = 3
+  // F(1212)  = 5
+  //F(12121)  = 8
+  //F(12129)  = 8
+
+  //    F(0)  = 1
+  //    F(9)  = 1
+  //   F(99)  = 1
+  //  F(999)  = 1
+
+  //    F(0)  = 1
+  //    F(2)  = 1
+  //   F(26)  = 1
+  //  F(266)  = 2
+  // F(2662)  = 2
+  //F(26621)  = 3
 
   // can recursive be top->down ?
 
