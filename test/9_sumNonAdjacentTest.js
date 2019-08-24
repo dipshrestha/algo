@@ -21,6 +21,11 @@ describe('SumNonAdjacent [2, 4]', function() {
     const result = algo.iterative(WM)
     assert.equal(result, expected);
   });
+
+  it('Dynamic', function() {
+    const result = algo.dp(WM)
+    assert.equal(result, expected);
+  });
 });
 
 describe('SumNonAdjacent [4, 2]', function() {
@@ -34,6 +39,11 @@ describe('SumNonAdjacent [4, 2]', function() {
 
   it('Iterative', function() {
     const result = algo.iterative(WM)
+    assert.equal(result, expected);
+  });
+
+  it('Dynamic', function() {
+    const result = algo.dp(WM)
     assert.equal(result, expected);
   });
 });
@@ -51,6 +61,11 @@ describe('SumNonAdjacent [2, 4, 6, 2, 5]', function() {
     const result = algo.iterative(WM)
     assert.equal(result, expected);
   });
+
+  it('Dynamic', function() {
+    const result = algo.dp(WM)
+    assert.equal(result, expected);
+  });
 });
 
 describe('SumNonAdjacent  [-1,-5]', function() {
@@ -64,6 +79,11 @@ describe('SumNonAdjacent  [-1,-5]', function() {
 
   it('Iterative', function() {
     const result = algo.iterative(WM)
+    assert.equal(result, expected);
+  });
+
+  it('Dynamic', function() {
+    const result = algo.dp(WM)
     assert.equal(result, expected);
   });
 });
@@ -81,6 +101,11 @@ describe('SumNonAdjacent  [-5,-1]', function() {
     const result = algo.iterative(WM)
     assert.equal(result, expected);
   });
+
+  it('Dynamic', function() {
+    const result = algo.dp(WM)
+    assert.equal(result, expected);
+  });
 });
 
 describe('SumNonAdjacent  [5, 4, -1, 3, 6, -4]', function() {
@@ -94,6 +119,11 @@ describe('SumNonAdjacent  [5, 4, -1, 3, 6, -4]', function() {
 
   it('Iterative', function() {
     const result = algo.iterative(WM)
+    assert.equal(result, expected);
+  });
+
+  it('Dynamic', function() {
+    const result = algo.dp(WM)
     assert.equal(result, expected);
   });
 });

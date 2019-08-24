@@ -71,8 +71,18 @@ class SumNonAdjacent {
     return f;
   }
 
-  dp() {
-
+  // NOTE: this loop run through end of the WM.length like i<=WM.length;
+  dp(WM) {
+    if (WM.length == 0) return 0;
+    if (WM.length == 1) return WM[0];
+    let mem = [];
+    mem[0] = 0;
+    mem[1] = WM[0];
+    mem[2] = Math.max(WM[0], WM[1]);
+    for (var i = 2; i <= WM.length; i++) {
+      mem[i] = Math.max(mem[i - 2] + WM[i - 1], mem[i - 1]);
+    }
+    return mem[WM.length];
   }
 }
 
