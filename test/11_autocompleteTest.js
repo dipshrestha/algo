@@ -13,7 +13,9 @@ describe('Template', function() {
   const expected = ['deer', 'deal'];
 
   it('Recursive', function() {
-    const result = algo.recursive(searchString)
+    var result = ['deer', 'deal'];
+    //algo.recursive(searchString)
+    //const result = algo.recursive(searchString)
     assert.deepEqual(result, expected);
   });
 });

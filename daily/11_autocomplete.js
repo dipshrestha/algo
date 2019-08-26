@@ -16,16 +16,61 @@ Hint: Try preprocessing the dictionary into a more efficient data structure to s
 class Autocomplete {
 
   constructor(WM) {
-    this._init();
+    this._init(WM);
+  }
+
+  _addWord(parentMap, word) {
+    if (word == null || word == '') return -1;
+    if (word.length == 1) {
+      var childMap = parentMap.get(word[i]);
+      if (childMap) {
+        return childMap;
+      }
+      childMap = new Map();
+      childMap.set(word[i], childMap);
+      return childMap;
+    } else {
+      var lastChar = word.substr(-1);
+      var childMap = this._addWord(parentMap.get(), word.substr(-1));
+      parentMap.set()
+    }
   }
 
   _init(WM) {
 
+    // for each word
+    //   for each letter find hashMap of the letter and add it to appropriate place
+    var parentMap = new Map();
+    for (var i = 0; i < WM.length; i++) {
+      var word = WM[i];
+      /*
+      for (var j = 0; j < word.length; i++) {
+        var letter = word[i];
+        var childMap = parentMap.has(letter)
+        if (childMap) {
+          childMap.push(letter, letter);
+
+        }
+        childMap = new Map();
+        childMap.push(letter, new Map())
+      }*/
+    }
   }
 
-  recursive(WM, searchString) {
 
-    return null;
+  _getAll() {
+
+  }
+
+  recursive(maps, searchString) {
+    // find inside the child
+    while (searchString != null) {
+      var s = searchString[i];
+      if (maps.has(s)) {
+        maps = maps.get(s);
+      }
+    }
+    return _getAll(maps);
   }
 
 }
