@@ -17,6 +17,14 @@ describe('SerializeDeseralizeTree 1', function() {
     //console.log(des);
     assert.equal(des.left.left.val, 'left.left');
   });
+
+  it('Recursive', function() {
+    const result = algo.recursiveSerializeWithDFS(node);
+    const des = algo.recursiveDeserializeWithDFS(result);
+    //console.log(result);
+    //console.log(des);
+    assert.equal(des.left.left.val, 'left.left');
+  });
 });
 
 
@@ -25,10 +33,15 @@ describe('SerializeDeseralizeTree 2', function() {
 
   it('Iterative', function() {
     const result = algo.iterativeSerializeWithArray(node);
-    console.log(result);
     const des = algo.iterativeDeserializeWithArray(result);
-    console.log(des);
     assert.equal(des.right.left.val, 'right.left');
   });
 
+  it('Recursive', function() {
+    const result = algo.recursiveSerializeWithDFS(node);
+    const des = algo.recursiveDeserializeWithDFS(result);
+    //console.log(result);
+    //console.log(des);
+    assert.equal(des.right.left.val, 'right.left');
+  });
 });

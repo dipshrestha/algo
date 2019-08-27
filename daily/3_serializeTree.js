@@ -30,6 +30,7 @@ class Node {
 
 class SerializeDeseralizeTree {
 
+  // BFS
   // time: O(N)
   // space: O(N)
   iterativeSerializeWithArray(node) {
@@ -54,13 +55,14 @@ class SerializeDeseralizeTree {
 
   // time: O(N)
   // space: O(N)
-  iterativeDeserializeWithArray(_arr) {
-    let arr = _arr.split('|')
+  iterativeDeserializeWithArray(str) {
+    let arr = str.split('|')
     let cur_node;
-    arr[0] = new Node(arr[0]);
+    arr[0] = new Node(arr[0]); // replace the original value with Node
     for (var i = 0; i < arr.length / 2; i++) {
       cur_node = arr[i];
       if (cur_node != '') {
+        // create node with just value and assign it as left/right
         arr[i * 2 + 1] = arr[i * 2 + 1] && new Node(arr[i * 2 + 1]);
         arr[i * 2 + 2] = arr[i * 2 + 2] && new Node(arr[i * 2 + 2]);
         cur_node.left = arr[i * 2 + 1];
@@ -68,6 +70,41 @@ class SerializeDeseralizeTree {
       }
     }
     return arr[0];
+  }
+
+  // DFS with '' for empty nodes and | as separator
+  recursiveSerializeWithDFS(node) {
+    if (node == null) return [''];
+    let stack = [];
+    let x = this.recursiveSerializeWithDFS_helper(node);
+    return x.join('|');
+  }
+
+  // this can be inside recursiveSerializeWithDFS and with a local stack variable
+  // like here
+  // https://leetcode.com/problems/serialize-and-deserialize-binary-tree/discuss/366872/Javascript-pre-order-traversal-DFS
+  recursiveSerializeWithDFS_helper(node) {
+    if (node == null) return [''];
+    let stack = [];
+    stack.push(node.val);
+    stack.push(...this.recursiveSerializeWithDFS_helper(node.left));
+    stack.push(...this.recursiveSerializeWithDFS_helper(node.right));
+    return stack;
+  }
+
+  recursiveDeserializeWithDFS(str) {
+    var arr = str.split('|');
+
+    function recursiveDeserializeWithDFS_helper() {
+      let val = arr.shift(); // element at head, move the pointer each time
+      if (val == '') return;
+      let cur_node = new Node(val);
+      cur_node.left = recursiveDeserializeWithDFS_helper();
+      cur_node.right = recursiveDeserializeWithDFS_helper();
+      return cur_node;
+    }
+
+    return recursiveDeserializeWithDFS_helper();
   }
 }
 
