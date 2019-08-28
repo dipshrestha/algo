@@ -27,24 +27,28 @@ class DistinctSubString {
     }
     return set.size;
   }
+
   recursive(str, N) {
-    var ret = this.recursive_helper(str, N);
-    return Math.max(this.maxLength, ret.length);
+    var all = [];
+    // do a start from each of the element
+    for (var i = 0; i < str.length; i++) {
+      var ret = this.recursive_helper(str.substring(i, str.length), N);
+      all.push(ret.length);
+    }
+    return Math.max(this.maxLength, ...all);
   }
 
   recursive_helper(str, N) {
-    debugger
     if (str == null || str.length == 0) return '';
-    //if (N == 0) return '';
     if (str.length == 1 && N >= 1) return str;
 
-    //for (var i = 1; i <= N; i++) {
     var e = str.substr(-1); // get the last element
-    //var remaining = 123;
-    var ret = this.recursive_helper(str.substr(0, str.length - 1), N)
+    var remaining = str.substr(0, str.length - 1);
+    var ret = this.recursive_helper(remaining, N)
     if (ret.indexOf(e) != -1 || this._distinct(ret) < N) {
       return ret + e;
     } else {
+      // character changed.
       this.maxLength = Math.max(this.maxLength, ret.length);
       return e;
     }

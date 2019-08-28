@@ -93,10 +93,32 @@ describe('DistinctSubString(bcba,2)', function() {
   });
 });
 
-describe.skip('DistinctSubString(abcba,2)', function() {
+describe('DistinctSubString(abcb,2)', function() {
+  const str = 'abcb';
+  const N = 2;
+  const expected = 3;
+
+  it('Recursive', function() {
+    const result = algo.recursive(str, N);
+    assert.equal(result, expected);
+  });
+});
+
+describe('DistinctSubString(abcba,2)', function() {
   const str = 'abcba';
   const N = 2;
   const expected = 3;
+
+  it('Recursive', function() {
+    const result = algo.recursive(str, N);
+    assert.equal(result, expected);
+  });
+});
+
+describe('DistinctSubString(contains,5)', function() {
+  const str = 'contains';
+  const N = 5;
+  const expected = 6;
 
   it('Recursive', function() {
     const result = algo.recursive(str, N);
