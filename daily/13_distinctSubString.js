@@ -20,11 +20,18 @@ class DistinctSubString {
   _init() {
     this.maxLength = 0;
   }
-
+  _distinct(str) {
+    var set = new Set();
+    for (var a of str) {
+      set.add(a);
+    }
+    return set.size;
+  }
   recursive(str, N) {
     var ret = this.recursive_helper(str, N);
     return Math.max(this.maxLength, ret.length);
   }
+
   recursive_helper(str, N) {
     debugger
     if (str == null || str.length == 0) return '';
@@ -34,8 +41,8 @@ class DistinctSubString {
     //for (var i = 1; i <= N; i++) {
     var e = str.substr(-1); // get the last element
     //var remaining = 123;
-    var ret = this.recursive_helper(str.substr(0, str.length - 1), N - 1)
-    if (ret.indexOf(e) != -1 || ret.length < N) {
+    var ret = this.recursive_helper(str.substr(0, str.length - 1), N)
+    if (ret.indexOf(e) != -1 || this._distinct(ret) < N) {
       return ret + e;
     } else {
       this.maxLength = Math.max(this.maxLength, ret.length);
