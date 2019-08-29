@@ -28,11 +28,14 @@ class DistinctSubString {
     return set.size;
   }
 
+  // Time: O(N^2)
+  // Space: O(N) stack
   recursive(str, N) {
     var all = [];
     // do a start from each of the element
     for (var i = 0; i < str.length; i++) {
       var ret = this.recursive_helper(str.substring(i, str.length), N);
+      console.log(ret);
       all.push(ret.length);
     }
     return Math.max(this.maxLength, ...all);
@@ -44,7 +47,9 @@ class DistinctSubString {
 
     var e = str.substr(-1); // get the last element
     var remaining = str.substr(0, str.length - 1);
-    var ret = this.recursive_helper(remaining, N)
+    var ret = this.recursive_helper(remaining, N);
+
+    // if element is already present or if the length N permits you to add more element
     if (ret.indexOf(e) != -1 || this._distinct(ret) < N) {
       return ret + e;
     } else {
@@ -53,6 +58,39 @@ class DistinctSubString {
       return e;
     }
   }
+
+  // ====================================================================== //
+  //  IT can be done other way, moving the pointer in opposite direction
+  // ====================================================================== //
+  // Time: O(N^2)
+  // Space: O(N) stack
+  recursive2(str, N) {
+    var all = [];
+    // do a start from each of the element
+    for (var i = str.length; i >= 0; i--) {
+      var ret = this.recursive_helper2(str.substring(0, i), N);
+      all.push(ret.length);
+    }
+    return Math.max(this.maxLength, ...all);
+  }
+  recursive_helper2(str, N) {
+    if (str == null || str.length == 0) return '';
+    if (str.length == 1 && N >= 1) return str;
+
+    var e = str.charAt(0); // get the first element
+    var remaining = str.substr(1, str.length);
+    var ret = this.recursive_helper(remaining, N);
+
+    // if element is already present or if the length N permits you to add more element
+    if (ret.indexOf(e) != -1 || this._distinct(ret) < N) {
+      return e + ret;
+    } else {
+      // character changed.
+      this.maxLength = Math.max(this.maxLength, ret.length);
+      return e;
+    }
+  }
+  // ====================================================================== //
 
 }
 

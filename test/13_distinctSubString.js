@@ -125,3 +125,15 @@ describe('DistinctSubString(contains,5)', function() {
     assert.equal(result, expected);
   });
 });
+
+
+describe('DistinctSubString(aabbcc,3)', function() {
+  const str = 'aabbcc';
+  const N = 3;
+  const expected = 6;
+
+  it('Recursive', function() {
+    const result = algo.recursive(str, N);
+    assert.equal(result, expected);
+  });
+});
