@@ -21,7 +21,7 @@ describe('DistinctSubString(a,1)', function() {
     assert.equal(result, expected);
   });
 });
-describe.only('DistinctSubString(ab,1)', function() {
+describe('DistinctSubString(ab,1)', function() {
   const str = 'ab';
   const N = 1;
   const expected = 1;
@@ -59,6 +59,10 @@ describe('DistinctSubString(ab,2)', function() {
     const result = algo.recursive(str, N);
     assert.equal(result, expected);
   });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
+    assert.equal(result, expected);
+  });
 });
 
 describe('DistinctSubString(abc,2)', function() {
@@ -68,6 +72,10 @@ describe('DistinctSubString(abc,2)', function() {
 
   it('Recursive', function() {
     const result = algo.recursive(str, N);
+    assert.equal(result, expected);
+  });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
     assert.equal(result, expected);
   });
 });
@@ -81,6 +89,10 @@ describe('DistinctSubString(bba,2)', function() {
     const result = algo.recursive(str, N);
     assert.equal(result, expected);
   });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
+    assert.equal(result, expected);
+  });
 });
 
 describe('DistinctSubString(aba,2)', function() {
@@ -90,6 +102,10 @@ describe('DistinctSubString(aba,2)', function() {
 
   it('Recursive', function() {
     const result = algo.recursive(str, N);
+    assert.equal(result, expected);
+  });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
     assert.equal(result, expected);
   });
 });
@@ -103,6 +119,10 @@ describe('DistinctSubString(bcba,2)', function() {
     const result = algo.recursive(str, N);
     assert.equal(result, expected);
   });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
+    assert.equal(result, expected);
+  });
 });
 
 describe('DistinctSubString(abcb,2)', function() {
@@ -112,6 +132,10 @@ describe('DistinctSubString(abcb,2)', function() {
 
   it('Recursive', function() {
     const result = algo.recursive(str, N);
+    assert.equal(result, expected);
+  });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
     assert.equal(result, expected);
   });
 });
@@ -125,6 +149,10 @@ describe('DistinctSubString(abcba,2)', function() {
     const result = algo.recursive(str, N);
     assert.equal(result, expected);
   });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
+    assert.equal(result, expected);
+  });
 });
 
 describe('DistinctSubString(contains,5)', function() {
@@ -134,6 +162,10 @@ describe('DistinctSubString(contains,5)', function() {
 
   it('Recursive', function() {
     const result = algo.recursive(str, N);
+    assert.equal(result, expected);
+  });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
     assert.equal(result, expected);
   });
 });
@@ -147,6 +179,10 @@ describe('DistinctSubString(aabbcc,3)', function() {
     const result = algo.recursive(str, N);
     assert.equal(result, expected);
   });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
+    assert.equal(result, expected);
+  });
 });
 
 describe('DistinctSubString(abcbbbbcccbdddadacb,2)', function() {
@@ -158,6 +194,10 @@ describe('DistinctSubString(abcbbbbcccbdddadacb,2)', function() {
     const result = algo.recursive(str, N);
     assert.equal(result, expected);
   });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
+    assert.equal(result, expected);
+  });
 });
 
 describe('DistinctSubString(abcadcacacaca,3)', function() {
@@ -167,6 +207,10 @@ describe('DistinctSubString(abcadcacacaca,3)', function() {
 
   it('Recursive', function() {
     const result = algo.recursive(str, N);
+    assert.equal(result, expected);
+  });
+  it('Iterative', function() {
+    const result = algo.iterative(str, N);
     assert.equal(result, expected);
   });
 });
