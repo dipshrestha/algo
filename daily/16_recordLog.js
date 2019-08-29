@@ -25,38 +25,57 @@ class LinkListNode {
 class RecordLog {
 
   constructor(N) {
-    this.head = null;
     this.maxLength = N;
-    this.size = 0;
+    this.arr = [];
+    this.curIdx = 0;
   }
 
   record(order_id) {
-    debugger;
-    var x = null;
-    if (this.head == null) {
-      x = new LinkListNode(order_id, null);
-    } else if (this.maxLength > this.size) {
-      x = new LinkListNode(order_id, this.head);
-    } else {
-      // don't create new node
-      
-    }
-    this.size = Math.min(++this.size, this.maxLength);
-    this.head = x;
+    this.arr[this.curIdx] = order_id;
+    this.curIdx = (this.curIdx + 1) % this.maxLength;
   }
 
-
-  // time: O(k)
-  // space: O(N)
   get_last(i) {
-    if (i <= 0 || this.size < i) return null;
-    var tmp = this.head;
-    while (i - 1 > 0 && tmp != null) {
-      tmp = tmp.before;
-      i--;
-    }
-    return tmp ? tmp.val : null;
+    if (i < 1 || i > this.maxLength || i > this.curIdx.length)
+      return null;
+    return this.arr[(this.curIdx - i + this.maxLength) % this.maxLength];
   }
+
+  /*
+    constructor(N) {
+      this.head = null;
+      this.maxLength = N;
+      this.size = 0;
+    }
+
+    record(order_id) {
+      debugger;
+      var x = null;
+      if (this.head == null) {
+        x = new LinkListNode(order_id, null);
+        //} else if (this.maxLength > this.size) {
+        //  x = new LinkListNode(order_id, this.head);
+      } else {
+        // don't create new node
+        x = new LinkListNode(order_id, this.head);
+      }
+      this.size = Math.min(++this.size, this.maxLength);
+      this.head = x;
+    }
+
+
+    // time: O(k)
+    // space: O(N)
+    get_last(i) {
+      if (i <= 0 || this.size < i) return null;
+      var tmp = this.head;
+      while (i - 1 > 0 && tmp != null) {
+        tmp = tmp.before;
+        i--;
+      }
+      return tmp ? tmp.val : null;
+    }
+  */
 }
 
 module.exports = { RecordLog, LinkListNode }

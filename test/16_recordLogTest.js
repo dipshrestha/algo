@@ -50,10 +50,10 @@ describe('RecordLog 654321', function() {
     assert.equal(result, expected);
   });
 
-  it.skip('pointer movement over size', function() {
-    const expected = 5;
+  it('pointer movement over size', function() {
+    const expected = 6;
     algo.record(6);
-    const result = algo.get_last(5);
+    const result = algo.get_last(1);
     assert.equal(result, expected);
   });
 });
