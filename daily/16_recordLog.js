@@ -35,6 +35,8 @@ class RecordLog {
     this.curIdx = (this.curIdx + 1) % this.maxLength;
   }
 
+  // time: O(1)
+  // space: O(N)
   get_last(i) {
     if (i < 1 || i > this.maxLength || i > this.curIdx.length)
       return null;
