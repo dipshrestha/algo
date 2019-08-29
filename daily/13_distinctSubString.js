@@ -90,6 +90,37 @@ class DistinctSubString {
       return e;
     }
   }
+
+  //"abcbbbbcccbdddadacb", the longest substring that contains 2 unique character is "bcbbbbcccb".
+  iterative(str, N) {
+    if (str == null || str.length == 0) return 0;
+    if (str.length == 1 && N >= 1) return 1;
+    debugger;
+
+    var set = new Set();
+    var counter = 0,
+      duplicatePointer = 0;
+    for (var i = 0; i < str.length; i++) {
+      var char = str[i];
+      // if element is already present or if the length N permits you to add more element
+      if (set.has(char)) {
+        if (i > 0 && char[i - 1] == char[i]) duplicatePointer++
+        else duplicatePointer = 0;
+        counter++;
+      } else if (set.size < N) {
+        set.add(char);
+        counter++;
+      } else {
+        set.clear();
+        counter = 0;
+        set.add(char);
+        // move i to the start of the last element;
+        i -= duplicatePointer;
+      }
+    }
+    return counter;
+
+  }
   // ====================================================================== //
 
 }
