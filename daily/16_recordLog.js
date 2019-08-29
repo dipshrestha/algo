@@ -24,17 +24,24 @@ class LinkListNode {
 
 class RecordLog {
 
-  constructor() {
+  constructor(N) {
     this.head = null;
+    this.maxLength = N;
+    this.size = 0;
   }
 
   record(order_id) {
+    debugger;
     var x = null;
     if (this.head == null) {
       x = new LinkListNode(order_id, null);
-    } else {
+    } else if (this.maxLength > this.size) {
       x = new LinkListNode(order_id, this.head);
+    } else {
+      // don't create new node
+      
     }
+    this.size = Math.min(++this.size, this.maxLength);
     this.head = x;
   }
 
@@ -42,7 +49,7 @@ class RecordLog {
   // time: O(k)
   // space: O(N)
   get_last(i) {
-    if (i <= 0) return null;
+    if (i <= 0 || this.size < i) return null;
     var tmp = this.head;
     while (i - 1 > 0 && tmp != null) {
       tmp = tmp.before;
