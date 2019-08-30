@@ -11,8 +11,23 @@ Given a stream of elements too large to store in memory, pick a random element f
 
  */
 
+// https://www.youtube.com/watch?v=Ybra0uGEkpM - very good explanation
+// https://www.youtube.com/watch?v=8-YLI2hRfpo
 class UniformProbability {
 
+  random(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  generate(stream) {
+    var rand = stream[0],
+      cur = null;
+
+    for (var i = 1; i < stream.length; i++) {
+      if (this.random(0, i) == i) rand = cur;
+    }
+    return rand;
+  }
 
 }
 
