@@ -57,13 +57,16 @@ class LongestAbsolutePath {
   }
 
   _findLength(charArr, depthArr, depth) {
+    var s = 0;
     if (this._isFile(charArr)) {
-      var s = charArr.length;
+      s = charArr.length;
       for (var j = 0; j < depth; j++) s += (depthArr[j] + 1);
-      this.maxLength = Math.max(s, this.maxLength);
     }
+    return s;
   }
 
+  // Time: O(N)
+  // Space: O(N) worst case
   iterative(str) {
     var char = null,
       depth = 0,
@@ -73,7 +76,7 @@ class LongestAbsolutePath {
       char = str[i];
       if (char == '\n') { // file has changed, it's time to count the characters
         depthArr[depth] = charArr.length;
-        this._findLength(charArr, depthArr, depth);
+        this.maxLength = Math.max(this.maxLength, this._findLength(charArr, depthArr, depth))
         charArr = []; // reset
         depth = 0;
       } else if (char == '\t') { // increase depth counter
@@ -82,8 +85,7 @@ class LongestAbsolutePath {
         charArr.push(char);
       }
     }
-    this._findLength(charArr, depthArr, depth);
-    return this.maxLength;
+    return Math.max(this.maxLength, this._findLength(charArr, depthArr, depth));
   }
 
   /**
