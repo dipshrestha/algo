@@ -7,11 +7,13 @@ beforeEach('Setting up...', function() {
   algo = new UniformProbability();
 });
 
-describe('Template', function() {
+describe('UniformProbability', function() {
   const result = 3;
   const expected = 3;
 
-  it('Iterative', function() {
+  it('No tests', function() {
+    var generated = algo.generate('123456789');
+    console.log(generated);
     assert.equal(result, expected);
   });
 });
