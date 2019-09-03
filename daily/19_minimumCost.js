@@ -17,6 +17,10 @@ return the minimum cost which achieves this goal.
 class MinimumCost {
 
 
+  recursive() {
+
+  }
+
 }
 
 module.exports = MinimumCost;
