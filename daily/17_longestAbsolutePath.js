@@ -36,16 +36,6 @@ The name of a file contains at least a period and an extension.
 The name of a directory or sub-directory will not contain a period.
  */
 
-class Node {
-  constructor(val, children = []) {
-    this.val = val;
-    this.children = children;
-  }
-  addChild(child) {
-    this.children.push(child)
-  }
-}
-
 class LongestAbsolutePath {
 
   constructor() {
