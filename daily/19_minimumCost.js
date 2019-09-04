@@ -23,35 +23,78 @@ class MinimumCost {
   _init() {
     this.V = [];
   }
-  _fillInfinity(W) {
-    for (var i = 1; i <= W; i++) {
-      this.V[i] = Infinity;
+
+  _fillZero(WM, N) {
+    for (var i = 0; i <= WM.length; i++) {
+      this.V[i] = [];
+      for (var j = 0; j <= N; j++)
+        this.V[i][j] = 0;
     }
   }
 
-  recursive(VM, N) {
-  	/*
+  recursive(WM, N = 3) {
+    /*
     this.V[0] = Infinity; // initialize
     this._fillZero(N);
     var result = this._recursive_helper(WM, N);
     return result;*/
-  }
 
-  recursive_helper(WM, N) {
-    if (N == 0 || WM == null || WM.length == 0) return Infinity;
-    if (WM.length == 1) return WM[0];
-    if (WM.length != WM[0].length) return Infinity;
-/*
-    for (var i = 0; i < WM.length; i++) {
-      var val = this.recursive_helper(WM, N - 1) + WM[0][i];
-      if (this.V[W] > val) {
-        console.log(space, 'this.V[W] > val:', this.V[W], val, N);
-        this.V[W] = val;
-      }
+    this._fillZero(WM, N);
+    // initialize
+    this.V[0] = [];
+    for (var i = 0; i <= N; i++) {
+      this.V[0][i] = WM[0][i];
     }
-    */
+    var result = this._recursive_helper(WM, N, -1);
+    return result;
+  }
+  _recursive_helper(WM, N, lastIndex) {
+    debugger
+    if (N == 0 || WM == null || WM.length == 0) return 0;
+    if (N == 1) return Math.min(...WM[0]);
+
+    var space = '';
+    for (var i = 1; i <= WM.length; i++) {
+      space = '';
+      for (var z = 0; z < i; z++) space += ' ';
+      if (i == lastIndex) continue;
+
+      var val = 0;
+      for (var j = 0; j < N; j++) {
+        if (j == N - 1) continue;
+        val = Math.min(val, this._recursive_helper(WM, N - 1, j));
+      }
+      // TODO: tomorrow
+    }
+    //this.V[i][N] += this.WM[i][]
+    //console.log(this.V);
+    return Math.min(...this.V[WM.length]);
   }
 
+  /*
+  // before individual inner loop
+    _recursive_helper(WM, N, lastIndex) {
+      debugger
+      if (N == 0 || WM == null || WM.length == 0) return 0;
+      if (N == 1) return Math.min(...WM[0]);
+
+      var space = '';
+      for (var i = 1; i <= WM.length; i++) {
+        space = '';
+        for (var z = 0; z < i; z++) space += ' ';
+        if (i == lastIndex) continue;
+
+        var val = this._recursive_helper(WM, N - 1, i);
+        if (this.V[i][N] > val) {
+          console.log(space, 'this.V[i][N] > val:', this.V[i][N], "val = " + val, "i= " + i, "N= " + N);
+          this.V[i][N] = val;
+        }
+      }
+      //this.V[i][N] += this.WM[i][]
+      //console.log(this.V);
+      return Math.min(...this.V[WM.length]);
+    }
+  */
 }
 
 module.exports = MinimumCost;
