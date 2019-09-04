@@ -40,7 +40,7 @@ class MinimumCost {
     if (N == 0 || WM == null || WM.length == 0) return Infinity;
     if (WM.length == 1) return WM[0];
     if (WM.length != WM[0].length) return Infinity;
-
+/*
     for (var i = 0; i < WM.length; i++) {
       var val = this.recursive_helper(WM, N - 1) + WM[0][i];
       if (this.V[W] > val) {
@@ -48,6 +48,7 @@ class MinimumCost {
         this.V[W] = val;
       }
     }
+    */
   }
 
 }
