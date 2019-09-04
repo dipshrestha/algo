@@ -32,7 +32,7 @@ class MinimumCost {
     }
   }
   /** 
-   * WM: matris
+   * WM: matrix
    * N - number of house
    * K - number of colors 
    **/
@@ -46,6 +46,8 @@ class MinimumCost {
     return result;
   }
 
+  // Time: O(K^N)
+  // Space: O(K) // stack calls
   _recursive_helper(WM, N, K, skipIndex) {
     if (K == 0 || WM == null || N == 0) return 0;
     /*
@@ -66,6 +68,8 @@ class MinimumCost {
     return Math.min(...this.V[N - 1].filter((x, i) => i != skipIndex));
   }
 
+  // Time: O(NK)
+  // Space: O(NK)
   dp(WM, N, K) {
     this._fillZero(WM, N, K);
     // initialize
@@ -79,7 +83,7 @@ class MinimumCost {
         this.V[i][j] = val + WM[i][j]
       }
     }
-    console.log(this.V);
+    //console.log(this.V);
     return Math.min(...this.V[N - 1]);
   }
 }
