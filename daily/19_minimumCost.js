@@ -43,23 +43,22 @@ class MinimumCost {
     return result;
   }
 
-  _recursive_helper(WM, N, K, lastIndex) {
+  _recursive_helper(WM, N, K, skipIndex) {
     debugger
     if (K == 0 || WM == null || N == 0) return 0;
     if (N == 1) {
-      // find the min from all but the lastIndex
-      return Math.min(...WM[0].filter((x, i) => i != lastIndex));
+      // find the min from all but the skipIndex
+      return Math.min(...WM[0].filter((x, i) => i != skipIndex));
     }
 
-    var space = '';
     for (var i = K - 1; i >= 0; i--) {
-      if (i == lastIndex) continue;
+      if (i == skipIndex) continue;
 
       var val = this._recursive_helper(WM, N - 1, K, i);
       this.V[N - 1][i] = val + WM[N - 1][i];
     }
-    // find the min from all but the lastIndex
-    return Math.min(...this.V[N - 1].filter((x, i) => i != lastIndex));
+    // find the min from all but the skipIndex
+    return Math.min(...this.V[N - 1].filter((x, i) => i != skipIndex));
   }
 
   /*

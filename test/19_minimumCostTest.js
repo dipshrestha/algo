@@ -55,3 +55,37 @@ describe('MinimumCost - 3 rows', function() {
     assert.equal(result, expected);
   });
 });
+
+describe('MinimumCost - 4 rows', function() {
+  const expected = 7;
+  const WM = [
+    // color ->
+    // House
+    //
+    [1, 3, 5],
+    [6, 2, 1],
+    [4, 4, 2],
+    [2, 3, 6],
+  ];
+  it('Recursive', function() {
+    const result = algo.recursive(WM, 4, 3);
+    assert.equal(result, expected);
+  });
+});
+
+describe('MinimumCost - 4x4 rows', function() {
+  const expected = 5;
+  const WM = [
+    // color ->
+    // House
+    //
+    [1, 3, 5, 4],
+    [6, 2, 1, 1],
+    [4, 4, 2, 3],
+    [2, 3, 6, 1],
+  ];
+  it('Recursive', function() {
+    const result = algo.recursive(WM, 4, 4);
+    assert.equal(result, expected);
+  });
+});
