@@ -24,51 +24,42 @@ class MinimumCost {
     this.V = [];
   }
 
-  _fillZero(WM, N) {
-    for (var i = 0; i <= WM.length; i++) {
+  _fillZero(WM, N, K) {
+    for (var i = 0; i < N; i++) {
       this.V[i] = [];
-      for (var j = 0; j <= N; j++)
+      for (var j = 0; j < K; j++)
         this.V[i][j] = 0;
     }
   }
 
-  recursive(WM, N = 3) {
-    /*
-    this.V[0] = Infinity; // initialize
-    this._fillZero(N);
-    var result = this._recursive_helper(WM, N);
-    return result;*/
-
-    this._fillZero(WM, N);
+  recursive(WM, N, K = 3) {
+    this._fillZero(WM, N, K);
     // initialize
     this.V[0] = [];
-    for (var i = 0; i <= N; i++) {
+    for (var i = 0; i < K; i++) {
       this.V[0][i] = WM[0][i];
     }
-    var result = this._recursive_helper(WM, N, -1);
+    var result = this._recursive_helper(WM, N, K, -1);
     return result;
   }
-  _recursive_helper(WM, N, lastIndex) {
+
+  _recursive_helper(WM, N, K, lastIndex) {
     debugger
-    if (N == 0 || WM == null || WM.length == 0) return 0;
-    if (N == 1) return Math.min(...WM[0]);
+    if (K == 0 || WM == null || N == 0) return 0;
+    if (N == 1) {
+      // find the min from all but the lastIndex
+      return Math.min(...WM[0].filter((x, i) => i != lastIndex));
+    }
 
     var space = '';
-    for (var i = 1; i <= WM.length; i++) {
-      space = '';
-      for (var z = 0; z < i; z++) space += ' ';
+    for (var i = K - 1; i >= 0; i--) {
       if (i == lastIndex) continue;
 
-      var val = 0;
-      for (var j = 0; j < N; j++) {
-        if (j == N - 1) continue;
-        val = Math.min(val, this._recursive_helper(WM, N - 1, j));
-      }
-      // TODO: tomorrow
+      var val = this._recursive_helper(WM, N - 1, K, i);
+      this.V[N - 1][i] = val + WM[N - 1][i];
     }
-    //this.V[i][N] += this.WM[i][]
-    //console.log(this.V);
-    return Math.min(...this.V[WM.length]);
+    // find the min from all but the lastIndex
+    return Math.min(...this.V[N - 1].filter((x, i) => i != lastIndex));
   }
 
   /*
