@@ -21,6 +21,10 @@ describe('MinimumCost - 1 row', function() {
     const result = algo.recursive(WM, 1, 3);
     assert.equal(result, expected);
   });
+  it('DP', function() {
+    const result = algo.dp(WM, 1, 3);
+    assert.equal(result, expected);
+  });
 });
 
 
@@ -38,6 +42,10 @@ describe('MinimumCost - 2 rows', function() {
     const result = algo.recursive(WM, 2, 3);
     assert.equal(result, expected);
   });
+  it('DP', function() {
+    const result = algo.dp(WM, 2, 3);
+    assert.equal(result, expected);
+  });
 });
 
 describe('MinimumCost - 3 rows', function() {
@@ -52,6 +60,10 @@ describe('MinimumCost - 3 rows', function() {
   ];
   it('Recursive', function() {
     const result = algo.recursive(WM, 3, 3);
+    assert.equal(result, expected);
+  });
+  it('DP', function() {
+    const result = algo.dp(WM, 3, 3);
     assert.equal(result, expected);
   });
 });
@@ -71,6 +83,10 @@ describe('MinimumCost - 4 rows', function() {
     const result = algo.recursive(WM, 4, 3);
     assert.equal(result, expected);
   });
+  it('DP', function() {
+    const result = algo.dp(WM, 4, 3);
+    assert.equal(result, expected);
+  });
 });
 
 describe('MinimumCost - 4x4 rows', function() {
@@ -86,6 +102,10 @@ describe('MinimumCost - 4x4 rows', function() {
   ];
   it('Recursive', function() {
     const result = algo.recursive(WM, 4, 4);
+    assert.equal(result, expected);
+  });
+  it('DP', function() {
+    const result = algo.dp(WM, 4, 4);
     assert.equal(result, expected);
   });
 });

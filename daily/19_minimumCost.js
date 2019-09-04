@@ -31,11 +31,14 @@ class MinimumCost {
         this.V[i][j] = 0;
     }
   }
-
-  recursive(WM, N, K = 3) {
+  /** 
+   * WM: matris
+   * N - number of house
+   * K - number of colors 
+   **/
+  recursive(WM, N, K) {
     this._fillZero(WM, N, K);
     // initialize
-    this.V[0] = [];
     for (var i = 0; i < K; i++) {
       this.V[0][i] = WM[0][i];
     }
@@ -44,47 +47,41 @@ class MinimumCost {
   }
 
   _recursive_helper(WM, N, K, skipIndex) {
-    debugger
     if (K == 0 || WM == null || N == 0) return 0;
+    /*
+    // THIS is just repetition, we don't need this if block
     if (N == 1) {
       // find the min from all but the skipIndex
       return Math.min(...WM[0].filter((x, i) => i != skipIndex));
-    }
+    }*/
 
-    for (var i = K - 1; i >= 0; i--) {
-      if (i == skipIndex) continue;
+    //is this the inner loop of DP again like knap-sack?
+    for (var j = K - 1; j >= 0; j--) {
+      if (j == skipIndex) continue;
 
-      var val = this._recursive_helper(WM, N - 1, K, i);
-      this.V[N - 1][i] = val + WM[N - 1][i];
+      var val = this._recursive_helper(WM, N - 1, K, j);
+      this.V[N - 1][j] = val + WM[N - 1][j];
     }
     // find the min from all but the skipIndex
     return Math.min(...this.V[N - 1].filter((x, i) => i != skipIndex));
   }
 
-  /*
-  // before individual inner loop
-    _recursive_helper(WM, N, lastIndex) {
-      debugger
-      if (N == 0 || WM == null || WM.length == 0) return 0;
-      if (N == 1) return Math.min(...WM[0]);
-
-      var space = '';
-      for (var i = 1; i <= WM.length; i++) {
-        space = '';
-        for (var z = 0; z < i; z++) space += ' ';
-        if (i == lastIndex) continue;
-
-        var val = this._recursive_helper(WM, N - 1, i);
-        if (this.V[i][N] > val) {
-          console.log(space, 'this.V[i][N] > val:', this.V[i][N], "val = " + val, "i= " + i, "N= " + N);
-          this.V[i][N] = val;
-        }
-      }
-      //this.V[i][N] += this.WM[i][]
-      //console.log(this.V);
-      return Math.min(...this.V[WM.length]);
+  dp(WM, N, K) {
+    this._fillZero(WM, N, K);
+    // initialize
+    for (var i = 0; i < K; i++) {
+      this.V[0][i] = WM[0][i];
     }
-  */
+    if (K == 0 || WM == null || N == 0) return 0;
+    for (var i = 1; i < N; i++) {
+      for (var j = 0; j < K; j++) {
+        var val = Math.min(...this.V[i - 1].filter((x, i) => i != j));
+        this.V[i][j] = val + WM[i][j]
+      }
+    }
+    console.log(this.V);
+    return Math.min(...this.V[N - 1]);
+  }
 }
 
 module.exports = MinimumCost;
