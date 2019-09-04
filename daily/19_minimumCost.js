@@ -16,9 +16,38 @@ return the minimum cost which achieves this goal.
 
 class MinimumCost {
 
+  constructor() {
+    this._init();
+  }
 
-  recursive() {
+  _init() {
+    this.V = [];
+  }
+  _fillInfinity(W) {
+    for (var i = 1; i <= W; i++) {
+      this.V[i] = Infinity;
+    }
+  }
 
+  recursive(VM, N) {
+    this.V[0] = Infinity; // initialize
+    this._fillZero(W);
+    var result = this._recursive_helper(WM, N);
+    return result;
+  }
+
+  recursive_helper(WM, N) {
+    if (N == 0 || WM == null || WM.length == 0) return Infinity;
+    if (WM.length == 1) return WM[0];
+    if (WM.length != WM[0].length) return Infinity;
+
+    for (var i = 0; i < WM.length; i++) {
+      var val = this.recursive_helper(WM, N - 1) + WM[0][i];
+      if (this.V[W] > val) {
+        console.log(space, 'this.V[W] > val:', this.V[W], val, N);
+        this.V[W] = val;
+      }
+    }
   }
 
 }
