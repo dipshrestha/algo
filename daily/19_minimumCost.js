@@ -42,7 +42,7 @@ class MinimumCost {
     for (var i = 0; i < K; i++) {
       this.V[0][i] = WM[0][i];
     }
-    var result = this._recursive_helper(WM, N, K, -1);
+    var result = this._recursive_helper(WM, N, K, -1); // set skip index to -1 as you'll want all K to be processed initially
     return result;
   }
 
@@ -57,8 +57,8 @@ class MinimumCost {
       return Math.min(...WM[0].filter((x, i) => i != skipIndex));
     }*/
 
-    //is this the inner loop of DP again like knap-sack?
-    for (var j = K - 1; j >= 0; j--) {
+    //is this the inner loop of DP again like knap-sack? -> Yes, use j for counter
+    for (var j = 0; j < K; j++) { // doesn't matter if you go from K-1 to 0 like in _recursive_helper1
       if (j == skipIndex) continue;
 
       var val = this._recursive_helper(WM, N - 1, K, j);
@@ -85,6 +85,28 @@ class MinimumCost {
     }
     //console.log(this.V);
     return Math.min(...this.V[N - 1]);
+  }
+
+  // Time: O(K^N)
+  // Space: O(K) // stack calls
+  _recursive_helper1(WM, N, K, skipIndex) {
+    if (K == 0 || WM == null || N == 0) return 0;
+    /*
+    // THIS is just repetition, we don't need this if block
+    if (N == 1) {
+      // find the min from all but the skipIndex
+      return Math.min(...WM[0].filter((x, i) => i != skipIndex));
+    }*/
+
+    //is this the inner loop of DP again like knap-sack?
+    for (var j = K - 1; j >= 0; j--) {
+      if (j == skipIndex) continue;
+
+      var val = this._recursive_helper(WM, N - 1, K, j);
+      this.V[N - 1][j] = val + WM[N - 1][j];
+    }
+    // find the min from all but the skipIndex
+    return Math.min(...this.V[N - 1].filter((x, i) => i != skipIndex));
   }
 }
 
