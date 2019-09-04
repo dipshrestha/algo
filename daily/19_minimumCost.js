@@ -30,10 +30,11 @@ class MinimumCost {
   }
 
   recursive(VM, N) {
+  	/*
     this.V[0] = Infinity; // initialize
-    this._fillZero(W);
+    this._fillZero(N);
     var result = this._recursive_helper(WM, N);
-    return result;
+    return result;*/
   }
 
   recursive_helper(WM, N) {
