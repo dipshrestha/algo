@@ -14,7 +14,7 @@ return the minimum cost which achieves this goal.
 
  */
 
-class MinimumCost {
+class PaintHouse {
 
   constructor() {
     this._init();
@@ -110,4 +110,4 @@ class MinimumCost {
   }
 }
 
-module.exports = MinimumCost;
+module.exports = PaintHouse;

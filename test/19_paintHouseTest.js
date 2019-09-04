@@ -1,13 +1,13 @@
 const assert = require('assert');
-const MinimumCost = require('../daily/19_minimumCost.js');
+const PaintHouse = require('../daily/19_paintHouse.js');
 
 let algo = null;
 
 beforeEach('Setting up...', function() {
-  algo = new MinimumCost();
+  algo = new PaintHouse();
 });
 
-describe('MinimumCost - 1 row', function() {
+describe('PaintHouse - 1 row', function() {
   const expected = 1;
   const WM = [
     // color ->
@@ -28,7 +28,7 @@ describe('MinimumCost - 1 row', function() {
 });
 
 
-describe('MinimumCost - 2 rows', function() {
+describe('PaintHouse - 2 rows', function() {
   const expected = 2;
   const WM = [
     // color ->
@@ -48,7 +48,7 @@ describe('MinimumCost - 2 rows', function() {
   });
 });
 
-describe('MinimumCost - 3 rows', function() {
+describe('PaintHouse - 3 rows', function() {
   const expected = 5;
   const WM = [
     // color ->
@@ -68,7 +68,7 @@ describe('MinimumCost - 3 rows', function() {
   });
 });
 
-describe('MinimumCost - 4 rows', function() {
+describe('PaintHouse - 4 rows', function() {
   const expected = 7;
   const WM = [
     // color ->
@@ -89,7 +89,7 @@ describe('MinimumCost - 4 rows', function() {
   });
 });
 
-describe('MinimumCost - 4x4 rows', function() {
+describe('PaintHouse - 4x4 rows', function() {
   const expected = 5;
   const WM = [
     // color ->
