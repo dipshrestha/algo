@@ -15,6 +15,8 @@ For example, given [(30, 75), (0, 50), (60, 150)], you should return 2.
 
 class MinClassroom {
 
+  // Time: O(NlogN)
+  // Space: O(1)
   iterative(WM) {
     // sort first
     WM.sort((a, b) => a[0] > b[0]);
