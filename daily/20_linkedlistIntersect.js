@@ -62,8 +62,8 @@ class LinkedlistIntersect {
       debugger;
 
     while (headM.val != headN.val) {
-      headM = headM ? headM.next : N;
-      headN = headN ? headN.next : M;
+      headM = headM ? (headM.next ? headM.next : N) : N;
+      headN = headN ? (headN.next ? headN.next : M) : M;
     }
     return headM ? headM.val : null;
   }
