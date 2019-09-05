@@ -57,8 +57,15 @@ class LinkedlistIntersect {
   }
 
   iterativeBest(M, N) {
+    var headM = M,
+      headN = N;
+      debugger;
 
-
+    while (headM.val != headN.val) {
+      headM = headM ? headM.next : N;
+      headN = headN ? headN.next : M;
+    }
+    return headM ? headM.val : null;
   }
 
 }
