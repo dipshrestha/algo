@@ -16,7 +16,7 @@ describe('LinkedlistIntersect: 3-7-8-10, 99-1-9-11', function() {
     const result = algo.iterative(M, N);
     assert.equal(result, expected);
   });
-  it.skip('IterativeBest', function() {
+  it('IterativeBest', function() {
     const result = algo.iterativeBest(M, N);
     assert.equal(result, expected);
   });

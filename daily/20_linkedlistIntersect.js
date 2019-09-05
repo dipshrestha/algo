@@ -56,14 +56,28 @@ class LinkedlistIntersect {
     return headM ? headM.val : null;
   }
 
+  /*
+   * move headM to start of headN if it goes over, do the same for headN
+   */
+  // Time: O(N + M)
+  // Space : O(1)
   iterativeBest(M, N) {
     var headM = M,
-      headN = N;
-      debugger;
+      headN = N,
+      headMover = 0,
+      headNover = 0;
 
     while (headM.val != headN.val) {
-      headM = headM.next ? headM.next : N;
-      headN = headN.next ? headN.next : M;
+      if (!headM.next) {
+        headMover++;
+        headM = N;
+      } else headM = headM.next;
+
+      if (!headN.next) {
+        headNover++;
+        headN = M;
+      } else headN = headN.next;
+      if (headMover > 1 || headNover > 1) return null;
     }
     return headM ? headM.val : null;
   }
