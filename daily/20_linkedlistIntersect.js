@@ -14,9 +14,53 @@ Do this in O(M + N) time (where M and N are the lengths of the lists) and consta
 
  */
 
+class Node {
+
+  constructor(val, next = null) {
+    this.val = val;
+    this.next = next
+  }
+}
+
 class LinkedlistIntersect {
 
+  _alignHeaders(header, steps) {
+    for (var i = 0; i < steps; i++) header = header.next;
+    return header;
+  }
+
+  _findLength(header) {
+    var i = 0;
+    while (header != null) {
+      header = header.next;
+      i++;
+    }
+    return i;
+  }
+
+  // Time: O(N + M)
+  // Space: O(1)
+  iterative(M, N) {
+    var headM = M,
+      headN = N,
+      lenM = this._findLength(headM),
+      lenN = this._findLength(headN);
+
+    // align the pointers
+    if (lenM > lenN) headM = this._alignHeaders(headM, lenM - lenN);
+    else if (lenM < lenN) headN = this._alignHeaders(headN, lenN - lenM);
+    while (headM && headN && headM.val != headN.val) {
+      headM = headM.next;
+      headN = headN.next;
+    }
+    return headM ? headM.val : null;
+  }
+
+  iterativeBest(M, N) {
+
+
+  }
 
 }
 
-module.exports = LinkedlistIntersect;
+module.exports = { Node, LinkedlistIntersect };
