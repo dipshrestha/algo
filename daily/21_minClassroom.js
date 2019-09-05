@@ -24,6 +24,7 @@ class MinClassroom {
     var conflict = 1,
       rooms = 1,
       baseLine = WM[0][1];
+    // the next start date should not be before the current end date
     for (var i = 0; i < WM.length - 1; i++) {
       if (baseLine >= WM[i + 1][0]) {
         conflict++;
