@@ -19,7 +19,6 @@ class MinClassroom {
     // sort first
     WM.sort((a, b) => a[0] > b[0]);
     console.log(WM);
-
     var conflict = 1,
       rooms = 1,
       baseLine = WM[0][1];
@@ -29,10 +28,10 @@ class MinClassroom {
       } else {
         baseLine = WM[i + 1][1];
         rooms = Math.max(conflict, rooms);
-        conflict = 0;
+        conflict = 1;
       }
     }
-    return rooms;
+    return Math.max(conflict, rooms);
   }
 
 }
