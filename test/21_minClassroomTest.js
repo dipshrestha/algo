@@ -68,3 +68,16 @@ describe('MinClassroomTest - 4', function() {
     assert.equal(result, expected);
   });
 });
+
+describe('MinClassroomTest - 5', function() {
+  const expected = 2;
+  const WM = [
+    [20, 30],
+    [30, 215],
+  ];
+
+  it('Iterative', function() {
+    const result = algo.iterative(WM)
+    assert.equal(result, expected);
+  });
+});

@@ -29,6 +29,7 @@ class MinClassroom {
       if (baseLine >= WM[i + 1][0]) {
         conflict++;
       } else {
+        // reset
         baseLine = WM[i + 1][1];
         rooms = Math.max(conflict, rooms);
         conflict = 1;
