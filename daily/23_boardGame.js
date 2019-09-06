@@ -34,11 +34,11 @@ class BoardGame {
     this.V = []; // visited
   }
 
-  _fillZero(WM) {
+  _fillZero(arr) {
     for (var i = 0; i < WM.length; i++) {
-      this.V[i] = [];
+      arr[i] = [];
       for (var j = 0; j < WM[0].length; j++)
-        this.V[i][j] = 0;
+        arr[i][j] = 0;
     }
   }
 
@@ -58,17 +58,17 @@ class BoardGame {
     return node1[0] == node2[0] && node1[1] == node2[1];
   }
 
-  // Time: O(N)
-  // Space: O(N) // for visited array
+  // Time: O(NM)
+  // Space: O(NM) // for visited array
   recursive(WM, start, end) {
-    debugger;
-    // initialize
-    this._fillZero(WM);
+    // initialize visited matrix
+    this._fillZero(this.V);
 
     var result = this._recursive_helper(WM, start, end);
     return result;
   }
 
+  // DFS
   _recursive_helper(WM, start, end) {
     if (this._isEqual(start, end)) return 0;
     if (start == null || end == null) return 1;
@@ -77,7 +77,7 @@ class BoardGame {
     if (this.V[start[0]][start[1]] == 1) return Infinity;
     this.V[start[0]][start[1]] = 1;
 
-    // get weight of child
+    // get weight of all child the return the min + 1
     var nodes = this._getAdjacentNodes(WM, start);
     var weightArr = [];
     for (var i = 0; i < nodes.length; i++) {
