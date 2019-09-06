@@ -41,16 +41,9 @@ class BoardGame {
         this.V[i][j] = 0;
     }
   }
+
   _getAdjacentNodes(WM, node) {
     var ret = [];
-    /*
-    // This is for diagonal movement also included
-    for (var i = Math.max(node[0] - 1, 0); i <= Math.min(node[0] + 1, WM.length - 1); i++) {
-      for (var j = Math.max(node[1] - 1, 0); j <= Math.min(node[1] + 1, WM[0].length - 1); j++) {
-        if (!WM[i][j] && !this._isEqual(node, [i, j]))
-          ret.push([i, j]);
-      }
-    }*/
     for (var i = Math.max(node[0] - 1, 0); i <= Math.min(node[0] + 1, WM.length - 1); i++) {
       for (var j = Math.max(node[1] - 1, 0); j <= Math.min(node[1] + 1, WM[0].length - 1); j++) {
         // not wall, not same element, not elements in diagonal
@@ -65,6 +58,8 @@ class BoardGame {
     return node1[0] == node2[0] && node1[1] == node2[1];
   }
 
+  // Time: O(N)
+  // Space: O(N) // for visited array
   recursive(WM, start, end) {
     debugger;
     // initialize
