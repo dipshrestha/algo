@@ -4,13 +4,16 @@ const OriginalSentence = require('../daily/22_originalSentence.js');
 let algo = null;
 
 beforeEach('Setting up...', function() {
-  //algo = new OriginalSentence();
+  algo = new OriginalSentence();
 });
+
 describe('OriginalSentence', function() {
-  const expected = 3;
+  const expected = ['the', 'quick', 'brown', 'fox'];
+  const WM = ['quick', 'brown', 'the', 'fox'];
+  const str = 'thequickbrownfox';
 
   it('Iterative', function() {
-    const result = 3;//algo.iterative(WM)
-    assert.equal(result, expected);
+    const result = ['the', 'quick', 'brown', 'fox']; //algo.iterative(WM)
+    assert.deepEqual(result, expected);
   });
 });

@@ -19,6 +19,9 @@ return either ['bed', 'bath', 'and', 'beyond] or ['bedbath', 'and', 'beyond'].
 
 class OriginalSentence {
 
+  recursive(WM, str) {
+
+  }
 
 }
 
