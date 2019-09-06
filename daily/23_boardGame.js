@@ -26,6 +26,71 @@ the minimum number of steps required to reach the end is 7, since we would need 
 
 class BoardGame {
 
+  constructor() {
+    this._init();
+  }
+
+  _init() {
+    this.V = []; // visited
+  }
+
+  _fillZero(WM) {
+    for (var i = 0; i < WM.length; i++) {
+      this.V[i] = [];
+      for (var j = 0; j < WM[0].length; j++)
+        this.V[i][j] = 0;
+    }
+  }
+  _getAdjacentNodes(WM, node) {
+    var ret = [];
+    /*
+    // This is for diagonal movement also included
+    for (var i = Math.max(node[0] - 1, 0); i <= Math.min(node[0] + 1, WM.length - 1); i++) {
+      for (var j = Math.max(node[1] - 1, 0); j <= Math.min(node[1] + 1, WM[0].length - 1); j++) {
+        if (!WM[i][j] && !this._isEqual(node, [i, j]))
+          ret.push([i, j]);
+      }
+    }*/
+    for (var i = Math.max(node[0] - 1, 0); i <= Math.min(node[0] + 1, WM.length - 1); i++) {
+      for (var j = Math.max(node[1] - 1, 0); j <= Math.min(node[1] + 1, WM[0].length - 1); j++) {
+        // not wall, not same element, not elements in diagonal
+        if (!WM[i][j] && !this._isEqual(node, [i, j]) && (Math.abs(node[0] - i) + Math.abs(node[1] - j) != 2))
+          ret.push([i, j]);
+      }
+    }
+    return ret;
+  }
+
+  _isEqual(node1, node2) {
+    return node1[0] == node2[0] && node1[1] == node2[1];
+  }
+
+  recursive(WM, start, end) {
+    debugger;
+    // initialize
+    this._fillZero(WM);
+
+    var result = this._recursive_helper(WM, start, end);
+    return result;
+  }
+
+  _recursive_helper(WM, start, end) {
+    if (this._isEqual(start, end)) return 0;
+    if (start == null || end == null) return 1;
+
+    // add to visited node if not
+    if (this.V[start[0]][start[1]] == 1) return Infinity;
+    this.V[start[0]][start[1]] = 1;
+
+    // get weight of child
+    var nodes = this._getAdjacentNodes(WM, start);
+    var weightArr = [];
+    for (var i = 0; i < nodes.length; i++) {
+      var val = this._recursive_helper(WM, nodes[i], end);
+      weightArr.push(val);
+    }
+    return Math.min(...weightArr) + 1;
+  }
 
 }
 
