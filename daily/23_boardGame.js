@@ -34,10 +34,10 @@ class BoardGame {
     this.V = []; // visited
   }
 
-  _fillZero(arr) {
-    for (var i = 0; i < WM.length; i++) {
+  _fillZero(arr, N, M) {
+    for (var i = 0; i < N; i++) {
       arr[i] = [];
-      for (var j = 0; j < WM[0].length; j++)
+      for (var j = 0; j < M; j++)
         arr[i][j] = 0;
     }
   }
@@ -62,7 +62,7 @@ class BoardGame {
   // Space: O(NM) // for visited array
   recursive(WM, start, end) {
     // initialize visited matrix
-    this._fillZero(this.V);
+    this._fillZero(this.V, WM.length, WM[0].length);
 
     var result = this._recursive_helper(WM, start, end);
     return result;
