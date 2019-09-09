@@ -38,14 +38,38 @@ return either ['bed', 'bath', 'and', 'beyond] or ['bedbath', 'and', 'beyond'].
 
 class OriginalSentence {
 
+  constructor() {
+    this._init();
+  }
+
+  _init() {
+    this.V = [];
+  }
   // Prints all possible word breaks of given string 
   recursive(WM, str) {
-    debugger;
-    // initialize visited matrix
+    // initialize dictionary 
     this.WM = WM;
     // last argument is prefix 
-    this.wordBreakUtil(str, str.length, "");
+    this.wordBreakUtil(str, str.length, "", []);
+    return this.V;
   }
+
+  /*
+
+  // Didn't do this way
+    _recursive_helper(WM, str) {
+      if (str == null || str.length == 0) return null;
+      if (str.length == 1 && this.dictionaryContains(prefix)) {
+        return true;
+      }
+      for (var i = 0; i < str.length; i++) {
+        var char = str[i];
+        if (this._recursive_helper(WM, str.substr(i + 1, str.length))) {
+          var val = this._recursive_helper(WM, str.substr(i, str.length))
+        }
+      }
+    }
+  */
 
   dictionaryContains(prefix) {
     return this.WM.indexOf(prefix) > -1;
@@ -53,13 +77,13 @@ class OriginalSentence {
 
   // result store the current prefix with spaces 
   // between words 
-  wordBreakUtil(str, n, result) {
+  wordBreakUtil(str, n, resultArr) {
     //Process all prefixes one by one 
     for (var i = 1; i <= n; i++) {
       //extract substring from 0 to i in prefix 
       var prefix = str.substr(0, i);
 
-      // if dictionary conatins this prefix, then 
+      // if dictionary contains this prefix, then 
       // we check for remaining string. Otherwise 
       // we ignore this prefix (there is no else for 
       // this if) and try next 
@@ -67,12 +91,12 @@ class OriginalSentence {
         // if no more elements are there, print it 
         if (i == n) {
           // add this element to previous prefix 
-          result += prefix;
-          console.log(result); //print result 
+          resultArr.push(prefix);
+          this.V = resultArr;
+          //console.log(result); //print result 
           return;
         }
-        this.wordBreakUtil(str.substr(i, n - i), n - i,
-          result + prefix + " ");
+        this.wordBreakUtil(str.substr(i, n - i), n - i, [...resultArr, prefix]);
       }
     } //end for 
   } //end function 
