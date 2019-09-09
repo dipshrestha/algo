@@ -50,7 +50,7 @@ class OriginalSentence {
     // initialize dictionary 
     this.WM = WM;
     // last argument is prefix 
-    this.wordBreakUtil(str, str.length, "", []);
+    this.wordBreakUtil(str, str.length, []);
     return this.V;
   }
 
@@ -75,8 +75,8 @@ class OriginalSentence {
     return this.WM.indexOf(prefix) > -1;
   }
 
-  // result store the current prefix with spaces 
-  // between words 
+  // Time: O(2^N)
+  // Space: O(N)
   wordBreakUtil(str, n, resultArr) {
     //Process all prefixes one by one 
     for (var i = 1; i <= n; i++) {
@@ -93,7 +93,6 @@ class OriginalSentence {
           // add this element to previous prefix 
           resultArr.push(prefix);
           this.V = resultArr;
-          //console.log(result); //print result 
           return;
         }
         this.wordBreakUtil(str.substr(i, n - i), n - i, [...resultArr, prefix]);
