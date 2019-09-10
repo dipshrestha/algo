@@ -21,30 +21,29 @@ You can simply print them out as you compute them.
 
 class SubarraySum {
 
-  constructor() {
+  constructor(WM) {
     this.steps = 0;
+    this.WM = WM;
   }
-  _getMaxWithinIndices(WM, start, end) {
-
-    var x = WM[start]
+  _getMaxWithinIndices(start, end) {
+    var x = this.WM[start];
+    this.steps++;
     for (var i = start + 1; i < end; i++) {
-      if (WM[i] > x) x = WM[i];
+      if (this.WM[i] > x) x = this.WM[i];
       this.steps++;
     }
     return x;
   }
 
-  iterative(WM, K) {
-    if (WM == null || WM.length == 0) return null;
+  iterative(K) {
+    if (this.WM == null || this.WM.length == 0) return null;
 
-    var max = null;
-
-    for (var i = 0; i <= WM.length - K; i++) {
-      WM[i] = this._getMaxWithinIndices(WM, i, i + K);
+    for (var i = 0; i <= this.WM.length - K; i++) {
+      this.WM[i] = this._getMaxWithinIndices(i, i + K);
     }
 
     console.log("Steps: " + this.steps);
-    return WM.slice(0, WM.length - K + 1);
+    return this.WM.slice(0, this.WM.length - K + 1);
   }
 
 
