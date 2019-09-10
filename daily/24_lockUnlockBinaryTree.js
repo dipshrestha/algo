@@ -20,7 +20,9 @@ Each method should run in O(h), where h is the height of the tree.
 
 /**
  * Construct the nodes based on the array input.
- * do not need the left/right for this algorithm
+ * do not need the left/right for this algorithm.
+ *
+ * Test only the parent of nodes.
  */
 class BinaryTreeNode {
   constructor(val, left = null, right = null, parent = null) {
@@ -57,10 +59,14 @@ class LockUnlockBinaryTree {
     this.WM = nodeArr;
   }
 
+  // Time: O(1)
+  // Space: O(1)
   is_locked(node) {
     return node.isLocked;
   }
 
+  // Time: O(h)
+  // Space: O(1)
   lock(node) {
     if (!node.isLocked && !node.canLock) {
       // check if parent can be locked
@@ -86,6 +92,8 @@ class LockUnlockBinaryTree {
     return false;
   }
 
+  // Time: O(h)
+  // Space: O(1)
   unlock(node) {
     if (node.isLocked) {
       node.isLocked = false;
