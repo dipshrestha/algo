@@ -29,6 +29,24 @@ class BinaryNode {
 
 class LockUnlockBinaryTree {
 
+  constructor(WM) {
+    this._init(WM);
+  }
+
+  _init(arr) {
+    for (var i = 0; i < arr.length / 2; i++) {
+      cur_node = arr[i];
+      if (cur_node != '') {
+        // create node with just value and assign it as left/right
+        arr[i * 2 + 1] = arr[i * 2 + 1] && new Node(arr[i * 2 + 1], null, null, cur_node);
+        arr[i * 2 + 2] = arr[i * 2 + 2] && new Node(arr[i * 2 + 2], null, null, cur_node);
+        cur_node.left = arr[i * 2 + 1];
+        cur_node.right = arr[i * 2 + 2];
+      }
+    }
+    //this.WM = WM;
+  }
+
   is_locked(node) {
     return node.isLocked;
   }
@@ -36,14 +54,14 @@ class LockUnlockBinaryTree {
   lock(node) {
     if (!node.isLocked && node.canLock) {
       // check if parent can be locked
-      var parent = node.parent;
+      var parent = this.getParent(node);
       var can = true;
       while (parent != null) {
         if (!parent.canLock) {
           can = false;
           break;
         }
-        parent = parent.parent;
+        parent = this.getParent(parent);
       }
 
       if (!can) return false;
@@ -52,10 +70,10 @@ class LockUnlockBinaryTree {
       node.isLocked = true;
 
       // make all the parent as can not be locked
-      var parent = node.parent;
+      var parent = this.getParent(node);
       while (parent != null) {
         parent.canLock = false;
-        parent = parent.parent;
+        parent = this.getParent(parent);
       }
       return true;
     }

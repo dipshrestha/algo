@@ -4,7 +4,7 @@ const LockUnlockBinaryTree = require('../daily/24_lockUnlockBinaryTree.js');
 let algo = null;
 
 beforeEach('Setting up...', function() {
-  algo = new LockUnlockBinaryTree();
+  algo = new LockUnlockBinaryTree([]);
 });
 describe('LockUnlockBinaryTree', function() {
   const expected = 3;
