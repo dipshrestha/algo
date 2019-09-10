@@ -35,6 +35,8 @@ class SubarraySum {
     return x;
   }
 
+  // Time:  greather than O(N) but definitely not O(N * K)
+  // Space: O(1) // array in-place modification
   iterative(K) {
     if (this.WM == null || this.WM.length == 0) return null;
 
