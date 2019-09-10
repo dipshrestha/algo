@@ -16,8 +16,55 @@ You may augment the node to add parent pointers or any other property you would 
 
  */
 
-class LockUnlockBinaryTree{
+class BinaryNode {
+  constructor(val, left = null, right = null, parent) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+    this.parent = parent;
+    this.isLocked = false;
+    this.canLock = false;
+  }
+}
 
+class LockUnlockBinaryTree {
+
+  is_locked(node) {
+    return node.isLocked;
+  }
+
+  lock(node) {
+    if (!node.isLocked && node.canLock) {
+      // check if parent can be locked
+      var parent = node.parent;
+      var can = true;
+      while (parent != null) {
+        if (!parent.canLock) {
+          can = false;
+          break;
+        }
+        parent = parent.parent;
+      }
+
+      if (!can) return false;
+
+      // lock the node
+      node.isLocked = true;
+
+      // make all the parent as can not be locked
+      var parent = node.parent;
+      while (parent != null) {
+        parent.canLock = false;
+        parent = parent.parent;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  unlock(node) {
+
+  }
 
 }
 
