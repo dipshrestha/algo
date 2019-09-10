@@ -16,14 +16,14 @@ You may augment the node to add parent pointers or any other property you would 
 
  */
 
-class BinaryNode {
-  constructor(val, left = null, right = null, parent) {
+class BinaryTreeNode {
+  constructor(val, left = null, right = null, parent = null) {
     this.val = val;
-    this.left = left;
-    this.right = right;
+    //this.left = left;
+    //this.right = right;
     this.parent = parent;
     this.isLocked = false;
-    this.canLock = false;
+    this.canLock = true;
   }
 }
 
@@ -34,17 +34,27 @@ class LockUnlockBinaryTree {
   }
 
   _init(arr) {
+    var nodeArr = [];
+    var cur_node = null;
+    nodeArr[0] = new BinaryTreeNode(arr[0]);
     for (var i = 0; i < arr.length / 2; i++) {
-      cur_node = arr[i];
-      if (cur_node != '') {
+      cur_node = nodeArr[i];
+      if (cur_node) {
         // create node with just value and assign it as left/right
-        arr[i * 2 + 1] = arr[i * 2 + 1] && new Node(arr[i * 2 + 1], null, null, cur_node);
-        arr[i * 2 + 2] = arr[i * 2 + 2] && new Node(arr[i * 2 + 2], null, null, cur_node);
-        cur_node.left = arr[i * 2 + 1];
-        cur_node.right = arr[i * 2 + 2];
+        if (arr[i * 2 + 1])
+          //cur_node.left = 
+          nodeArr[i * 2 + 1] = new BinaryTreeNode(arr[i * 2 + 1], null, null, nodeArr[i]);
+        if (arr[i * 2 + 2])
+          //cur_node.right = 
+          nodeArr[i * 2 + 2] = new BinaryTreeNode(arr[i * 2 + 2], null, null, nodeArr[i]);
       }
     }
-    //this.WM = WM;
+    //console.log(nodeArr);
+    this.WM = nodeArr;
+  }
+
+  getParent(node) {
+    return node.parent;
   }
 
   is_locked(node) {
@@ -55,21 +65,17 @@ class LockUnlockBinaryTree {
     if (!node.isLocked && node.canLock) {
       // check if parent can be locked
       var parent = this.getParent(node);
-      var can = true;
       while (parent != null) {
-        if (!parent.canLock) {
-          can = false;
-          break;
+        if (!parent.canLock || parent.isLocked) {
+          return false;
         }
         parent = this.getParent(parent);
       }
 
-      if (!can) return false;
-
       // lock the node
       node.isLocked = true;
 
-      // make all the parent as can not be locked
+      // mark all the parent as can not be locked
       var parent = this.getParent(node);
       while (parent != null) {
         parent.canLock = false;
@@ -86,4 +92,4 @@ class LockUnlockBinaryTree {
 
 }
 
-module.exports = LockUnlockBinaryTree;
+module.exports = { BinaryTreeNode, LockUnlockBinaryTree };
