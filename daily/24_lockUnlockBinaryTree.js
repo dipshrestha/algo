@@ -64,22 +64,22 @@ class LockUnlockBinaryTree {
   lock(node) {
     if (!node.isLocked && node.canLock) {
       // check if parent can be locked
-      var parent = this.getParent(node);
+      var parent = node.parent;
       while (parent != null) {
-        if (!parent.canLock || parent.isLocked) {
+        if (parent.isLocked) {
           return false;
         }
-        parent = this.getParent(parent);
+        parent = parent.parent;
       }
 
       // lock the node
       node.isLocked = true;
 
       // mark all the parent as can not be locked
-      var parent = this.getParent(node);
+      var parent = node.parent;
       while (parent != null) {
         parent.canLock = false;
-        parent = this.getParent(parent);
+        parent = parent.parent;
       }
       return true;
     }
@@ -88,6 +88,10 @@ class LockUnlockBinaryTree {
 
   unlock(node) {
 
+    if (node.isLocked) {
+      node.isLocked = false;
+    }
+    return false;
   }
 
 }
