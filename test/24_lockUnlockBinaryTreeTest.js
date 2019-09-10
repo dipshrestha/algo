@@ -44,4 +44,30 @@ describe('LockUnlockBinaryTree', function() {
     assert.equal(algo.lock(algo.WM[4]), true, "Lock sibling");
   });
 
+  it.only('Lock leaf, test leaf, test parent, test sibling, lock leaf again, lock parent, lock sibling\n\t, unlock node, test node ', function() {
+    const node = algo.WM[3];
+    assert.equal(algo.is_locked(node), false, "node locked ?");
+    assert.equal(algo.lock(node), true, "Lock node");
+    assert.equal(algo.is_locked(node), true, "node locked ?");
+    assert.equal(algo.is_locked(node.parent), false, "parent locked ?");
+    assert.equal(algo.is_locked(algo.WM[4]), false, "sibling locked ?");
+    assert.equal(algo.lock(node), false, "Lock node");
+    assert.equal(algo.lock(node.parent), false, "Lock parent");
+    assert.equal(algo.lock(algo.WM[4]), true, "Lock sibling");
+    assert.equal(algo.unlock(node), true, "UnLock node");
+    assert.equal(algo.is_locked(node), false, "node locked ?");
+  });
+
+  it('Lock root, test root, test child, lock root again, lock child\n\t, unlock root, node locked?', function() {
+    const node = algo.WM[0];
+    assert.equal(algo.is_locked(node), false, "node locked ?");
+    assert.equal(algo.lock(node), true, "Lock node");
+    assert.equal(algo.is_locked(node), true, "node locked ?");
+    assert.equal(algo.is_locked(algo.WM[1]), false, "child locked ?");
+    assert.equal(algo.lock(node), false, "Lock node");
+    assert.equal(algo.lock(algo.WM[1]), false, "Lock child");
+    assert.equal(algo.unlock(node), true, "Unlock node");
+    assert.equal(algo.is_locked(node), false, "node locked ?");
+  });
+
 });
