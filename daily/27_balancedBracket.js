@@ -15,6 +15,8 @@ Given the string "([)]" or "((()", you should return false.
 
 class BalancedBracket {
 
+  // Time: O(N)
+  // Space: O(N) // worst case
   iterative(str) {
     var x = { ")": "(", "}": "{", "]": "[" };
     var isOpen = function(char) {
