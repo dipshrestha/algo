@@ -12,18 +12,24 @@ Design a binary tree node class with the following methods:
 is_locked, which returns whether the node is locked
 lock, which attempts to lock the node. If it cannot be locked, then it should return false. Otherwise, it should lock it and return true.
 unlock, which unlocks the node. If it cannot be unlocked, then it should return false. Otherwise, it should unlock it and return true.
-You may augment the node to add parent pointers or any other property you would like. You may assume the class is used in a single-threaded program, so there is no need for actual locks or mutexes. Each method should run in O(h), where h is the height of the tree.
+You may augment the node to add parent pointers or any other property you would like.
+You may assume the class is used in a single-threaded program, so there is no need for actual locks or mutexes.
+Each method should run in O(h), where h is the height of the tree.
 
  */
 
+/**
+ * Construct the nodes based on the array input.
+ * do not need the left/right for this algorithm
+ */
 class BinaryTreeNode {
   constructor(val, left = null, right = null, parent = null) {
     this.val = val;
-    //this.left = left;
-    //this.right = right;
+    this.left = left;
+    this.right = right;
     this.parent = parent;
     this.isLocked = false;
-    this.canLock = 0;
+    this.canLock = 0; // number of child locked
   }
 }
 
@@ -42,11 +48,9 @@ class LockUnlockBinaryTree {
       if (cur_node) {
         // create node with just value and assign it as left/right
         if (arr[i * 2 + 1])
-          //cur_node.left = 
-          nodeArr[i * 2 + 1] = new BinaryTreeNode(arr[i * 2 + 1], null, null, nodeArr[i]);
+          cur_node.left = nodeArr[i * 2 + 1] = new BinaryTreeNode(arr[i * 2 + 1], null, null, nodeArr[i]);
         if (arr[i * 2 + 2])
-          //cur_node.right = 
-          nodeArr[i * 2 + 2] = new BinaryTreeNode(arr[i * 2 + 2], null, null, nodeArr[i]);
+          cur_node.right = nodeArr[i * 2 + 2] = new BinaryTreeNode(arr[i * 2 + 2], null, null, nodeArr[i]);
       }
     }
     //console.log(nodeArr);
@@ -83,7 +87,6 @@ class LockUnlockBinaryTree {
   }
 
   unlock(node) {
-
     if (node.isLocked) {
       node.isLocked = false;
 
