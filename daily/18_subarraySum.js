@@ -25,7 +25,8 @@ class SubarraySum {
     this.steps = 0;
     this.WM = WM;
   }
-  _getMaxWithinIndices(start, end) {
+
+  _getMaxWithinWindow(start, end) {
     var x = this.WM[start];
     this.steps++;
     for (var i = start + 1; i < end; i++) {
@@ -41,7 +42,7 @@ class SubarraySum {
     if (this.WM == null || this.WM.length == 0) return null;
 
     for (var i = 0; i <= this.WM.length - K; i++) {
-      this.WM[i] = this._getMaxWithinIndices(i, i + K);
+      this.WM[i] = this._getMaxWithinWindow(i, i + K);
     }
 
     console.log("Steps: " + this.steps);
