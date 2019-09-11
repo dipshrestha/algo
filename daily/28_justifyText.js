@@ -28,6 +28,68 @@ For example, given the list of words
 
 class JustifyText {
 
+  iterative(WM, K) {
+
+    function appendCurrentWord() {
+      S += ((S.length > 0 ? SPACE : '') + curWord);
+    }
+
+    function reset() {
+      result.push(S);
+      S = "";
+    }
+
+    function distributeSpace() {
+      var words = S.split(SPACE);
+      var diff = K - words.map(w => w.length).reduce((i = 0, j) => i + j);
+      // evenly distrubute
+      for (let i = 0; i < Math.floor(diff / (words.length - 1)); i++) {
+        words = words.map((w, i) => (i != words.length - 1) ? w + SPACE : w);
+      }
+      // handle overflow
+      for (let i = 0; i < diff % (words.length - 1); i++) {
+        words[i] = words[i] + SPACE;
+      }
+      S = words.join('');
+    }
+
+    function padSpace() {
+      var diff = K - S.length;
+      for (var i = 0; i < diff; i++) S += SPACE;
+    }
+
+    var S = "",
+      result = [],
+      curWord = "",
+      len = 0;
+    const SPACE = ' ';
+
+    for (var i = 0; i < WM.length; i++) {
+      curWord = WM[i];
+      len = S.length + curWord.length;
+      if (len == K) {
+        appendCurrentWord();
+        reset();
+      } else if (len < K) {
+        appendCurrentWord();
+      } else { // word won't fit
+        distributeSpace(); // -1 for extra space added at the end
+        reset();
+        i--;
+      }
+    }
+
+    if (S.length != 0) {
+      if (S.split(SPACE).length > 1) {
+        distributeSpace();
+      } else { // only 1 word, so pad space
+        padSpace();
+      }
+      reset();
+    }
+
+    return result;
+  }
 
 }
 
