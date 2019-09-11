@@ -19,7 +19,7 @@ You can simply print them out as you compute them.
 
  */
 
-class SubarraySum {
+class SubarrayMax {
 
   constructor(WM) {
     this.steps = 0;
@@ -52,4 +52,4 @@ class SubarraySum {
 
 }
 
-module.exports = SubarraySum;
+module.exports = SubarrayMax;

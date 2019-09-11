@@ -1,13 +1,13 @@
 const assert = require('assert');
-const SubarraySum = require('../daily/18_subarraySum.js');
+const SubarrayMax = require('../daily/18_subarrayMax.js');
 
 let algo = null;
 
 beforeEach('Setting up...', function() {
-  algo = new SubarraySum([10, 5, 2, 7, 8, 7]);
+  algo = new SubarrayMax([10, 5, 2, 7, 8, 7]);
 });
 
-describe.only('SubarraySum - 1', function() {
+describe.only('SubarrayMax - 1', function() {
   //  const WM = [10, 5, 2, 7, 8, 7];
 
   it('Iterative [10, 5, 2, 7, 8, 7], 2', function() {
