@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new SubarrayMax([10, 5, 2, 7, 8, 7]);
 });
 
-describe.only('SubarrayMax - 1', function() {
+describe('SubarrayMax - 1', function() {
   //  const WM = [10, 5, 2, 7, 8, 7];
 
   it('Iterative [10, 5, 2, 7, 8, 7], 2', function() {
