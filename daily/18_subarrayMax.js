@@ -49,6 +49,46 @@ class SubarrayMax {
     return this.WM.slice(0, this.WM.length - K + 1);
   }
 
+  /**
+   * Maintain 2 maxes
+   **/
+  _getMaxWithinWindowBest(start, end) {
+
+    // check if maxes are out of window and update accordingly
+    if (start > this.max[0]) {
+      this.max[0] = start;
+    }
+    if (start > this.max[1]) {
+      this.max[1] = this.max[0];
+    }
+    this.steps++;
+    this.steps++;
+
+    // VIP: start from the max index
+    for (var i = this.max[1] + 1; i < end; i++) {
+      // update the maxes
+      if (this.WM[i] > this.WM[this.max[1]]) {
+        //this.max[0] = this.max[1];
+        this.max[0] = this.max[1] = i;
+      } else if (this.WM[i] > this.WM[this.max[0]]) {
+        this.max[0] = i;
+      }
+      this.steps++;
+    }
+    this.WM[start] = this.WM[this.max[1]];
+  }
+
+  iterativeBest(K) {
+    debugger;
+    if (this.WM == null || this.WM.length == 0) return null;
+    this.max = [0, 0];
+    for (var i = 1; i <= this.WM.length - K; i++) {
+      this._getMaxWithinWindowBest(i, i + K);
+    }
+    console.log("Steps: " + this.steps);
+    return this.WM.slice(0, this.WM.length - K + 1);
+  }
+
 
 }
 
