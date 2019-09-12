@@ -17,7 +17,34 @@ and consists solely of alphabetic characters. You can assume the string to be de
 
 class RunlengthEncodingDecoding {
 
+  // Time: O(N)
+  // Space: O(1)
+  iterative(str) {
 
+    function reset() {
+      count = 1;
+      cur = str[i];
+    }
+
+    function set() {
+      result += (count + cur);
+    }
+
+    // if transition, update count
+    var result = "",
+      count = 1,
+      cur = str[0];
+    for (var i = 1; i < str.length; i++) {
+      if (cur != str[i]) {
+        set();
+        reset();
+      } else {
+        count++;
+      }
+    }
+    set();
+    return result;
+  }
 }
 
 module.exports = RunlengthEncodingDecoding;

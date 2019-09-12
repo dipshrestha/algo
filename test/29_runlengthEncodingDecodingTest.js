@@ -7,11 +7,22 @@ beforeEach('Setting up...', function() {
   algo = new RunlengthEncodingDecoding();
 });
 
-describe('RunlengthEncodingDecoding', function() {
-  const expected = 3;
+describe('RunlengthEncodingDecoding - AAAABBBCCDAA', function() {
+  const expected = '4A3B2C1D2A';
+  const str = 'AAAABBBCCDAA';
 
   it('Iterative', function() {
-    const result = 3; //algo.iterative(WM)
+    const result = algo.iterative(str);
+    assert.equal(result, expected);
+  });
+});
+
+describe('RunlengthEncodingDecoding - ABCD', function() {
+  const expected = '1A1B1C1D';
+  const str = 'ABCD';
+
+  it('Iterative', function() {
+    const result = algo.iterative(str);
     assert.equal(result, expected);
   });
 });
