@@ -19,7 +19,19 @@ class RunlengthEncodingDecoding {
 
   // Time: O(N)
   // Space: O(1)
-  iterative(str) {
+  decode(str) {
+    var s = '';
+    for (var i = 0; i < str.length; i += 2) {
+      for (var j = 0; j < str[i]; j++) {
+        s += (str[i + 1]);
+      }
+    }
+    return s;
+  }
+
+  // Time: O(N)
+  // Space: O(1)
+  encode(str) {
 
     function reset() {
       count = 1;

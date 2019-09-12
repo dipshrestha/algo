@@ -12,8 +12,9 @@ describe('RunlengthEncodingDecoding - AAAABBBCCDAA', function() {
   const str = 'AAAABBBCCDAA';
 
   it('Iterative', function() {
-    const result = algo.iterative(str);
+    const result = algo.encode(str);
     assert.equal(result, expected);
+    assert.equal(str, algo.decode(result));
   });
 });
 
@@ -22,7 +23,8 @@ describe('RunlengthEncodingDecoding - ABCD', function() {
   const str = 'ABCD';
 
   it('Iterative', function() {
-    const result = algo.iterative(str);
+    const result = algo.encode(str);
     assert.equal(result, expected);
+    assert.equal(str, algo.decode(result));
   });
 });
