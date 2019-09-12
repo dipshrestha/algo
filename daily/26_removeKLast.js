@@ -23,6 +23,9 @@ class Node {
 }
 
 class RemoveKLast {
+  
+  // Time: O(N)
+  // Space: O(1)
   iterative(WM, K) {
 
     var ptr1 = WM,
