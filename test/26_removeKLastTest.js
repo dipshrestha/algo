@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new RemoveKLast();
 });
 
-describe.only('RemoveKLast: 1-3-7-8-10-12-14', function() {
+describe('RemoveKLast: 1-3-7-8-10-12-14', function() {
   const M = new Node(1,
     new Node(3,
       new Node(7,
