@@ -25,7 +25,18 @@ class Node {
 class RemoveKLast {
   iterative(WM, K) {
 
+    var ptr1 = WM,
+      ptr2 = WM,
+      i = 1;
+    while (ptr1) {
+      ptr1 = ptr1.next;
+      if (i > K) {
+        ptr2 = ptr2.next;
+      }
+      i++;
+    }
+    return ptr2.val;
   }
 }
 
-module.exports = RemoveKLast;
+module.exports = { RemoveKLast, Node };
