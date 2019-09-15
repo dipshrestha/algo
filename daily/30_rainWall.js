@@ -18,6 +18,48 @@ Given the input [3, 0, 1, 3, 0, 5], we can hold 3 units in the first index, 2 in
 
 class RainWall {
 
+  iterative(WM) {
+    function calculate(start, end) {
+      var sum = 0,
+        smallVal = Math.min(WM[start], WM[end]),
+        count = 0;
+      while (++start < end) {
+        if (WM[end] >= WM[start]) {
+          sum += WM[start];
+          count++;
+        }
+      }
+      var x = (count * smallVal) - sum;
+      return x;
+    }
+
+    function isTrigger() {
+      return down && up && up > down;
+    }
+
+    function reset() {
+      down = up = start = i;
+    }
+
+    debugger;
+    if (WM == null || WM.length < 2) return 0;
+    var down, up, start, res;
+    down = up = start = res = 0;
+    for (var i = 0; i < WM.length; i++) {
+      if (WM[i + 1] < WM[i]) down = i + 1;
+      if (WM[i + 1] > WM[i]) up = i + 1;
+      if (isTrigger()) {
+        res = calculate(0, i + 1);
+        console.log('partial: ' + res)
+        reset();
+      }
+    }
+
+    if (isTrigger()) {
+      res = calculate(0, WM.length - 1);
+    }
+    return res;
+  }
 
 }
 
