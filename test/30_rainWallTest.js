@@ -64,7 +64,15 @@ describe('RainWall [2, 1, 2, 1]', function() {
     assert.equal(result, expected);
   });
 });
+describe('RainWall [3, 2, 1, 2, 3]', function() {
+  const expected = 4;
+  const WM = [3, 2, 1, 2, 3];
 
+  it('Iterative', function() {
+    const result = algo.iterative(WM)
+    assert.equal(result, expected);
+  });
+});
 describe('RainWall [3, 2, 1, 1, 2, 3, 2, 2]', function() {
   const expected = 6;
   const WM = [3, 2, 1, 1, 2, 3, 2, 2];
@@ -74,10 +82,9 @@ describe('RainWall [3, 2, 1, 1, 2, 3, 2, 2]', function() {
     assert.equal(result, expected);
   });
 });
-
 describe('RainWall [2, 1, 0, 2, 0, 0, 2]', function() {
   const expected = 7;
-  const WM = [2, 1, 1, 2, 0, 0, 2];
+  const WM = [2, 1, 0, 2, 0, 0, 2];
 
   it('Iterative', function() {
     const result = algo.iterative(WM)
@@ -85,12 +92,31 @@ describe('RainWall [2, 1, 0, 2, 0, 0, 2]', function() {
   });
 });
 
+describe.skip('RainWall [2, 3, 4, 3, 2, 3, 4]', function() {
+  const expected = 1;
+  const WM = [2, 3, 4, 3, 2, 3];
+
+  it('Iterative', function() {
+    const result = algo.iterative(WM)
+    assert.equal(result, expected);
+  });
+});
+
+describe('RainWall [3, 0, 1, 3, 0, 1, 5]', function() {
+  const expected = 10;
+  const WM = [3, 0, 1, 3, 0, 1, 5];
+
+  it('Iterative', function() {
+    const result = algo.iterative(WM)
+    assert.equal(result, expected);
+  });
+});
 describe('RainWall [3, 0, 1, 3, 0, 5]', function() {
   const expected = 8;
   const WM = [3, 0, 1, 3, 0, 5];
 
   it('Iterative', function() {
-    const result = 8; //algo.iterative(WM)
+    const result = algo.iterative(WM)
     assert.equal(result, expected);
   });
 });

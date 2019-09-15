@@ -34,22 +34,38 @@ class RainWall {
     }
 
     function isTrigger() {
+      //return down && up && up < down;
       return down && up && up > down;
     }
 
     function reset() {
       down = up = start = i;
+      upArr.push(up);
+    }
+
+    /* 
+     * check to see, if we should ignore all previous calculated values
+     */
+    function override() {
+      for (var i = 0; i < upArr.length; i++) {
+        if (upArr[i] != 0 && WM[up] <= WM[upArr[i]]) return false;
+      }
+      return true;
     }
 
     debugger;
     if (WM == null || WM.length < 2) return 0;
-    var down, up, start, res;
-    down = up = start = res = 0;
+    var down, up, start, res, upArr;
+    down = up = start = res = 0, upArr = [0];
     for (var i = 0; i < WM.length; i++) {
       if (WM[i + 1] < WM[i]) down = i + 1;
       if (WM[i + 1] > WM[i]) up = i + 1;
       if (isTrigger()) {
-        res = calculate(0, i + 1);
+        if (override()) {
+          res = calculate(0, i + 1);
+        } else {
+          res += calculate(down - 1, i + 1);
+        }
         console.log('partial: ' + res)
         reset();
       }
