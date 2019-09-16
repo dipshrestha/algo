@@ -92,7 +92,7 @@ describe('RainWall [2, 1, 0, 2, 0, 0, 2]', function() {
   });
 });
 
-describe.skip('RainWall [2, 3, 4, 3, 2, 3, 4]', function() {
+describe('RainWall [2, 3, 4, 3, 2, 3, 4]', function() {
   const expected = 1;
   const WM = [2, 3, 4, 3, 2, 3];
 

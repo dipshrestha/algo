@@ -18,7 +18,42 @@ Given the input [3, 0, 1, 3, 0, 5], we can hold 3 units in the first index, 2 in
 
 class RainWall {
 
+  //https://leetcode.com/problems/trapping-rain-water/discuss/364650/O(n)-Time-O(1)-space-C%2B%2B-Solution
+  // Time: O(N)
+  // Space: O(1)
+  iterativeBest(WM) {
+    var maxL, maxR, rain, i = 0,
+      j = WM.length - 1;
+    maxR = maxL = rain = i;
+    while (i < j) {
+      maxL = Math.max(maxL, WM[i]);
+      maxR = Math.max(maxR, WM[j]);
+      // move the smaller pointer towards greater
+      if (WM[i] < WM[j]) {
+        rain += Math.min(maxL, maxR) - WM[i++];
+      } else {
+        rain += Math.min(maxL, maxR) - WM[j--];
+      }
+    }
+    return rain;
+  }
+
+  // Time: O(N^2)
+  // Space: O(1)
   iterative(WM) {
+    var maxL, maxR, rain;
+    rain = 0;
+    for (var i = 1; i < WM.length; i++) {
+      maxL = Math.max(...WM.slice(0, i + 1));
+      maxR = Math.max(...WM.slice(i));
+      rain += (Math.min(maxL, maxR) - WM[i]);
+    }
+    return rain;
+  }
+
+  // Time: > O(N)
+  // Space: O(N)
+  iterative1(WM) {
     function calculate(start, end) {
       var sum = 0,
         smallVal = Math.min(WM[start], WM[end]),
