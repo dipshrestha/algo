@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new JustifyText();
 });
 
-describe.only('JustifyText', function() {
+describe('JustifyText', function() {
 
   it('Iterative - ["the"], 3', function() {
     const expected = ["the"];
