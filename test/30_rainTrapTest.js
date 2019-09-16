@@ -1,13 +1,13 @@
 const assert = require('assert');
-const RainWall = require('../daily/30_rainWall.js');
+const RainTrap = require('../daily/30_rainTrap.js');
 
 let algo = null;
 
 beforeEach('Setting up...', function() {
-  algo = new RainWall();
+  algo = new RainTrap();
 });
 
-describe('RainWall [2, 3, 4]', function() {
+describe('RainTrap [2, 3, 4]', function() {
   const expected = 0;
   const WM = [2, 2, 4];
 
@@ -16,7 +16,7 @@ describe('RainWall [2, 3, 4]', function() {
     assert.equal(result, expected);
   });
 });
-describe('RainWall [4, 2, 1,1,0]', function() {
+describe('RainTrap [4, 2, 1,1,0]', function() {
   const expected = 0;
   const WM = [4, 2, 1, 1, 0];
 
@@ -26,7 +26,7 @@ describe('RainWall [4, 2, 1,1,0]', function() {
   });
 });
 
-describe('RainWall [2, 2, 2]', function() {
+describe('RainTrap [2, 2, 2]', function() {
   const expected = 0;
   const WM = [2, 2, 2];
 
@@ -35,7 +35,7 @@ describe('RainWall [2, 2, 2]', function() {
     assert.equal(result, expected);
   });
 });
-describe('RainWall [2, 1, 2]', function() {
+describe('RainTrap [2, 1, 2]', function() {
   const expected = 1;
   const WM = [2, 1, 2];
 
@@ -45,7 +45,7 @@ describe('RainWall [2, 1, 2]', function() {
   });
 });
 
-describe('RainWall [2, 1, 0, 2]', function() {
+describe('RainTrap [2, 1, 0, 2]', function() {
   const expected = 3;
   const WM = [2, 1, 0, 2];
 
@@ -55,7 +55,7 @@ describe('RainWall [2, 1, 0, 2]', function() {
   });
 });
 
-describe('RainWall [2, 1, 2, 1]', function() {
+describe('RainTrap [2, 1, 2, 1]', function() {
   const expected = 1;
   const WM = [2, 1, 2, 1];
 
@@ -64,7 +64,7 @@ describe('RainWall [2, 1, 2, 1]', function() {
     assert.equal(result, expected);
   });
 });
-describe('RainWall [3, 2, 1, 2, 3]', function() {
+describe('RainTrap [3, 2, 1, 2, 3]', function() {
   const expected = 4;
   const WM = [3, 2, 1, 2, 3];
 
@@ -73,7 +73,7 @@ describe('RainWall [3, 2, 1, 2, 3]', function() {
     assert.equal(result, expected);
   });
 });
-describe('RainWall [3, 2, 1, 1, 2, 3, 2, 2]', function() {
+describe('RainTrap [3, 2, 1, 1, 2, 3, 2, 2]', function() {
   const expected = 6;
   const WM = [3, 2, 1, 1, 2, 3, 2, 2];
 
@@ -82,7 +82,7 @@ describe('RainWall [3, 2, 1, 1, 2, 3, 2, 2]', function() {
     assert.equal(result, expected);
   });
 });
-describe('RainWall [2, 1, 0, 2, 0, 0, 2]', function() {
+describe('RainTrap [2, 1, 0, 2, 0, 0, 2]', function() {
   const expected = 7;
   const WM = [2, 1, 0, 2, 0, 0, 2];
 
@@ -92,7 +92,7 @@ describe('RainWall [2, 1, 0, 2, 0, 0, 2]', function() {
   });
 });
 
-describe('RainWall [2, 3, 4, 3, 2, 3, 4]', function() {
+describe('RainTrap [2, 3, 4, 3, 2, 3, 4]', function() {
   const expected = 1;
   const WM = [2, 3, 4, 3, 2, 3];
 
@@ -102,7 +102,7 @@ describe('RainWall [2, 3, 4, 3, 2, 3, 4]', function() {
   });
 });
 
-describe('RainWall [3, 0, 1, 3, 0, 1, 5]', function() {
+describe('RainTrap [3, 0, 1, 3, 0, 1, 5]', function() {
   const expected = 10;
   const WM = [3, 0, 1, 3, 0, 1, 5];
 
@@ -111,7 +111,7 @@ describe('RainWall [3, 0, 1, 3, 0, 1, 5]', function() {
     assert.equal(result, expected);
   });
 });
-describe('RainWall [3, 0, 1, 3, 0, 5]', function() {
+describe('RainTrap [3, 0, 1, 3, 0, 5]', function() {
   const expected = 8;
   const WM = [3, 0, 1, 3, 0, 5];
 

@@ -16,7 +16,7 @@ Given the input [3, 0, 1, 3, 0, 5], we can hold 3 units in the first index, 2 in
 
  */
 
-class RainWall {
+class RainTrap {
 
   //https://leetcode.com/problems/trapping-rain-water/discuss/364650/O(n)-Time-O(1)-space-C%2B%2B-Solution
   // Time: O(N)
@@ -114,4 +114,4 @@ class RainWall {
 
 }
 
-module.exports = RainWall;
+module.exports = RainTrap;
