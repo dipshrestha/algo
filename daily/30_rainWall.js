@@ -54,7 +54,7 @@ class RainWall {
     }
 
     debugger;
-    if (WM == null || WM.length < 2) return 0;
+    if (WM == null || WM.length < 3) return 0;
     var down, up, start, res, upArr;
     down = up = start = res = 0, upArr = [0];
     for (var i = 0; i < WM.length; i++) {
