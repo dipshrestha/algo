@@ -16,6 +16,21 @@ Given two strings, compute the edit distance between them.
 
 class EditDistance {
 
+  recursive(s1, s2) {
+    if (s1 == null && s2 == null) return 0;
+    if (Math.max(s1.length, s2.length) == 0) return 0;
+    if (Math.min(s1.length, s2.length) == 0)
+      return Math.max(s1.length, s2.length);
+    if (s1.charAt(s1.length - 1) == s2.charAt(s2.length - 1))
+      return this.recursive(s1.slice(0, s1.length - 1), s2.slice(0, s2.length - 1));
+
+    return 1 + Math.min(
+      this.recursive(s1.slice(0, s1.length), s2.slice(0, s2.length - 1)),
+      this.recursive(s1.slice(0, s1.length - 1), s2.slice(0, s2.length)),
+      this.recursive(s1.slice(0, s1.length - 1), s2.slice(0, s2.length - 1))
+    )
+
+  }
 
 }
 
