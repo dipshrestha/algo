@@ -18,6 +18,10 @@ Given the input [3, 0, 1, 3, 0, 5], we can hold 3 units in the first index, 2 in
 
 class RainTrap {
 
+  // other method
+  // O(N), O(1)
+  //https://leetcode.com/problems/trapping-rain-water/discuss/372506/csujiabin's-O(n)-time-O(1)-space-solution-but-with-a-helpful-pic-and-no-syntactic-sugar
+
   //https://leetcode.com/problems/trapping-rain-water/discuss/364650/O(n)-Time-O(1)-space-C%2B%2B-Solution
   // Time: O(N)
   // Space: O(1)
