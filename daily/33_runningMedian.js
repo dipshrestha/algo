@@ -24,6 +24,25 @@ For example, given the sequence [2, 1, 5, 7, 2, 0, 5], your algorithm should pri
 
 class RunningMedian {
 
+  // Time: O(n*log(n))
+  // Space: O(n)
+  iterative(WM) {
+    var ret = [];
+    var tmp = [];
+    for (var i = 0; i < WM.length; i++) {
+      tmp.push(WM[i]);
+      tmp.sort();
+      // find middle
+      if (i % 2 == 0) {
+        var x = tmp[i / 2];
+        ret.push(x);
+      } else {
+        var x = tmp[(i + 1) / 2] + tmp[(i - 1) / 2];
+        ret.push(x / 2);
+      }
+    }
+    return ret;
+  }
 
 }
 

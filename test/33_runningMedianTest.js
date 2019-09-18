@@ -8,10 +8,11 @@ beforeEach('Setting up...', function() {
 });
 
 describe('RunningMedian', function() {
-  const expected = 3;
+  const expected = [2, 1.5, 2, 3.5, 2, 2, 2];
+  const WM = [2, 1, 5, 7, 2, 0, 5];
 
   it('Iterative', function() {
-    const result = 3; //algo.iterative(WM)
-    assert.equal(result, expected);
+    const result = algo.iterative(WM);
+    assert.deepEqual(result, expected);
   });
 });
