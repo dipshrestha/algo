@@ -16,3 +16,13 @@ describe('RunningMedian', function() {
     assert.deepEqual(result, expected);
   });
 });
+
+describe('RunningMedian', function() {
+  const expected = [2, 6, 5, 7.5];
+  const WM = [2, 10, 5, 20];
+
+  it('Iterative', function() {
+    const result = algo.iterative(WM);
+    assert.deepEqual(result, expected);
+  });
+});

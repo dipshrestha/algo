@@ -31,7 +31,8 @@ class RunningMedian {
     var tmp = [];
     for (var i = 0; i < WM.length; i++) {
       tmp.push(WM[i]);
-      tmp.sort();
+      tmp.sort(function(a, b) { return a - b });
+      console.log(tmp);
       // find middle
       if (i % 2 == 0) {
         var x = tmp[i / 2];
