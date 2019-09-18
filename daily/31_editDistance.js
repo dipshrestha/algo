@@ -25,13 +25,14 @@ class EditDistance {
   }
 
   // can we only fill the first row/column with 0
-  _fillZero(s1, s2) {
+  _fill(s1, s2) {
     for (var i = 0; i <= s1.length; i++) {
       this.V[i] = [];
       for (var j = 0; j <= s2.length; j++)
         this.V[i][j] = Math.min(i, j);
     }
   }
+
   //https://www.techiedelight.com/levenshtein-distance-edit-distance-problem/
   //https://www.geeksforgeeks.org/edit-distance-dp-5/
 
@@ -60,11 +61,11 @@ class EditDistance {
     if (Math.min(s1.length, s2.length) == 0)
       return Math.max(s1.length, s2.length);
 
-    this._fillZero(s1, s2);
+    this._fill(s1, s2);
 
     for (var i = 1; i <= s1.length; i++) {
       for (var j = 1; j <= s2.length; j++) {
-        if (s1[i] == s2[i]) {
+        if (s1[i - 1] == s2[j - 1]) {
           this.V[i][j] = this.V[i - 1][j - 1];
         } else {
           this.V[i][j] = 1 + Math.min(
