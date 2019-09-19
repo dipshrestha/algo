@@ -15,6 +15,10 @@ describe('RunningMedian', function() {
     const result = algo.iterative(WM);
     assert.deepEqual(result, expected);
   });
+  it('IterativeBest', function() {
+    const result = algo.iterativeBest(WM);
+    assert.deepEqual(result, expected);
+  });
 });
 
 describe('RunningMedian', function() {
@@ -23,6 +27,10 @@ describe('RunningMedian', function() {
 
   it('Iterative', function() {
     const result = algo.iterative(WM);
+    assert.deepEqual(result, expected);
+  });
+  it('IterativeBest', function() {
+    const result = algo.iterativeBest(WM);
     assert.deepEqual(result, expected);
   });
 });
