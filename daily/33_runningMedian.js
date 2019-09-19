@@ -2,6 +2,7 @@
  * Created by dipshrestha on 09/17/2019 
  */
 
+var Heap = require('heap');
 /*
 Daily Coding Problem: Problem #33 [Easy]
 
@@ -23,6 +24,49 @@ For example, given the sequence [2, 1, 5, 7, 2, 0, 5], your algorithm should pri
  */
 
 class RunningMedian {
+
+  _add(num, smallerHeap, largerHeap) {
+    if (smallerHeap.empty() || num < smallerHeap.peek()) {
+      smallerHeap.push(num);
+    } else {
+      largerHeap.push(num);
+    }
+  }
+
+  _rebalance(smallerHeap, largerHeap) {
+    if (smallerHeap.size() - largerHeap.size() >= 2) {
+      largerHeap.push(smallerHeap.pop());
+    } else if (largerHeap.size() - smallerHeap.size() >= 2) {
+      smallerHeap.push(largerHeap.pop());
+    }
+  }
+
+  _findMedian(smallerHeap, largerHeap) {
+    if (smallerHeap.size() == largerHeap.size()) {
+      return (smallerHeap.peek() + largerHeap.peek()) / 2.0
+    } else if (smallerHeap.size() > largerHeap.size()) {
+      return smallerHeap.peek();
+    } else {
+      return largerHeap.peek();
+    }
+  }
+  // very good video
+  // https://www.youtube.com/watch?v=VmogG01IjYc
+  // Time: O(n * log(n))
+  // Space: O (n)
+  iterativeBest(WM) {
+    var smallerHeap = new Heap((a, b) => b - a); // max heap
+    var largerHeap = new Heap((a, b) => a - b); // min heap
+    var num, ret = [];
+    for (var i = 0; i < WM.length; i++) {
+      num = WM[i];
+      this._add(num, smallerHeap, largerHeap);
+      this._rebalance(smallerHeap, largerHeap);
+      num = this._findMedian(smallerHeap, largerHeap);
+      ret.push(num);
+    }
+    return ret;
+  }
 
   // Time: O(n*n*log(n))
   // Space: O(n)
