@@ -46,10 +46,11 @@ class EditDistancePalindrome {
     debugger;
     if (str.length == 0 || str == "") return [];
     if (str.length == 1) return [str];
-    if (str[0] == str[str.length -1])
-      return [str];
-    //if (str.charAt(0) == str.slice(-1))
-   //   return this._recursive_helper(str.slice(1, -1));
+    if (str[0] == str[str.length - 1])
+    //  return this._recursive_helper(str.slice(1, -1));
+    return [str];
+    if (str.charAt(0) == str.slice(-1))
+       return this._recursive_helper(str.slice(1, -1));
     var arr = [];
     arr = arr.concat(this._getLeft(str));
     arr = arr.concat(this._getRight(str));

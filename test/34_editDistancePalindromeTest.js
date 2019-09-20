@@ -7,9 +7,19 @@ beforeEach('Setting up...', function() {
   algo = new EditDistancePalindrome();
 });
 
-describe('EditDistancePalindrome: google', function() {
-  const expected = 'elgoogle';
-  const str = 'google';
+describe.skip('EditDistancePalindrome: rxor', function() {
+  const expected = 'roxor';
+  const str = 'rxor';
+
+  it('Iterative', function() {
+    const result = algo.recursive(str);
+    assert.equal(result, expected);
+  });
+});
+
+describe('EditDistancePalindrome: race', function() {
+  const expected = 'ecarace';
+  const str = 'race';
 
   it('Iterative', function() {
     const result = algo.recursive(str);
