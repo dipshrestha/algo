@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new EditDistancePalindrome();
 });
 
-describe('EditDistancePalindrome', function() {
+describe('EditDistancePalindrome: google', function() {
   const expected = 'elgoogle';
   const str = 'google';
 
@@ -17,7 +17,7 @@ describe('EditDistancePalindrome', function() {
   });
 });
 
-describe.only('EditDistancePalindrome', function() {
+describe('EditDistancePalindrome: ab', function() {
   const expected = 'aba';
   const str = 'ab';
 
@@ -27,9 +27,29 @@ describe.only('EditDistancePalindrome', function() {
   });
 });
 
-describe.only('EditDistancePalindrome', function() {
+describe('EditDistancePalindrome: aa', function() {
+  const expected = '';
+  const str = 'aa';
+
+  it('Iterative', function() {
+    const result = algo.recursive(str);
+    assert.equal(result, expected);
+  });
+});
+
+describe('EditDistancePalindrome: ba', function() {
   const expected = 'aba';
   const str = 'ba';
+
+  it('Iterative', function() {
+    const result = algo.recursive(str);
+    assert.equal(result, expected);
+  });
+});
+
+describe('EditDistancePalindrome: b', function() {
+  const expected = 'b';
+  const str = 'b';
 
   it('Iterative', function() {
     const result = algo.recursive(str);

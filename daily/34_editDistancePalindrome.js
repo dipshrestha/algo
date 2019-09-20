@@ -41,17 +41,18 @@ class EditDistancePalindrome {
   }
 
   recursive(str) {
-  	debugger;
+    debugger;
     if (str.length == 0 || str == "") return [];
     if (str.length == 1) return [str];
-    if (str.length == 2) {
-      if (str.charAt(0) == str.charAt(1)) return [str];
-      var arr = [];
-      arr = arr.concat(this._getLeft(str));
-      arr = arr.concat(this._getRight(str));
-      var res = this._findMin(arr);
-      return res;
-    }
+    //if (str.length == 2) {
+    if (str.charAt(0) == str.slice(-1))
+      return this.recursive(str.slice(1, -1));
+    var arr = [];
+    arr = arr.concat(this._getLeft(str));
+    arr = arr.concat(this._getRight(str));
+    var res = this._findMin(arr);
+    return res;
+    //}
   }
 
 }
