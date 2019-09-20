@@ -49,7 +49,6 @@ class EditDistancePalindrome {
   };
 
   _recursive_helper(str) {
-    debugger;
     if (str.length == 0 || str == "") return [];
     if (str.length == 1) return [str];
     if (str[0] == str[str.length - 1] && str.length == 2)
@@ -60,10 +59,11 @@ class EditDistancePalindrome {
     var arr = [];
     arr = arr.concat(this._getLeft(str));
     arr = arr.concat(this._getRight(str));
-    //var res = this._findMin(arr);
     return arr;
   }
 
+  // Time: O(2 ^ N)
+  // Space: O(N)
   recursive(str) {
     var res = this._recursive_helper(str);
     return this._findMin(res);
