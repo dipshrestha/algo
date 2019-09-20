@@ -16,3 +16,23 @@ describe('EditDistancePalindrome', function() {
     assert.equal(result, expected);
   });
 });
+
+describe.only('EditDistancePalindrome', function() {
+  const expected = 'aba';
+  const str = 'ab';
+
+  it('Iterative', function() {
+    const result = algo.recursive(str);
+    assert.equal(result, expected);
+  });
+});
+
+describe.only('EditDistancePalindrome', function() {
+  const expected = 'aba';
+  const str = 'ba';
+
+  it('Iterative', function() {
+    const result = algo.recursive(str);
+    assert.equal(result, expected);
+  });
+});
