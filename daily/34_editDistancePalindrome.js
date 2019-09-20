@@ -20,39 +20,46 @@ As another example, given the string "google", you should return "elgoogle".
 class EditDistancePalindrome {
 
   _getLeft(str) {
-    var left = this.recursive(str.slice(1)); // exclude first
+    var left = this._recursive_helper(str.slice(1)); // exclude first
     left = left.map(i => str.slice(0, 1) + i + str.slice(0, 1));
     return left;
   }
 
   // find smallest length, then sort , return first element
   _findMin(arr) {
+    if (arr == null || arr.length < 1) return '';
     var max = Infinity;
     arr.forEach(a => a.length <= max ? max = a.length : max);
     arr = arr.filter(a => a.length == max);
     arr.sort();
+    //console.log(arr);
     return arr[0];
   };
 
   _getRight(str) {
-    var right = this.recursive(str.slice(0, -1)); // exclude last
-    right = right.map(i => str.slice(-1) + str.charAt(0) + str.slice(-1));
+    var right = this._recursive_helper(str.slice(0, -1)); // exclude last
+    right = right.map(i => str.slice(-1) + i + str.slice(-1));
     return right;
   }
 
-  recursive(str) {
+  _recursive_helper(str) {
     debugger;
     if (str.length == 0 || str == "") return [];
     if (str.length == 1) return [str];
-    //if (str.length == 2) {
-    if (str.charAt(0) == str.slice(-1))
-      return this.recursive(str.slice(1, -1));
+    if (str[0] == str[str.length -1])
+      return [str];
+    //if (str.charAt(0) == str.slice(-1))
+   //   return this._recursive_helper(str.slice(1, -1));
     var arr = [];
     arr = arr.concat(this._getLeft(str));
     arr = arr.concat(this._getRight(str));
-    var res = this._findMin(arr);
-    return res;
-    //}
+    //var res = this._findMin(arr);
+    return arr;
+  }
+
+  recursive(str) {
+    var res = this._recursive_helper(str);
+    return this._findMin(res);
   }
 
 }

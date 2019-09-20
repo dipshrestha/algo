@@ -12,7 +12,27 @@ describe('EditDistancePalindrome: google', function() {
   const str = 'google';
 
   it('Iterative', function() {
-    const result = 'elgoogle'; //algo.iterative(WM)
+    const result = algo.recursive(str);
+    assert.equal(result, expected);
+  });
+});
+
+describe('EditDistancePalindrome: google', function() {
+  const expected = 'elgoogle';
+  const str = 'google';
+
+  it('Iterative', function() {
+    const result = algo.recursive(str);
+    assert.equal(result, expected);
+  });
+});
+
+describe('EditDistancePalindrome: abc', function() {
+  const expected = 'abcba';
+  const str = 'abc';
+
+  it('Iterative', function() {
+    const result = algo.recursive(str);
     assert.equal(result, expected);
   });
 });
@@ -28,7 +48,7 @@ describe('EditDistancePalindrome: ab', function() {
 });
 
 describe('EditDistancePalindrome: aa', function() {
-  const expected = '';
+  const expected = 'aa';
   const str = 'aa';
 
   it('Iterative', function() {
