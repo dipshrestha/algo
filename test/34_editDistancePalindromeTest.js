@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new EditDistancePalindrome();
 });
 
-describe.skip('EditDistancePalindrome: rxor', function() {
+describe('EditDistancePalindrome: rxor', function() {
   const expected = 'roxor';
   const str = 'rxor';
 

@@ -25,6 +25,18 @@ class EditDistancePalindrome {
     return left;
   }
 
+  _getRight(str) {
+    var right = this._recursive_helper(str.slice(0, -1)); // exclude last
+    right = right.map(i => str.slice(-1) + i + str.slice(-1));
+    return right;
+  }
+
+  _getCenter(str) {
+    var center = this._recursive_helper(str.slice(1, -1));
+    center = center.map(i => str.slice(-1) + i + str.slice(-1));
+    return center;
+  }
+
   // find smallest length, then sort , return first element
   _findMin(arr) {
     if (arr == null || arr.length < 1) return '';
@@ -36,21 +48,15 @@ class EditDistancePalindrome {
     return arr[0];
   };
 
-  _getRight(str) {
-    var right = this._recursive_helper(str.slice(0, -1)); // exclude last
-    right = right.map(i => str.slice(-1) + i + str.slice(-1));
-    return right;
-  }
-
   _recursive_helper(str) {
     debugger;
     if (str.length == 0 || str == "") return [];
     if (str.length == 1) return [str];
+    if (str[0] == str[str.length - 1] && str.length == 2)
+      return [str];
     if (str[0] == str[str.length - 1])
-    //  return this._recursive_helper(str.slice(1, -1));
-    return [str];
-    if (str.charAt(0) == str.slice(-1))
-       return this._recursive_helper(str.slice(1, -1));
+      return this._getCenter(str);
+
     var arr = [];
     arr = arr.concat(this._getLeft(str));
     arr = arr.concat(this._getRight(str));
