@@ -15,6 +15,29 @@ You may also use a list or array to represent a set.
 
 class Powerset {
 
+  _merge(char, arr2) {
+    debugger;
+    var ret;
+    if (arr2.length == 0)
+      ret = [[], [char]];
+    else
+      ret = arr2.map(function(i) {
+        return [char, i];
+      });
+    ret = [ret, arr2];
+    //ret = arr2.concat(ret);
+    //ret.unshift([char]);
+    return ret;
+  }
+
+  recursive(WM) {
+    if (WM == null || WM.length == 0)
+      return [];
+    // get right and concat
+    var ret = this.recursive(WM.slice(1))
+    ret = this._merge([WM[0]], ret);
+    return ret;
+  }
 }
 
 module.exports = Powerset;
