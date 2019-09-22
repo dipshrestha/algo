@@ -15,25 +15,24 @@ You may also use a list or array to represent a set.
 
 class Powerset {
 
-  _merge(char, arr2) {
-    debugger;
-    var ret = arr2.map(function(i) {
-      return [char].concat(i)
+  _merge(char, arr) {
+    var ret = arr.map(function(i) {
+      return i.concat(char);
     });
-    ret = ret.concat(arr2);
-    //ret = arr2.concat(ret);
-    //ret.unshift([char]);
+    ret = arr.concat(ret);
     return ret;
   }
 
+  // Time: (2^N)
+  // Space: (2^N)
   recursive(WM) {
     if (WM == null || WM.length == 0)
       return [
         []
       ];
-    // get right and concat
-    var ret = this.recursive(WM.slice(1))
-    ret = this._merge(WM[0], ret);
+    // get left and concat to right
+    var ret = this.recursive(WM.slice(0, -1))
+    ret = this._merge(WM.slice(-1), ret);
     return ret;
   }
 }

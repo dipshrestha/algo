@@ -1,24 +1,25 @@
 const assert = require('assert');
 const Powerset = require('../daily/37_powerset.js');
+var expect = require('chai').expect;
 
 let algo = null;
 
 beforeEach('Setting up...', function() {
   algo = new Powerset();
 });
-describe.skip('Powerset', function() {
+describe('Powerset', function() {
   const expected = [
     [],
     [1],
   ];
   const WM = [1];
 
-  it('Iterative', function() {
+  it('Recursive', function() {
     const result = algo.recursive(WM)
-    assert.equal(result, expected);
+    assert.deepEqual(result, expected);
   });
 });
-describe.skip('Powerset', function() {
+describe('Powerset', function() {
   const expected = [
     [],
     [1],
@@ -27,27 +28,27 @@ describe.skip('Powerset', function() {
   ];
   const WM = [1, 2];
 
-  it('Iterative', function() {
+  it('Recursive', function() {
     const result = algo.recursive(WM)
-    assert.equal(result, expected);
+    assert.deepEqual(result, expected);
   });
 });
 
-describe.skip('Powerset', function() {
+describe('Powerset', function() {
   const expected = [
     [],
     [1],
     [2],
-    [3],
     [1, 2],
+    [3],
     [1, 3],
     [2, 3],
     [1, 2, 3]
   ];
   const WM = [1, 2, 3];
 
-  it('Iterative', function() {
+  it('Recursive', function() {
     const result = algo.recursive(WM)
-    assert.equal(result, expected);
+    assert.deepEqual(result, expected);
   });
 });
