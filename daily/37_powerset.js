@@ -17,14 +17,10 @@ class Powerset {
 
   _merge(char, arr2) {
     debugger;
-    var ret;
-    if (arr2.length == 0)
-      ret = [[], [char]];
-    else
-      ret = arr2.map(function(i) {
-        return [char, i];
-      });
-    ret = [ret, arr2];
+    var ret = arr2.map(function(i) {
+      return [char].concat(i)
+    });
+    ret = ret.concat(arr2);
     //ret = arr2.concat(ret);
     //ret.unshift([char]);
     return ret;
@@ -32,10 +28,12 @@ class Powerset {
 
   recursive(WM) {
     if (WM == null || WM.length == 0)
-      return [];
+      return [
+        []
+      ];
     // get right and concat
     var ret = this.recursive(WM.slice(1))
-    ret = this._merge([WM[0]], ret);
+    ret = this._merge(WM[0], ret);
     return ret;
   }
 }
