@@ -26,42 +26,35 @@ class SegregateArray {
     WM[j] = tmp;
   }
 
-  _isGreater(WM, i, j) {
-    return this.V.indexOf(WM[i]) > this.V.indexOf(WM[j])
-  }
-
-  // place pointer in both end, left for smallest, right for largest
-  // move pointer inward only if 
+  // https://github.com/h4yfans/Daily-Coding-Problem/blob/master/035%20%5BHard%5D/Solution.md
+  // place pointer in both ends and middle, left for smallest, right for largest, middle to start as left
+  // move pointer inward only if
   // - left is
   // - right is
+  // - middle
+
+  // Time: O(N)
+  // Space: O(1)
   iterative(WM) {
+    /* L: low, M: middle, H: high */
     var L = 0,
+      M = 0,
       R = WM.length - 1;
 
-    while (L < R) {
-      //if (WM[L] > WM[R]) {
-      if (this._isGreater(WM, L, R)) {
-        this._swap(WM, R, L);
-        //if (WM[L] == this.V[0])
-        //  L++;
-        //} else if (WM[L] < WM[R]) {
-      } else {
-        this._swap(WM, L, R);
-        //if (WM[R] == this.V[this.V.length - 1])
-        //  R--;
-      }
-      if (WM[L] == this.V[0])
+    while (M <= R) {
+      if (WM[M] == this.V[0]) {
+        this._swap(WM, L, M);
         L++;
-      if (WM[R] == this.V[this.V.length - 1])
+        M++;
+      } else if (WM[M] == this.V[2]) {
+        this._swap(WM, M, R);
         R--;
-      if (WM[L] == WM[R] && WM[L] == this.V[1]) {
-        L++;
-        //R--;
+      } else {
+        M++;
       }
     }
     return WM;
   }
-
 }
 
 module.exports = SegregateArray;

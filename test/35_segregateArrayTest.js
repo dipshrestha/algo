@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new SegregateArray(['R', 'G', 'B']);
 });
 
-describe.skip('SegregateArray - GBRRBRG ', function() {
+describe('SegregateArray - GBRRBRG ', function() {
   const expected = ['R', 'R', 'R', 'G', 'G', 'B', 'B'];
   const WM = ['G', 'B', 'R', 'R', 'B', 'R', 'G'];
 
@@ -18,7 +18,7 @@ describe.skip('SegregateArray - GBRRBRG ', function() {
 });
 
 
-describe.skip('SegregateArray - GRGB ', function() {
+describe('SegregateArray - GRGB ', function() {
   const expected = ['R', 'G', 'G', 'B'];
   const WM = ['G', 'R', 'G', 'B'];
 
@@ -58,7 +58,7 @@ describe('SegregateArray - GBG ', function() {
   });
 });
 
-describe.skip('SegregateArray - GRG ', function() {
+describe('SegregateArray - GRG ', function() {
   const expected = ['R', 'G', 'G'];
   const WM = ['G', 'R', 'G'];
 
