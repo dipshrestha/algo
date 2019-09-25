@@ -14,6 +14,10 @@ i.e. no two queens share the same row, column, or diagonal.
 
  */
 
+// https://developers.google.com/optimization/cp/queens
+// https://rosettacode.org/wiki/N-queens_problem
+// https://blogs.cs.st-andrews.ac.uk/csblog/2017/08/31/n-queens-completion-is-np-complete/
+// https://www.youtube.com/watch?v=wGbuCyNpxIg
 class NQueens {
 
 
