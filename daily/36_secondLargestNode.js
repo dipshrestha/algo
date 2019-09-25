@@ -14,6 +14,13 @@ Given the root to a binary search tree, find the second largest node in the tree
 class SecondLargestNode {
 
 
+  recursive() {
+    // if it has a right child and it's a leaf
+    // 
+    // find the largest element in left child
+    //
+  }
+
 }
 
 module.exports = SecondLargestNode;
