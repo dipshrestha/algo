@@ -13,12 +13,34 @@ Given the root to a binary search tree, find the second largest node in the tree
 
 class SecondLargestNode {
 
+  _isLeaf(node) {
+    return node.left == null && node.right == null;
+  }
 
-  recursive() {
-    // if it has a right child and it's a leaf
-    // 
-    // find the largest element in left child
-    //
+  _findLargest(node) {
+    if (this._isLeaf(node)) return node.val;
+    if (node.right == null) return node.val;
+    return this._findLargest(node.right);
+  }
+
+  recursive(node) {
+    var val = this._recursive_helper(node);
+    return val;
+  }
+
+  _recursive_helper(node) {
+    if (!node) return node;
+    if (this._isLeaf(node)) return node.val;
+    if (node.right != null) {
+      if (this._isLeaf(node.right)) {
+        // this is it
+        return node.val;
+      } else {
+        return this._recursive_helper(node.right)
+      }
+    } else {
+      return this._findLargest(node.left);
+    }
   }
 
 }
