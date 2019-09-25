@@ -18,6 +18,7 @@ i.e. no two queens share the same row, column, or diagonal.
 // https://rosettacode.org/wiki/N-queens_problem
 // https://blogs.cs.st-andrews.ac.uk/csblog/2017/08/31/n-queens-completion-is-np-complete/
 // https://www.youtube.com/watch?v=wGbuCyNpxIg
+//https://github.com/h4yfans/Daily-Coding-Problem/blob/master/038%20%5BHard%5D/Solution.md
 class NQueens {
 
   recursive(N) {
