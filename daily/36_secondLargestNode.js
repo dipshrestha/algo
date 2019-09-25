@@ -23,6 +23,8 @@ class SecondLargestNode {
     return this._findLargest(node.right);
   }
 
+  // Time: O(log (N))
+  // Space: O(1)
   recursive(node) {
     var val = this._recursive_helper(node);
     return val;
