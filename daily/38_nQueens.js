@@ -20,7 +20,19 @@ i.e. no two queens share the same row, column, or diagonal.
 // https://www.youtube.com/watch?v=wGbuCyNpxIg
 class NQueens {
 
+  recursive(N) {
+    if (N == 0 || N == 2 || N == 3) return 0;
+    var val = this._recursive_helper(N, []);
+    return val;
+  }
 
+  _recursive_helper(N, board = []) {
+    if (N == board.length)
+      return 1;
+    for (var i = 0; i < N; i++) {
+      // pick
+    }
+  }
 }
 
 module.exports = NQueens;
