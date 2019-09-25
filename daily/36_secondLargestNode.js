@@ -11,6 +11,10 @@ Given the root to a binary search tree, find the second largest node in the tree
 
  */
 
+/*
+ Algo: if it has a right child which is leaf retun this
+       else find max in the left child
+*/
 class SecondLargestNode {
 
   _isLeaf(node) {
