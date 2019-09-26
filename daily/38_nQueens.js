@@ -25,6 +25,31 @@ i.e. no two queens share the same row, column, or diagonal.
 */
 class NQueens {
 
+  constructor() {
+    this.V = [];
+  }
+
+  _print(_sol) {
+    for (var z = 0; z < _sol.length; z++) {
+      console.log(" --- " + (z + 1) + " --- ");
+      var sol = _sol[z];
+      sol = sol.split(',');
+      for (var i = 0; i < sol.length; i++) {
+        var v = sol[i];
+        var row = "";
+        for (var j = 0; j < sol.length; j++) {
+          if (v == j) {
+            row += ' X ';
+          } else {
+            row += ' O ';
+          }
+        }
+        console.log(row);
+      }
+    }
+
+  }
+
   _isValid(board) {
     if (board.length == 1) return true;
     var diff = 0,
@@ -44,6 +69,8 @@ class NQueens {
   recursive(N) {
     if (N == 0 || N == 2 || N == 3) return 0;
     var val = this._recursive_helper(N, []);
+    this._print(this.V);
+    //console.log(this.V);
     return val;
   }
 
@@ -63,6 +90,7 @@ class NQueens {
       board.push(i);
       if (this._isValid(board)) {
         count += this._recursive_helper(N, board);
+        if (N == board.length) this.V.push(board.join(','));
       }
 
       // IMP: we CAN NOT prematurely do this to prevent uncecessary calls
