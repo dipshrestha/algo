@@ -18,21 +18,59 @@ i.e. no two queens share the same row, column, or diagonal.
 // https://rosettacode.org/wiki/N-queens_problem
 // https://blogs.cs.st-andrews.ac.uk/csblog/2017/08/31/n-queens-completion-is-np-complete/
 // https://www.youtube.com/watch?v=wGbuCyNpxIg
-//https://github.com/h4yfans/Daily-Coding-Problem/blob/master/038%20%5BHard%5D/Solution.md
+// https://github.com/h4yfans/Daily-Coding-Problem/blob/master/038%20%5BHard%5D/Solution.md
+
+/*
+ Algo: Solve using backtracking
+*/
 class NQueens {
 
+  _isValid(board) {
+    if (board.length == 1) return true;
+    var diff = 0,
+      last_col = board.slice(-1),
+      last_row = board.length - 1;
+    for (var i = 0; i < last_row; i++) {
+      diff = Math.abs(board[i] - last_col);
+      /* same column OR same diagonal */
+      if (diff == 0 || diff == last_row - i) return false;
+    }
+    return true;
+
+  }
+
+  // Time : O(N^N)
+  // Space: O(N)
   recursive(N) {
     if (N == 0 || N == 2 || N == 3) return 0;
     var val = this._recursive_helper(N, []);
     return val;
   }
 
+  // TODO: try another method to get a selection from the bishop(ghoda) movement
+
+
+  /*
+   * Index of board represents row and value represent column in that row
+   */
   _recursive_helper(N, board = []) {
     if (N == board.length)
       return 1;
+    var count = 0;
+    // try to place in each column
     for (var i = 0; i < N; i++) {
       // pick
+      board.push(i);
+      if (this._isValid(board)) {
+        count += this._recursive_helper(N, board);
+      }
+
+      // IMP: we CAN NOT prematurely do this to prevent uncecessary calls
+      // because we need all the possible paths
+      //if (count == N) return N; 
+      board.pop();
     }
+    return count;
   }
 }
 
