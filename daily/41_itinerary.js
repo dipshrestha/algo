@@ -19,6 +19,9 @@ However, the first one is lexicographically smaller.
 
  */
 
+/*
+ Algo: Solve using backtracking
+*/
 class Itinerary {
 
   constructor() {
@@ -63,6 +66,8 @@ class Itinerary {
     return arr[0] || [];
   }
 
+  // Time: O(2^N)
+  // Space: O(N)
   recursive(WM, start) {
     if (WM == null || WM.length == 0) return null;
     this._recursive_helper(WM, start, []);
