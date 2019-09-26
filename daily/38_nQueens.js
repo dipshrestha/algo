@@ -39,9 +39,9 @@ class NQueens {
         var row = "";
         for (var j = 0; j < sol.length; j++) {
           if (v == j) {
-            row += ' X ';
+            row += ' × ';
           } else {
-            row += ' O ';
+            row += ' ○ ';
           }
         }
         console.log(row);
