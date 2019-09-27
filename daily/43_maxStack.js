@@ -16,32 +16,38 @@ Each method should run in constant time.
 
  */
 
+/*
+ Algo: Maintain a maxes stack
+*/
 class MaxStack {
 
   constructor() {
     this.stack = [];
-    this.max = null;
-    this.p = -1;
+    this.maxes = [];
   }
 
-  isEmpty() {
-    if (this.p < 0) return true;
+  _isEmpty() {
+    return this.stack.length == 0;
   }
+
   // add to stack and compute max
   push(e) {
-    this.stack[++this.p] = e;
+    this.stack.push(e);
+    if (e > this.max()) this.maxes.push(e);
+    else this.maxes.push(this.maxes.slice(-1));
   }
 
   // add to stack and compute max
   pop() {
-    if (this.isEmpty()) return null;
-    return this.stack[this.p--];
+    if (this._isEmpty()) return null;
+    this.maxes.pop();
+    return this.stack.pop();
   }
 
   // return max
   max() {
-    if (this.isEmpty()) return null;
-    return this.max;
+    if (this._isEmpty()) return null;
+    return this.maxes.slice(-1);
   }
 
 }

@@ -7,10 +7,23 @@ beforeEach('Setting up...', function() {
   algo = new MaxStack();
 });
 describe('MaxStack', function() {
-  const expected = 3;
 
   it('Iterative', function() {
-    const result = 3;//algo.iterative(WM)
-    assert.equal(result, expected);
+    algo.push(3);
+    assert.equal(algo.max(), 3);
+    assert.equal(algo.pop(), 3);
+    assert.equal(algo.max(), null);
+    assert.equal(algo.pop(), null);
+
+    algo.push(10);
+    algo.push(10);
+    algo.push(5);
+    assert.equal(algo.max(), 10);
+    algo.push(20);
+    algo.push(5);
+    assert.equal(algo.max(), 20);
+    algo.pop();
+    algo.pop();
+    assert.equal(algo.max(), 10);
   });
 });
