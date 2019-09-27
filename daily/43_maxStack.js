@@ -18,6 +18,31 @@ Each method should run in constant time.
 
 class MaxStack {
 
+  constructor() {
+    this.stack = [];
+    this.max = null;
+    this.p = -1;
+  }
+
+  isEmpty() {
+    if (this.p < 0) return true;
+  }
+  // add to stack and compute max
+  push(e) {
+    this.stack[++this.p] = e;
+  }
+
+  // add to stack and compute max
+  pop() {
+    if (this.isEmpty()) return null;
+    return this.stack[this.p--];
+  }
+
+  // return max
+  max() {
+    if (this.isEmpty()) return null;
+    return this.max;
+  }
 
 }
 
