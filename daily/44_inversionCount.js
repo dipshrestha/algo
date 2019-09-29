@@ -26,8 +26,9 @@ class InversionCount {
     this.V = 0;
   }
 
+  // Time: O(N logN)
+  // Space: O(N)
   recursive(WM) {
-    debugger
     if (WM == null || WM.length < 1) return 0;
     var x = this._recursive_helper(WM);
     console.log(x, this.V);
