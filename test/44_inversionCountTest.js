@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new InversionCount();
 });
 
-describe.only ('InversionCount', function() {
+describe('InversionCount', function() {
   const expected = 0;
   const WM = [2, 4];
 
@@ -17,7 +17,7 @@ describe.only ('InversionCount', function() {
   });
 });
 
-describe.only ('InversionCount', function() {
+describe('InversionCount', function() {
   const expected = 1;
   const WM = [4 , 2];
 
@@ -27,7 +27,7 @@ describe.only ('InversionCount', function() {
   });
 });
 
-describe.only ('InversionCount', function() {
+describe('InversionCount', function() {
   const expected = 3;
   const WM = [2, 4, 1, 3, 5];
 
@@ -37,7 +37,7 @@ describe.only ('InversionCount', function() {
   });
 });
 
-describe.only ('InversionCount', function() {
+describe('InversionCount', function() {
   const expected = 3;
   const WM = [2, 4, 1, 3];
 
@@ -47,7 +47,7 @@ describe.only ('InversionCount', function() {
   });
 });
 
-describe.only ('InversionCount', function() {
+describe ('InversionCount', function() {
   const expected = 10;
   const WM = [5, 4, 3, 2, 1];
 
