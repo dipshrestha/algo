@@ -15,6 +15,10 @@ describe('MaxProfit', function() {
     const result = algo.iterative(WM)
     assert.equal(result, expected);
   });
+  it('IterativeBest', function() {
+    const result = algo.iterativeBest(WM)
+    assert.equal(result, expected);
+  });
 });
 
 describe('MaxProfit', function() {
@@ -25,6 +29,10 @@ describe('MaxProfit', function() {
     const result = algo.iterative(WM)
     assert.equal(result, expected);
   });
+  it('IterativeBest', function() {
+    const result = algo.iterativeBest(WM)
+    assert.equal(result, expected);
+  });
 });
 
 describe('MaxProfit', function() {
@@ -33,6 +41,10 @@ describe('MaxProfit', function() {
 
   it('Iterative', function() {
     const result = algo.iterative(WM)
+    assert.equal(result, expected);
+  });
+  it('IterativeBest', function() {
+    const result = algo.iterativeBest(WM)
     assert.equal(result, expected);
   });
 });
