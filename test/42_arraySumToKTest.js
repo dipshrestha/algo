@@ -6,6 +6,23 @@ let algo = null;
 beforeEach('Setting up...', function() {
   algo = new ArraySumToK();
 });
+
+describe('ArraySumToK: [12, 1, 4, 2], 3', function() {
+  const expected = [1, 2];
+  const WM = [12, 1, 4, 2];
+  const K = 3;
+
+  it('Recursive', function() {
+    const result = algo.recursive(WM, K)
+    assert.deepEqual(result.sort(), expected.sort());
+  });
+
+  it('RecursiveBacktracking', function() {
+    const result = algo.recursive(WM, K)
+    assert.deepEqual(result.sort(), expected.sort());
+  });
+});
+
 describe('ArraySumToK: [12, 1, 61, 5, 9, 2], 24', function() {
   const expected = [12, 9, 2, 1];
   const WM = [12, 1, 61, 5, 9, 2];
@@ -13,6 +30,11 @@ describe('ArraySumToK: [12, 1, 61, 5, 9, 2], 24', function() {
 
   it('Recursive', function() {
     const result = algo.recursive(WM, K)
+    assert.deepEqual(result.sort(), expected.sort());
+  });
+
+  it('RecursiveBacktracking', function() {
+    const result = algo.recursiveBackTrack(WM, K)
     assert.deepEqual(result.sort(), expected.sort());
   });
 });
@@ -26,8 +48,12 @@ describe('ArraySumToK: [12, 1, 61, 5, 9, 2], 10', function() {
     const result = algo.recursive(WM, K)
     assert.deepEqual(result.sort(), expected.sort());
   });
-});
 
+  it('RecursiveBacktracking', function() {
+    const result = algo.recursiveBackTrack(WM, K)
+    assert.deepEqual(result.sort(), expected.sort());
+  });
+});
 
 describe('ArraySumToK: [12, 1, 61, 5, 9, 2], 4', function() {
   const expected = null;
@@ -36,6 +62,11 @@ describe('ArraySumToK: [12, 1, 61, 5, 9, 2], 4', function() {
 
   it('Recursive', function() {
     const result = algo.recursive(WM, K)
+    assert.deepEqual(result, expected);
+  });
+
+  it('RecursiveBacktracking', function() {
+    const result = algo.recursiveBackTrack(WM, K)
     assert.deepEqual(result, expected);
   });
 });
