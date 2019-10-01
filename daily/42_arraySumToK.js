@@ -114,7 +114,8 @@ class ArraySumToK {
       this.V[0][j] = true;
     }
   }
-
+  // https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
+  //https://github.com/h4yfans/Daily-Coding-Problem/blob/master/042%20%5BHard%5D/Solution.md
   dp(WM, K) {
     this._fillZero(K, WM.length);
 
