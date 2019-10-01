@@ -46,6 +46,24 @@ class ArraySumToK {
     return val1 || val2;
   }
 
+  // TODO: https://github.com/h4yfans/Daily-Coding-Problem/blob/master/042%20%5BHard%5D/Solution.md
+  _recursive_helper2(WM, K) {
+    if (K == 0) return true;
+    if (WM.length == 0 && K != 0) return false;
+
+    var num = WM.pop();
+    //if (num > K)
+    //  return this._recursive_helper2(WM.slice(0, -1), K);
+    // exclude num
+    var without_last = this._recursive_helper2(WM, K);
+    // include num
+    var with_last = this._recursive_helper2(WM.slice(0, -1), K - num);
+    if (with_last) {
+      this.V.push(with_last);
+    }
+    return without_last || with_last;
+  }
+
   // Time: O(2^N)
   // Space: O(N)
   recursiveBackTrack(WM, K) {
@@ -85,24 +103,38 @@ class ArraySumToK {
     this.V = [];
   }
 
-  _fillZero(K) {
-    for (var i = 0; i < K; i++)
-      this.V[i] = 0;
+  _fillZero(K, N) {
+    for (var i = 0; i <= K; i++) {
+      this.V[i] = [];
+      for (var j = 0; j <= N; j++)
+        this.V[i][j] = false;
+    }
+
+    for (var j = 0; j <= N; j++) {
+      this.V[0][j] = true;
+    }
   }
 
   dp(WM, K) {
-    this._fillZero(K);
+    this._fillZero(K, WM.length);
 
-    for (var i = 0; i < K; i++) {
-      for (var j = 0; j < WM.length; j++) {
+    for (var i = 1; i <= K; i++) {
+      for (var j = 1; j <= WM.length; j++) {
 
-        var tmp = WM[j];
-        if (tmp + WM[j - 1] < K) {
-          //if (WM[j - 1] + tmp)
+        var tmp = this.V[i][j] = this.V[i][j - 1];
+        if (i >= WM[j - 1]) { // number is less than or equal to K
+          var with_last = this.V[i - WM[j - 1]][j - 1];
+          var without_last = this.V[i][j];
+          //var val = this.V[w - WM[i]] + VM[i];
+          this.V[i][j] = with_last || without_last;
+        } else {
+          this.V[i][j] = tmp;
         }
       }
     }
-
+    console.log(this.V)
+    var val = this.V[K][WM.length];
+    return val;
   }
 
 }

@@ -21,6 +21,11 @@ describe('ArraySumToK: [12, 1, 4, 2], 3', function() {
     const result = algo.recursive(WM, K)
     assert.deepEqual(result.sort(), expected.sort());
   });
+
+  it('DP', function() {
+    const result = algo.dp(WM, K)
+    //assert.deepEqual(result.sort(), expected.sort());
+  });
 });
 
 describe('ArraySumToK: [12, 1, 61, 5, 9, 2], 24', function() {
