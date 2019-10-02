@@ -23,6 +23,9 @@ d  e f  g
 
  */
 
+
+const { Node } = require('../daily/3_serializeTree.js');
+
 /*
  Algo: 
 */
