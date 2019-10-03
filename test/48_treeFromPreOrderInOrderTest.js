@@ -9,10 +9,11 @@ beforeEach('Setting up...', function() {
 
 describe('TreeFromPreOrderInOrder', function() {
   const expected = 3;
-
+  const preT = ['a', 'b', 'd', 'e', 'c', 'f', 'g'];
+  const inT = ['d', 'b', 'e', 'a', 'f', 'c', 'g'];
 
   it('Iterative', function() {
-    const result = 3;//algo.iterative(WM)
+    const result = 3//algo.iterative(WM)
     assert.equal(result, expected);
   });
 });
