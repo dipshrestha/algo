@@ -33,7 +33,6 @@ class EvaluateExpression {
   // Time: O(N)
   // Space: O(N)
   recursive(node) {
-    debugger;
     if (node == null) return 0;
     var val = this._recursive_helper(node);
     return val;
