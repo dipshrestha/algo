@@ -15,7 +15,12 @@ Hint: What if we enter the same URL twice?
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: https://github.com/ashwanikumar04/daily-coding-problems/blob/master/src/main/java/in/ashwanik/dcp/problems/p31_60/p55/Solution.java
+ http://blog.gainlo.co/index.php/2016/03/08/system-design-interview-question-create-tinyurl-system/
+ https://www.educative.io/courses/grokking-the-system-design-interview/m2ygV4E81AR
+ https://gist.github.com/bhelx/778542
+ https://www.interviewcake.com/question/java/url-shortener
+ https://medium.com/@vaibhav0109/how-to-build-a-tiny-url-service-that-scales-to-billions-f6fb5ea22e8c
 */
 class ShortenURL {
 
