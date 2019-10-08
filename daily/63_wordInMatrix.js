@@ -37,8 +37,8 @@ class WordInMatrix {
     }
     return true;
   }
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(N * K) K is max of R,C
+  // Space: O(1)
   iterative(WM, W) {
     var R = WM.length,
       C = WM[0].length,
