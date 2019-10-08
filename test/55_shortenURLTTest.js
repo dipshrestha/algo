@@ -6,7 +6,7 @@ let algo = null;
 beforeEach('Setting up...', function() {
   algo = new ShortenURL(Math.pow(64, 5) - 1);
 });
-describe.only('ShortenURL', function() {
+describe('ShortenURL', function() {
 
   it('Iterative - 1', function() {
     const url = 'http://abc.com';
