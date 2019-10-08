@@ -21,7 +21,10 @@ Similarly, given the target word 'MASS', you should return true, since it's the 
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: For each cell position do 2 checks, one for left-to-right and other for up-to-down
+
+ TODO: try difficult problem
+ https://leetcode.com/problems/word-search/discuss/407751/simple-dfs-in-C%2B%2B
 */
 class WordInMatrix {
 
