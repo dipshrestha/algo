@@ -15,7 +15,11 @@ Hint: What if we enter the same URL twice?
  */
 
 /*
- Algo: https://github.com/ashwanikumar04/daily-coding-problems/blob/master/src/main/java/in/ashwanik/dcp/problems/p31_60/p55/Solution.java
+ Algo:
+ 1) set new number for each entry -> same URL twice -> different result
+ 2) to get same result -> hash it first instead of setting number.
+
+ https://github.com/ashwanikumar04/daily-coding-problems/blob/master/src/main/java/in/ashwanik/dcp/problems/p31_60/p55/Solution.java
  http://blog.gainlo.co/index.php/2016/03/08/system-design-interview-question-create-tinyurl-system/
  https://www.educative.io/courses/grokking-the-system-design-interview/m2ygV4E81AR
  https://gist.github.com/bhelx/778542
@@ -29,27 +33,30 @@ class ShortenURL {
     this.V = new Map();
     this.seed = seed;
   }
-  // Time: O(2^N)
-  // Space: O(N)
 
+  // Time: O(N)
+  // Space: O(N)
   shorten(url) {
     var buff = '';
     var val = ++this.seed;
     while (val > 0) {
       var x = this.allChars.charAt(val % this.allChars.length);
-      console.log(val, x, this.allChars.length);
       buff += x;
       val = parseInt(val / this.allChars.length);
     }
     this.V.set(this.seed, url);
-    console.log(buff);
     var res = buff.split('').reverse().join('');
-    console.log(res);
+    console.log(url, res);
     return res;
   }
 
   restore(str) {
-
+    var num = 0;
+    str.split('').forEach(c => {
+      debugger;
+      num = num * this.allChars.length + this.allChars.indexOf(c);
+    })
+    return this.V.get(num);
   }
 
 }
