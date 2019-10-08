@@ -19,8 +19,33 @@ Hint: What if we enter the same URL twice?
 */
 class ShortenURL {
 
+  constructor(seed) {
+    this.allChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    this.V = new Map();
+    this.seed = seed;
+  }
   // Time: O(2^N)
   // Space: O(N)
+
+  shorten(url) {
+    var buff = '';
+    var val = ++this.seed;
+    while (val > 0) {
+      var x = this.allChars.charAt(val % this.allChars.length);
+      console.log(val, x, this.allChars.length);
+      buff += x;
+      val = parseInt(val / this.allChars.length);
+    }
+    this.V.set(this.seed, url);
+    console.log(buff);
+    var res = buff.split('').reverse().join('');
+    console.log(res);
+    return res;
+  }
+
+  restore(str) {
+
+  }
 
 }
 

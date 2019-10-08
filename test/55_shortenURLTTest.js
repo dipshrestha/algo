@@ -4,13 +4,14 @@ const ShortenURL = require('../daily/55_shortenURL.js');
 let algo = null;
 
 beforeEach('Setting up...', function() {
-  algo = new ShortenURL();
+  algo = new ShortenURL(Math.pow(64,5) - 1);
 });
-describe('ShortenURL', function() {
+describe.only('ShortenURL', function() {
   const expected = 3;
+  const url = 'http://abc.com';
 
   it('Iterative', function() {
-    const result = 3;//algo.iterative(WM)
-    assert.equal(result, expected);
+    const result = algo.shorten(url)
+    //assert.equal(result, expected);
   });
 });
