@@ -8,10 +8,52 @@ beforeEach('Setting up...', function() {
 });
 
 describe('WordInMatrix', function() {
-  const expected = 3;
+  const WM = [
+    ['F', 'A', 'C', 'I'],
+    ['O', 'B', 'Q', 'P'],
+    ['A', 'N', 'O', 'B'],
+    ['M', 'A', 'S', 'S']
+  ];
 
-  it('Iterative', function() {
-    const result = 3; //algo.iterative(WM)
+  it('Iterative - 1', function() {
+    const W = 'FOAM';
+    const expected = true;
+    const result = algo.iterative(WM, W)
+    assert.equal(result, expected);
+  });
+
+  it('Iterative - 2', function() {
+    const W = 'MASS';
+    const expected = true;
+    const result = algo.iterative(WM, W)
+    assert.equal(result, expected);
+  });
+
+  it('Iterative - 3', function() {
+    const W = 'MASB';
+    const expected = false;
+    const result = algo.iterative(WM, W)
+    assert.equal(result, expected);
+  });
+
+  it('Iterative - 4', function() {
+    const W = 'BQP';
+    const expected = true;
+    const result = algo.iterative(WM, W)
+    assert.equal(result, expected);
+  });
+
+  it('Iterative - 5', function() {
+    const W = 'FAM';
+    const expected = false;
+    const result = algo.iterative(WM, W)
+    assert.equal(result, expected);
+  });
+
+  it('Iterative - 6', function() {
+    const W = 'QOS';
+    const expected = true;
+    const result = algo.iterative(WM, W)
     assert.equal(result, expected);
   });
 });

@@ -23,10 +23,38 @@ Similarly, given the target word 'MASS', you should return true, since it's the 
 /*
  Algo: Solve using backtracking
 */
-class WordInMatrix{
+class WordInMatrix {
 
+  _findLR(WM, W, _i, _j) {
+    for (var i = _i, j = _j; j - _j < W.length && j < WM[0].length; j++) {
+      if (WM[i][j] != W.charAt(j - _j)) return false;
+    }
+    return true;
+  }
+  _findUD(WM, W, _i, _j) {
+    for (var i = _i, j = _j; i - _i < W.length && i < WM.length; i++) {
+      if (WM[i][j] != W.charAt(i - _i)) return false;
+    }
+    return true;
+  }
   // Time: O(2^N)
   // Space: O(N)
+  iterative(WM, W) {
+    var R = WM.length,
+      C = WM[0].length,
+      L = W.length;
+    debugger;
+    if ((R < L && C < L) || R < 1 || C < 1) return false;
+    for (var i = 0; i < R; i++) {
+      for (var j = 0; j < C; j++) {
+        if (R - i >= L && this._findUD(WM, W, i, j))
+          return true;
+        if (C - j >= L && this._findLR(WM, W, i, j))
+          return true;
+      }
+    }
+    return false;
+  }
 
 }
 
