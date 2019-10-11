@@ -45,8 +45,61 @@ You should print out the following:
 */
 class ClockwiseSpiral {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(N)
+  // Space: O(1)
+  iterative(WM) {
+    var lowRow = 0,
+      highRow = WM[0].length,
+      lowCol = 0,
+      highCol = WM.length,
+      curR = 0,
+      curC = 0,
+      ret = [];
+
+    function moveR() {
+      while (curR < highRow - 1) {
+        ret.push(WM[curC][curR++]);
+      }
+      curR--;
+      highRow--;
+    }
+
+    function moveD() {
+      while (curC < highCol - 1) {
+        ret.push(WM[curC++][curR]);
+      }
+      curC--;
+      highCol--;
+    }
+
+    function moveL() {
+      while (curR > lowRow) {
+        ret.push(WM[curC][--curR]);
+      }
+      curR++;
+      lowRow++;
+    }
+
+    function moveU() {
+      //curC--;
+      curR--;
+      while (curC > lowCol) {
+        ret.push(WM[--curC][curR]);
+      }
+      curC++;
+      lowCol++;
+    }
+
+    debugger;
+    while (lowRow <= curR && curR < highRow && lowCol <= curC && curC < highCol) {
+      moveR();
+      moveD();
+      moveL();
+      moveU();
+    }
+    console.log(ret);
+    return ret;
+  }
 
 }
 
