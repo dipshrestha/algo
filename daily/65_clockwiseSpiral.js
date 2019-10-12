@@ -49,53 +49,54 @@ class ClockwiseSpiral {
   // Space: O(1)
   iterative(WM) {
     var lowRow = 0,
-      highRow = WM[0].length,
+      highRow = WM.length,
       lowCol = 0,
-      highCol = WM.length,
+      highCol = WM[0].length,
       curR = 0,
       curC = 0,
       ret = [];
 
     function moveR() {
-      while (curR < highRow - 1) {
-        ret.push(WM[curC][curR++]);
-      }
-      curR--;
-      highRow--;
-    }
-
-    function moveD() {
-      while (curC < highCol - 1) {
-        ret.push(WM[curC++][curR]);
+      while (curC < highCol) {
+        ret.push(WM[curR][curC++]);
       }
       curC--;
       highCol--;
     }
 
-    function moveL() {
-      while (curR > lowRow) {
-        ret.push(WM[curC][--curR]);
-      }
+    function moveD() {
       curR++;
-      lowRow++;
+      while (curR < highRow) {
+        ret.push(WM[curR++][curC]);
+      }
+      curR--;
+      highRow--;
     }
 
-    function moveU() {
-      //curC--;
-      curR--;
-      while (curC > lowCol) {
-        ret.push(WM[--curC][curR]);
+    function moveL() {
+      curC--;
+      while (curC >= lowCol) {
+        ret.push(WM[curR][curC--]);
       }
       curC++;
       lowCol++;
     }
 
-    debugger;
+    function moveU() {
+      curR--;
+      while (curR > lowRow) {
+        ret.push(WM[curR--][curC]);
+      }
+      curR++;
+      lowRow++;
+    }
+
     while (lowRow <= curR && curR < highRow && lowCol <= curC && curC < highCol) {
       moveR();
       moveD();
       moveL();
       moveU();
+      curC++;
     }
     console.log(ret);
     return ret;
