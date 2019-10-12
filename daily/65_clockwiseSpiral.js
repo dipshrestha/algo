@@ -41,7 +41,7 @@ You should print out the following:
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: Move clocksiwse
 */
 class ClockwiseSpiral {
 
