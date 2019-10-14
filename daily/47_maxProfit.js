@@ -22,6 +22,8 @@ buy the stock at 5 dollars and sell it at 10 dollars.
 */
 class MaxProfit {
 
+  // Time: O(N)
+  // Space: O(N)
   iterative(WM) {
     if (WM == null || WM.length < 2) return null;
 
