@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new MaxProfit();
 });
 
-describe.only('MaxProfit', function() {
+describe('MaxProfit', function() {
   const expected = 5;
   const WM = [9, 11, 8, 5, 7, 10];
 
@@ -17,7 +17,7 @@ describe.only('MaxProfit', function() {
   });
 });
 
-describe.only('MaxProfit', function() {
+describe('MaxProfit', function() {
   const expected = 8;
   const WM = [12, 2, 4, 10];
 
@@ -27,7 +27,7 @@ describe.only('MaxProfit', function() {
   });
 });
 
-describe.only('MaxProfit', function() {
+describe('MaxProfit', function() {
   const expected = 0;
   const WM = [12, 10, 9];
 
