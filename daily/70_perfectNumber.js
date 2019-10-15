@@ -14,12 +14,21 @@ For example, given 1, you should return 19. Given 2, you should return 28.
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: Find the sequence and make into account about 100, 1000
+ // 19, 28, 37, 46, 55, 65, 73, 82, 91, 109, 118
 */
 class PerfectNumber {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(N)
+  // Space: O(1)
+  iterative(N) {
+    var start = 19;
+    var formula = start + 9 * N;
+    formula += 9 * (parseInt(Math.log10(N)) - 1);
+
+    return formula;
+
+  }
 
 }
 
