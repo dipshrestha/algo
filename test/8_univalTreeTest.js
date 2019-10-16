@@ -51,3 +51,22 @@ describe(' UnivalTree - 2', function() {
     assert.equal(result, expected);
   });
 });
+
+/*
+   1
+  / \
+ 1   1
+    / \
+   1   0
+  / \
+ 1   1
+*/
+describe(' UnivalTree - 3', function() {
+  var node = new Node('1', new Node('1'), new Node('1', new Node('1', new Node('1'), new Node('1')), new Node('0')));
+
+  it('Recursive', function() {
+    const result = algo.recursive(node);
+    const expected = 5;
+    assert.equal(result, expected);
+  });
+});

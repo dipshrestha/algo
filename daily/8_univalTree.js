@@ -23,6 +23,9 @@ For example, the following tree has 5 unival subtrees:
 
 const { Node } = require('../daily/3_serializeTree.js');
 
+/*
+ Algo: if one of the child isn't unival, then this node won't be.
+*/
 class UnivalTree {
   constructor() {
     this._init();
@@ -39,10 +42,18 @@ class UnivalTree {
   }
 
   _recursive_helper(node) {
-    if (node == null) return null;
-    if (this._recursive_helper(node.left) == this._recursive_helper(node.right))
+    if (node == null) return true;
+    var left = this._recursive_helper(node.left);
+    var right = this._recursive_helper(node.right);
+    if (left && right) {
+      if (node.left != null && node.val != node.left.val)
+        return false;
+      if (node.right != null && node.val != node.right.val)
+        return false;
       this.counter++;
-    return node.val;
+      return true;
+    }
+    return false;
   }
 }
 
