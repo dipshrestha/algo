@@ -17,7 +17,7 @@ describe('LongestPalindrome: aabcdcb', function() {
   });
 });
 
-describe.only('LongestPalindrome: bananas', function() {
+describe('LongestPalindrome: bananas', function() {
   const expected = 'anana';
   const str = 'bananas';
 
@@ -26,7 +26,7 @@ describe.only('LongestPalindrome: bananas', function() {
     assert.equal(result, expected);
   });
 });
-describe.only('LongestPalindrome: cbbd', function() {
+describe('LongestPalindrome: cbbd', function() {
   const expected = 'bb';
   const str = 'cbbd';
 
