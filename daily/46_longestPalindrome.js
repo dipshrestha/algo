@@ -15,12 +15,43 @@ he longest palindromic substring of "bananas" is "anana".
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: 
+ For each character check if it makes palindrome
 */
 class LongestPalindrome {
 
+  _isPalindrome(str) {
+    for (var i = 0; i < Math.floor(str.length / 2); i++) {
+      if (str.charAt(i) != str.charAt(str.length - 1 - i)) {
+        console.log('_isPalindrome: No, ' + str);
+        return false;
+      }
+    }
+    console.log('_isPalindrome: Yes, ' + str);
+    return true;
+  }
+
   // Time: O(2^N)
   // Space: O(N)
+  iterative(str) {
+    var char1, char2, palindrome = '',
+      tmp;
+    for (var i = 0; i < str.length; i++) {
+      char1 = str.charAt(i);
+      for (var j = i + 1; j < str.length; j++) {
+        char2 = str.charAt(j);
+        if (char1 == char2) {
+          tmp = str.substr(i, j);
+          if (this._isPalindrome(tmp)) {
+            if (palindrome.length < tmp.length) {
+              palindrome = tmp;
+            }
+          }
+        }
+      }
+    }
+    return palindrome;
+  }
 
 }
 

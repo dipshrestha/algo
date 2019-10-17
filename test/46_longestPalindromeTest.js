@@ -7,11 +7,31 @@ beforeEach('Setting up...', function() {
   algo = new LongestPalindrome();
 });
 
-describe('Template', function() {
-  const expected = 3;
+describe('LongestPalindrome: aabcdcb', function() {
+  const expected = 'bcdcb';
+  const str = 'aabcdcb';
 
   it('Iterative', function() {
-    const result = 3;//algo.iterative(WM)
+    const result = algo.iterative(str);
+    assert.equal(result, expected);
+  });
+});
+
+describe.only('LongestPalindrome: bananas', function() {
+  const expected = 'anana';
+  const str = 'bananas';
+
+  it('Iterative', function() {
+    const result = algo.iterative(str);
+    assert.equal(result, expected);
+  });
+});
+describe.only('LongestPalindrome: cbbd', function() {
+  const expected = 'bb';
+  const str = 'cbbd';
+
+  it('Iterative', function() {
+    const result = algo.iterative(str);
     assert.equal(result, expected);
   });
 });
