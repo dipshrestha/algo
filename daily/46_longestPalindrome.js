@@ -31,26 +31,38 @@ class LongestPalindrome {
     return true;
   }
 
-  _isPalindromeFromChar(str, pos) {
-    var p = pos + 1;
-    for (var i = pos; i < str.length; i++) {
-      if (str.charAt(pos) == str.charAt()) {
-
+  _getPalindromeFromChar(str, pos) {
+    debugger;
+    var pre = pos - 1,
+      i = pos + 1,
+      palindrome = "";
+    if (str.charAt(i) == str.charAt(pos)) {
+      i = pos + 2;
+      palindrome = str.charAt(pos) + str.charAt(pos);
+    } else {
+      palindrome = str.charAt(pos);
+    }
+    for (; i < str.length && pre >= 0; i++, pre--) {
+      if (str.charAt(i) == str.charAt(pre)) {
+        palindrome += str.charAt(i);
+        palindrome = str.charAt(i) + palindrome;
+      } else {
+        break;
       }
     }
+    return palindrome;
   }
 
   iterativeBetter(str) {
-    var char, palindrome;
-    for (var i = 0; i < str.length; i++) {
-      char = str[i];
-      if (this._isPalindromeFromChar(str, char)) {
-        if (palindrome.length < tmp.length) {
-          palindrome = tmp;
-        }
+    var palindrome = '',
+      tmp;
+    for (var i = 1; i < str.length; i++) {
+      tmp = this._getPalindromeFromChar(str, i);
+      if (tmp && tmp.length > palindrome.length) {
+        palindrome = tmp;
       }
-      return palindrome;
     }
+    return palindrome;
   }
 
   // Time: O(2^N)

@@ -15,6 +15,10 @@ describe('LongestPalindrome: aabcdcb', function() {
     const result = algo.iterative(str);
     assert.equal(result, expected);
   });
+  it('IterativeBetter', function() {
+    const result = algo.iterativeBetter(str);
+    assert.equal(result, expected);
+  });
 });
 
 describe('LongestPalindrome: bananas', function() {
@@ -25,6 +29,10 @@ describe('LongestPalindrome: bananas', function() {
     const result = algo.iterative(str);
     assert.equal(result, expected);
   });
+  it('IterativeBetter', function() {
+    const result = algo.iterativeBetter(str);
+    assert.equal(result, expected);
+  });
 });
 describe('LongestPalindrome: cbbd', function() {
   const expected = 'bb';
@@ -32,6 +40,10 @@ describe('LongestPalindrome: cbbd', function() {
 
   it('Iterative', function() {
     const result = algo.iterative(str);
+    assert.equal(result, expected);
+  });
+  it('IterativeBetter', function() {
+    const result = algo.iterativeBetter(str);
     assert.equal(result, expected);
   });
 });
