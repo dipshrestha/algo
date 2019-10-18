@@ -30,8 +30,7 @@ class LongestPalindrome {
     console.log('_isPalindrome: Yes, ' + str);
     return true;
   }
-  // Time: O(2^N)
-  // Space: O(N)
+
   _getPalindromeFromChar(str, pos) {
     debugger;
     var pre = pos - 1,
@@ -53,7 +52,9 @@ class LongestPalindrome {
     }
     return palindrome;
   }
-
+  
+  // Time: O(2^N)
+  // Space: O(N)
   iterativeBetter(str) {
     var palindrome = '',
       tmp;
