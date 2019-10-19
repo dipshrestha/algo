@@ -20,17 +20,67 @@ he longest palindromic substring of "bananas" is "anana".
 */
 class LongestPalindrome {
 
+  constructor() {
+    this.V = [];
+  }
+
   recursive(str) {
     if (str == null || str.length < 1) return '';
     var val = this._recursive_helper(str, str.length);
     return val;
   }
 
-  _recursive_helper(str, index) {
+  _isPalindromeForRecursive(str, char) {
+    return str.getCharAt(0) == char;
+  }
+
+  _recursive_helper(str) {
+
+    for (var i = 0; i < str.length; i++) {
+      if (str[i + 1] == str[i - 1]) {
+        // recursively find if there are more
+      }
+    }
+  }
+  _recursive_helper1(str, index) {
     if (str.length == 1) return true;
 
-    var val = this._recursive_helper(str, index--);
+    // if previous is palindrome adding this might be
+    // a) a longer palindrome
+    // b) or no palindrome at all.
 
+    // if previouse is not a palindrome, adding this might be
+    // a) a longer palindrome
+    // b) or no palindrome at all.
+
+    var val = this._recursive_helper(str, index--);
+    if (val) {
+
+    }
+
+  }
+
+  _fillZero(N) {
+    this.V = new Array(N);
+    for (var i = 0; i < N; i++) {
+      this.V[i] = new Array(N).fill(0);
+    }
+
+  }
+  //https://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/
+  //https://leetcode.com/problems/longest-palindromic-substring/discuss/416640/dp-Solution-by-javascript - JS
+  // https://leetcode.com/problems/longest-palindromic-substring/solution/
+  dp(str) {
+    this._fillZero(str.length);
+    for (var i = 0; i < K; i++) {
+      for (var j = 0; i + j < K; j++) {
+         if (str.charAt(i) == str.charAt(j)) {
+         var last = this.N[i+1][j-1];
+
+         }
+
+      }
+    }
   }
 
   _isPalindrome(str) {
@@ -44,6 +94,7 @@ class LongestPalindrome {
     return true;
   }
 
+  // go to before/after the char in search of longest palindrome
   _getPalindromeFromChar(str, pos) {
     debugger;
     var pre = pos - 1,
@@ -66,7 +117,7 @@ class LongestPalindrome {
     return palindrome;
   }
 
-  // Time: O(2^N)
+  // Time: O(N^2)
   // Space: O(N)
   iterativeBetter(str) {
     var palindrome = '',
