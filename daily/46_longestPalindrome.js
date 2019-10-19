@@ -20,6 +20,19 @@ he longest palindromic substring of "bananas" is "anana".
 */
 class LongestPalindrome {
 
+  recursive(str) {
+    if (str == null || str.length < 1) return '';
+    var val = this._recursive_helper(str, str.length);
+    return val;
+  }
+
+  _recursive_helper(str, index) {
+    if (str.length == 1) return true;
+
+    var val = this._recursive_helper(str, index--);
+
+  }
+
   _isPalindrome(str) {
     for (var i = 0; i < Math.floor(str.length / 2); i++) {
       if (str.charAt(i) != str.charAt(str.length - 1 - i)) {
@@ -52,7 +65,7 @@ class LongestPalindrome {
     }
     return palindrome;
   }
-  
+
   // Time: O(2^N)
   // Space: O(N)
   iterativeBetter(str) {
