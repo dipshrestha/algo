@@ -70,14 +70,23 @@ class LongestPalindrome {
   //https://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/
   //https://leetcode.com/problems/longest-palindromic-substring/discuss/416640/dp-Solution-by-javascript - JS
   // https://leetcode.com/problems/longest-palindromic-substring/solution/
+  // https://leetcode.com/problems/longest-palindromic-substring/discuss/420539/very-straightforward-java-solution-using-DP-and-explanation
   dp(str) {
     this._fillZero(str.length);
+    var palindrome = '',
+      tmp;
     for (var i = 0; i < K; i++) {
-      for (var j = 0; i + j < K; j++) {
-         if (str.charAt(i) == str.charAt(j)) {
-         var last = this.N[i+1][j-1];
-
-         }
+      for (var j = i; j >= 0; j--) {
+        if (str.charAt(i) == str.charAt(j)) {
+          var last = this.N[i + 1][j - 1];
+          if (last || i - j < 3) {
+            this.N[i][j] = true;
+            tmp = str.substring(i, j + 1);
+            if (tmp && tmp.length > palindrome.length) {
+              palindrome = tmp;
+            }
+          }
+        }
 
       }
     }
