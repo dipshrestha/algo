@@ -19,7 +19,7 @@ describe('LongestPalindrome: aabcdcb', function() {
     const result = algo.iterativeBetter(str);
     assert.equal(result, expected);
   });
-  it.only('DP', function() {
+  it('DP', function() {
     const result = algo.dp(str);
     assert.equal(result, expected);
   });
@@ -37,7 +37,7 @@ describe('LongestPalindrome: bananas', function() {
     const result = algo.iterativeBetter(str);
     assert.equal(result, expected);
   });
-  it.only('DP', function() {
+  it('DP', function() {
     const result = algo.dp(str);
     assert.equal(result, expected);
   });
@@ -54,7 +54,7 @@ describe('LongestPalindrome: cbbd', function() {
     const result = algo.iterativeBetter(str);
     assert.equal(result, expected);
   });
-  it.only('DP', function() {
+  it('DP', function() {
     const result = algo.dp(str);
     assert.equal(result, expected);
   });
