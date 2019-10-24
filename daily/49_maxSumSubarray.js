@@ -17,12 +17,30 @@ Do this in O(N) time.
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: At each point decide what happens if you add the next element
+  a) if it decreases, earlier is the max
+  b) if it makes sum negative, reset to 0
 */
 class MaxSumSubarray {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(N)
+  // Space: O(1)
+  iterative(WM) {
+
+    if (WM == null || WM.length < 1) return 0;
+    var max = Math.max(WM[0], 0);
+    var tmp = max;
+
+    for (var i = 1; i < WM.length; i++) {
+      tmp += WM[i];
+      if (tmp < 0) {
+        tmp = 0; // reset
+      } else if (tmp >= max) {
+        max = tmp;
+      }
+    }
+    return max;
+  }
 
 }
 
