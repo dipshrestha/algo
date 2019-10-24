@@ -9,17 +9,17 @@ beforeEach('Setting up...', function() {
 
 describe('Template', function() {
 
-  it.only('Iterative', function() {
+  it('Iterative - 3', function() {
     const expected = 'ave';
     const result = algo.readN(3)
     assert.equal(result, expected);
   });
-  it.only('Iterative', function() {
+  it('Iterative - 15', function() {
     const expected = 'averylongfile';
     const result = algo.readN(15)
     assert.equal(result, expected);
   });
-  it.only('Iterative', function() {
+  it('Iterative - 8', function() {
     const expected = 'averylon';
     const result = algo.readN(8)
     assert.equal(result, expected);
