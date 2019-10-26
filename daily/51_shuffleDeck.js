@@ -15,13 +15,46 @@ Hint: Make sure each one of the 52! permutations of the deck is equally likely.
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: Swap current card with the random number generated.
 */
 class ShuffleDeck {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // random numbers between 1 and k (inclusive)
+  random(k) {
+    var min = 1;
+    var max = k;
+    var rand = Math.floor(Math.random() * (+max - +min)) + +min;
+    return rand - 1;
+  }
 
+  swap(WM, i, j) {
+    var tmp = WM[i];
+    WM[i] = WM[j];
+    WM[j] = tmp;
+  }
+
+  _fill(WM) {
+    for (var i = 0; i < WM.length; i++) {
+      WM[i] = i + 1;
+    }
+  }
+
+  // Time: O(N)
+  // Space: O(1)
+  iterative(WM) {
+    this._fill(WM);
+
+    var rand;
+    for (var i = 0; i < 52; i++) {
+      rand = this.random(52);
+      this.swap(WM, rand, i);
+    }
+
+    var print = '';
+    WM.forEach((x, i) => print += ((i % 13 == 0 ? '\r\n' : '') + '-' + x));
+    console.log(print);
+    return WM;
+  }
 }
 
 module.exports = ShuffleDeck;

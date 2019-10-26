@@ -9,9 +9,10 @@ beforeEach('Setting up...', function() {
 
 describe('ShuffleDeck', function() {
   const expected = 3;
+  const WM = new Array(52);
 
-  it('Iterative', function() {
-    const result = 3;//algo.iterative(WM)
-    assert.equal(result, expected);
+  it.only('Iterative', function() {
+    algo.iterative(WM);
+    //assert.equal(result, expected);
   });
 });
