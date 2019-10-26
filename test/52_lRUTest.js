@@ -1,5 +1,5 @@
 const assert = require('assert');
-const LRU = require('../daily/52_LRU.js');
+const LRU = require('../daily/52_lRU.js');
 
 let algo = null;
 
