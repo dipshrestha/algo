@@ -16,6 +16,7 @@ Hint: Make sure each one of the 52! permutations of the deck is equally likely.
 
 /*
  Algo: Swap current card with the random number generated.
+ // Fisher-Yates Shuffle Modern Algorithm
 */
 class ShuffleDeck {
 
@@ -24,7 +25,7 @@ class ShuffleDeck {
     var min = 1;
     var max = k;
     var rand = Math.floor(Math.random() * (+max - +min)) + +min;
-    return rand - 1;
+    return rand;
   }
 
   swap(WM, i, j) {
@@ -45,8 +46,8 @@ class ShuffleDeck {
     this._fill(WM);
 
     var rand;
-    for (var i = 0; i < 52; i++) {
-      rand = this.random(52);
+    for (var i = 0; i < WM.length - 1; i++) {
+      rand = this.random(i, WM.length);
       this.swap(WM, rand, i);
     }
 
