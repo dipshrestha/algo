@@ -4,14 +4,20 @@ const LRU = require('../daily/52_lRU.js');
 let algo = null;
 
 beforeEach('Setting up...', function() {
-  algo = new LRU();
+  algo = new LRU(5);
 });
 
 describe('LRU', function() {
   const expected = 3;
 
-  it('Iterative', function() {
+  it.only('Iterative', function() {
     const result = 3; //algo.iterative(WM)
-    assert.equal(result, expected);
+    algo.set('a',1);
+    algo.set('b',2);
+    algo.set('c',3);
+    algo.set('d',2);
+    //algo.set('b',2);
+    console.log(algo._getAll())
+    //assert.equal(result, expected);
   });
 });
