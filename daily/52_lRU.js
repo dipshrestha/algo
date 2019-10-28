@@ -16,7 +16,7 @@ Each operation should run in O(1) time.
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: Use double linked list with hash table
  // reference https://medium.com/dsinjs/implementing-lru-cache-in-javascript-94ba6755cda9
 */
 class Node {
@@ -33,17 +33,17 @@ class LRU {
   constructor(n) {
     this.head = null;
     this.tail = null;
-    this.size = 0;
     this.maxSize = n;
     this.map = new Map();
   }
 
   _remove(key) {
-    var nodeToRemove = this.get(key);
-    if (this.size < 1) return;
+    var nodeToRemove = this.map.get(key);
     // update pointers
-    if (nodeToRemove.prev)
+    if (nodeToRemove.prev) {
       nodeToRemove.prev.next = nodeToRemove.next;
+    }
+    this.tail = nodeToRemove.prev;
     // delete
     nodeToRemove = null;
     this.map.delete(key);
@@ -53,50 +53,69 @@ class LRU {
     var h = this.head;
     var p = '';
     while (h) {
-      p += (' - ' + h.key);
+      p += ('(' + h.key + ':' + h.val + ')');
       h = h.next;
     }
     return p;
   }
 
   _add(key, val) {
-    if (this.size == this.maxSize) {
-      this._remove(key);
+    if (this.map.size == this.maxSize) {
+      debugger;
+      this._remove(this.tail.key);
     }
     var newNode = new Node(key, val);
     this.map.set(key, newNode);
-    this._moveToHead(key);
+    if (this.map.size != 1) {
+      newNode.next = this.head;
+      this.head.prev = newNode;
+    } else {
+      this.tail = newNode;
+    }
+    this.head = newNode;
   }
 
   _moveToHead(key) {
     var nodeToMove = this.map.get(key);
     // update pointers for before/after node
-    if (nodeToMove.next != null) {
-      nodeToMove.prev.next = nodeToMove.next;
+    if (nodeToMove.next) {
       nodeToMove.next.prev = nodeToMove.prev;
     }
+    if (nodeToMove.prev) {
+      nodeToMove.prev.next = nodeToMove.next;
+    }
 
+    if (this.tail.key == nodeToMove.key) {
+      this.tail = nodeToMove.prev;
+    }
     // update pointers for this node and head node
+    this.head.prev = nodeToMove;
     nodeToMove.next = this.head;
-    if (this.head)
-      this.head.prev = nodeToMove.prev;
 
     // set this node as head
     this.head = nodeToMove;
+    this.head.prev = null;
+
+    if (this.map.size == 1)
+      this.tail = this.head;
   }
 
+  // Time: O(1)
+  // Space: O(N)
   get(key) {
     var ret = this.map.get(key);
     // doesn't exist
-    if (!ret) {
+    if (!ret)
       return null;
-    }
+
     // exist and is not header
     if (this.head.key != key)
       this._moveToHead(key);
     return ret.val;
   }
 
+  // Time: O(1)
+  // Space: O(N)
   set(key, val) {
     var ret = this.map.get(key);
     // doesn't exist
@@ -104,16 +123,17 @@ class LRU {
       this._add(key, val);
       return;
     }
+    ret.val = val;
+    this.map.set(key, ret);
     // exist and is not header
-    if (this.head.key != key) {
+    if (this.head.key != key)
       this._moveToHead(key);
-    } else {
+    else {
       // exist so update header
       this.header.val = val;
     }
   }
-  // Time: O(2^N)
-  // Space: O(N)
+
 
 }
 
