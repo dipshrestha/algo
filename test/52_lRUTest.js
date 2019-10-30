@@ -10,7 +10,7 @@ beforeEach('Setting up...', function() {
 describe('LRU', function() {
   const expected = 3;
 
-  it.only('Iterative', function() {
+  it('Iterative', function() {
     const result = 3;
     algo.set('a', 1);
     algo.set('b', 2);
