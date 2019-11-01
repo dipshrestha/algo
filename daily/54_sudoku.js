@@ -19,8 +19,145 @@ Implement an efficient sudoku solver.
 */
 class Sudoku {
 
+
+  _isComplete(WM) {
+    for (var i = 0; i < WM.length; i++) {
+      for (var j = 0; j < WM[0].length; j++) {
+        if (!Number.isInteger(WM[i][j])) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  _findEmptySlot(WM) {
+    for (var i = 0; i < WM.length; i++) {
+      for (var j = 0; j < WM[0].length; j++) {
+        if (!Number.isInteger(WM[i][j])) {
+          return { i: i, j: j };
+        }
+      }
+    }
+  }
+
+  _findDuplicate(WM, idx) {
+    for (var i = 0; i < WM.length; i++) {
+      if (i != idx && WM[idx] != null && WM[idx] == WM[i])
+        return true;
+    }
+    return false;
+  }
+
+  _findDuplicateInRow(WM, rowId) {
+    for (var i = 0; i < WM.length; i++) {
+      if (this._findDuplicate(WM[rowId], i))
+        return true;
+    }
+    return false;
+  }
+
+  _findDuplicateInColumn(WM, colId) {
+    var arr = [];
+    for (var i = 0; i < WM.length; i++) {
+      arr.push(WM[i][colId]);
+    }
+    for (var j = 0; j < WM.length; j++) {
+      if (this._findDuplicate(arr, j))
+        return true;
+    }
+    return false;
+  }
+
+  _findDuplicateInBox(WM, boxId) {
+    var cellsAround = [
+      [1, 1],
+      [1, 4],
+      [1, 7],
+      [4, 1],
+      [4, 4],
+      [4, 7],
+      [7, 1],
+      [7, 4],
+      [7, 7]
+    ];
+
+    //function get(idx) {
+    var allAxes = [
+      [-1, -1],
+      [-1, 0],
+      [-1, 1],
+
+      [0, -1],
+      [0, 1],
+
+      [1, -1],
+      [1, 0],
+      [1, 1]
+    ]
+    //}
+
+    var ret = [];
+    var box = cellsAround[boxId];
+    for (var k = 0; k < allAxes.length; k++) {
+      var co = allAxes[k];
+      var i = co[0] + box[0];
+      var j = co[1] + box[1];
+      ret.push(WM[i][j]);
+    }
+
+    for (var j = 0; j < ret.length; j++) {
+      if (this._findDuplicate(ret, j))
+        return true;
+    }
+    return false;
+  }
+
+  _isValid(WM) {
+    // each row has unique element
+    // each column has unique element
+    for (var i = 0; i < WM.length; i++) {
+      if (this._findDuplicateInRow(WM, i))
+        return false;
+      if (this._findDuplicateInColumn(WM, i))
+        return false;
+      if (this._findDuplicateInBox(WM, i))
+        return false;
+    }
+    return true;
+  }
+
   // Time: O(2^N)
   // Space: O(N)
+  recursive(WM) {
+    debugger;
+    if (WM == null || WM.length != 9 || WM.length < 1 || WM[0].length != 9)
+      return false;
+    var val = this._recursive_helper(WM);
+    console.log(val);
+    return val;
+  }
+
+  _recursive_helper(WM) {
+
+    //return condition
+    if (this._isComplete(WM)) {
+      return;
+    }
+
+    var empty = this._findEmptySlot(WM);
+    // try to place each number
+    // this is collection of choice you have
+    for (var i = 1; i < 10; i++) {
+      // pick
+      WM[empty.i][empty.j] = i;
+      if (this._isValid(WM)) {
+        this._recursive_helper(WM);
+      } else {
+        WM[empty.i][empty.j] = null;
+      }
+    }
+  }
 
 }
 

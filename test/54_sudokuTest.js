@@ -7,11 +7,20 @@ beforeEach('Setting up...', function() {
   algo = new Sudoku();
 });
 
-describe('Sudoku', function() {
-  const expected = 3;
-
+describe.skip('Sudoku', function() {
+  var WM = [
+    [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+  ];
   it('Iterative', function() {
-    const result = 3;//algo.iterative(WM)
-    assert.equal(result, expected);
+    const result = algo.recursive(WM);
+    //assert.equal(result, expected);
   });
 });
