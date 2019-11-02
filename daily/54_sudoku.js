@@ -124,6 +124,45 @@ class Sudoku {
     return true;
   }
 
+  _isValid_better(WM, empty) {
+    if (this._findDuplicate(WM[empty.i], empty.j))
+      return false;
+    if (this._findDuplicateInColumn(WM, empty.j))
+      return false;
+    // each row has unique element
+    // each column has unique element
+    for (var i = 0; i < WM.length; i++) {
+
+      if (this._findDuplicateInBox(WM, i))
+        return false;
+    }
+    return true;
+  }
+  _findPossibleNums(WM, empty) {
+    var currentNums = [];
+    // find existing in row
+    var row = WM[empty.i];
+    for (var i = 0; i < row.length; i++) {
+      if (row[i]) currentNums[row[i]] = true;;
+    }
+    // find existing in column
+    var val = null;
+    for (var i = 0; i < WM.length; i++) {
+      val = WM[i][empty.j];
+      if (val) currentNums[val] = true;
+    }
+    // find existing in box
+    // determine which box it falls
+
+    var ret = [];
+    for (var i = 1; i <= WM.length; i++) {
+      if (currentNums[i] != true)
+        ret.push(i);
+    }
+    return ret;
+    // find existing in box
+  }
+
   // Time: O(2^N)
   // Space: O(N)
   recursive(WM) {
@@ -132,6 +171,37 @@ class Sudoku {
     var val = this._recursive_helper(WM);
     console.log(val);
     return val;
+  }
+
+  _recursive_helper_better(WM) {
+
+    //return condition
+    if (this._isComplete(WM)) {
+      return WM;
+    }
+
+    var empty = this._findEmptySlot(WM);
+    // instead of trying to place each number
+    // find a set of numbers from which it can be filled
+    var possibleNums = this._findPossibleNums(WM, empty);
+    //var i = null;
+    //for (var k = 0; k < possibleNums.length; k++) {
+    //        i = possibleNums[k];
+    for (var i = 1; i < 10; i++) {
+
+      // pick
+      WM[empty.i][empty.j] = i;
+      if (this._isValid_better(WM, empty)) {
+        var val = this._recursive_helper_better(WM);
+        // we don't need to count number of ways
+        // this can be solved, so return
+        if (this._isComplete(WM))
+          return WM;
+      } else {
+        WM[empty.i][empty.j] = 0;
+      }
+    }
+    return WM;
   }
 
   _recursive_helper(WM) {
