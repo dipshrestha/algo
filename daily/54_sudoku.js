@@ -19,11 +19,10 @@ Implement an efficient sudoku solver.
 */
 class Sudoku {
 
-
   _isComplete(WM) {
     for (var i = 0; i < WM.length; i++) {
       for (var j = 0; j < WM[0].length; j++) {
-        if (!Number.isInteger(WM[i][j])) {
+        if (!WM[i][j]) {
           return false;
         }
       }
@@ -34,7 +33,7 @@ class Sudoku {
   _findEmptySlot(WM) {
     for (var i = 0; i < WM.length; i++) {
       for (var j = 0; j < WM[0].length; j++) {
-        if (!Number.isInteger(WM[i][j])) {
+        if (!WM[i][j]) {
           return { i: i, j: j };
         }
       }
@@ -43,7 +42,7 @@ class Sudoku {
 
   _findDuplicate(WM, idx) {
     for (var i = 0; i < WM.length; i++) {
-      if (i != idx && WM[idx] != null && WM[idx] == WM[i])
+      if (i != idx && WM[idx] != 0 && WM[idx] == WM[i])
         return true;
     }
     return false;
@@ -82,7 +81,6 @@ class Sudoku {
       [7, 7]
     ];
 
-    //function get(idx) {
     var allAxes = [
       [-1, -1],
       [-1, 0],
@@ -95,7 +93,6 @@ class Sudoku {
       [1, 0],
       [1, 1]
     ]
-    //}
 
     var ret = [];
     var box = cellsAround[boxId];
@@ -130,7 +127,6 @@ class Sudoku {
   // Time: O(2^N)
   // Space: O(N)
   recursive(WM) {
-    debugger;
     if (WM == null || WM.length != 9 || WM.length < 1 || WM[0].length != 9)
       return false;
     var val = this._recursive_helper(WM);
@@ -142,7 +138,7 @@ class Sudoku {
 
     //return condition
     if (this._isComplete(WM)) {
-      return;
+      return WM;
     }
 
     var empty = this._findEmptySlot(WM);
@@ -152,11 +148,16 @@ class Sudoku {
       // pick
       WM[empty.i][empty.j] = i;
       if (this._isValid(WM)) {
-        this._recursive_helper(WM);
+        var val = this._recursive_helper(WM);
+        // we don't need to count number of ways
+        // this can be solved, so return
+        if (this._isComplete(WM))
+          return WM;
       } else {
-        WM[empty.i][empty.j] = null;
+        WM[empty.i][empty.j] = 0;
       }
     }
+    return WM;
   }
 
 }
