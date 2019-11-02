@@ -7,8 +7,8 @@ beforeEach('Setting up...', function() {
   algo = new Sudoku();
 });
 
-describe.only('Sudoku', function() {
-  var WM1 = [
+describe('Sudoku', function() {
+  var WM = [
     [1, 2, 3, 4, 5, 6, 7, 8, 9],
     //    [0, 0, 0, 0, 0, 0, 0, 0, 0],
     //[0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -22,7 +22,7 @@ describe.only('Sudoku', function() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
   ]; // 70 - 90 ms
 
-  var WM = [
+  var WM1 = [
     [0, 7, 9, 0, 0, 8, 0, 0, 2],
     [0, 6, 3, 0, 0, 1, 0, 0, 0],
     [0, 5, 1, 0, 9, 2, 6, 3, 7],

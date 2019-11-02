@@ -68,6 +68,15 @@ class Sudoku {
     return false;
   }
 
+  _findBoxIndex(WM, empty) {
+    var i = Math.floor(empty.i / WM.length);
+    var j = Math.floor(empty.j / WM.length);
+    var cell = i + '' + j;
+    if (cell < 3) return j;
+    if (cell < 20) return 3 + j;
+    return 6 + j;
+  }
+
   _findDuplicateInBox(WM, boxId) {
     var cellsAround = [
       [1, 1],
@@ -124,20 +133,40 @@ class Sudoku {
     return true;
   }
 
+  /**
+   *
+   * Only be concerned to the parts affected when empty is filled
+   */
   _isValid_better(WM, empty) {
+    // row
     if (this._findDuplicate(WM[empty.i], empty.j))
       return false;
-    if (this._findDuplicateInColumn(WM, empty.j))
+    // column
+    if (this._findDuplicate([WM[0][empty.j],
+        WM[1][empty.j],
+        WM[2][empty.j],
+        WM[3][empty.j],
+        WM[4][empty.j],
+        WM[5][empty.j],
+        WM[6][empty.j],
+        WM[7][empty.j],
+        WM[8][empty.j],
+      ], empty.j))
       return false;
-    // each row has unique element
+
+    // box
+    var boxId = this._findBoxIndex(WM, empty);
+    //console.log(empty, boxId);
+    if (this._findDuplicateInBox(WM, boxId))
+      return false;
     // each column has unique element
     for (var i = 0; i < WM.length; i++) {
-
       if (this._findDuplicateInBox(WM, i))
         return false;
     }
     return true;
   }
+  
   _findPossibleNums(WM, empty) {
     var currentNums = [];
     // find existing in row
@@ -163,6 +192,7 @@ class Sudoku {
     // find existing in box
   }
 
+  // Sudoku is known to be NP-Complete. There are no known algorithms to solve a general NxN Sudoku in polynomial time
   // Time: O(2^N)
   // Space: O(N)
   recursive(WM) {
