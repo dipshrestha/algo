@@ -63,7 +63,7 @@ class LongestPalindrome {
   _fillZero(N) {
     this.V = new Array(N);
     for (var i = 0; i < N; i++) {
-      this.V[i] = new Array(N).fill(0);
+      this.V[i] = new Array(N).fill(false);
     }
 
   }
@@ -71,25 +71,51 @@ class LongestPalindrome {
   //https://leetcode.com/problems/longest-palindromic-substring/discuss/416640/dp-Solution-by-javascript - JS
   // https://leetcode.com/problems/longest-palindromic-substring/solution/
   // https://leetcode.com/problems/longest-palindromic-substring/discuss/420539/very-straightforward-java-solution-using-DP-and-explanation
+
+  // used this approach
+  // https://leetcode.com/problems/longest-palindromic-substring/discuss/422110/Python-DP-Solution
+  // Time: O(N^2)
+  // Space: O(N^2)
   dp(str) {
-    this._fillZero(str.length);
+    var K = str.length;
+    this._fillZero(K);
+    console.log(this.V);
+
     var palindrome = '',
       tmp;
-    for (var i = 0; i < K; i++) {
-      for (var j = i; j >= 0; j--) {
-        if (str.charAt(i) == str.charAt(j)) {
-          var last = this.N[i + 1][j - 1];
-          if (last || i - j < 3) {
-            this.N[i][j] = true;
-            tmp = str.substring(i, j + 1);
-            if (tmp && tmp.length > palindrome.length) {
-              palindrome = tmp;
-            }
-          }
-        }
 
+    // terminal condition 1: single character
+    for (var i = 0; i < K; i++) {
+      this.V[i][i] = 1;
+      palindrome = str.charAt(i);
+    }
+
+
+    // terminal condition 2: double character
+    for (var j = 1; j < K; j++) {
+      this.V[j - 1][j] = str.charAt(j - 1) == str.charAt(j);
+      if (this.V[j - 1][j]) {
+        palindrome = str.substring(j - 1, j + 1);
       }
     }
+
+    for (var k = 2; k < K; k++) {
+      for (var i = 0; k + i < K; i++) {
+        var j = k + i;
+        this.V[i][j] = str.charAt(i) == str.charAt(j) && this.V[i + 1][j - 1];
+        if (this.V[i][j])
+          palindrome = str.substring(i, j + 1);
+        /*var last = this.V[i + 1][j - 1];
+        if (str.charAt(i) == str.charAt(j) && last) {
+          this.V[i][j] = true;
+          tmp = str.substring(i, j + 1);
+          if (tmp && tmp.length > palindrome.length) {
+            palindrome = tmp;
+          }
+        }*/
+      }
+    }
+    return palindrome;
   }
 
   _isPalindrome(str) {
