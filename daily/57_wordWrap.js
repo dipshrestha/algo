@@ -17,12 +17,69 @@ For example, given the string "the quick brown fox jumps over the lazy dog" and 
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: Solve using DP.
+ Compute the cost of each word as being the start word and keep adding next word until length < K.
+
 */
 class WordWrap {
 
+  constructor() {
+    this.V = [];
+  }
+
+  recursive() {
+
+  }
+
   // Time: O(2^N)
   // Space: O(N)
+  // Good tutorial by MIT professor
+  // https://www.youtube.com/watch?v=ENyox7kNKeY
+  // https://www.geeksforgeeks.org/word-wrap-problem-space-optimized-solution/
+  dp(WM, K) {
+    if (WM == null || WM.length < 0) return null;
+    var N = WM.length;
+    var ans = new Array(N); // store pointer to the last word for index word
+    this.V = new Array(N);
+
+    // base case
+    // cost of line starting with ... as first element
+    this.V[N - 1] = 0; // 0 as space after the last work doesn't cost anything
+    ans[N - 1] = N - 1; // the last word contains last word as the last word
+
+    // start in reverse
+    for (let i = N - 2; i >= 0; i--) {
+      var curLen = -1;
+      var cost = 0;
+      this.V[i] = Infinity;
+
+      for (let j = i; j < N; j++) {
+        curLen += (WM[j].length + 1);
+
+        if (curLen > K) break;
+        if (j == N - 1) cost = 0;
+        else
+          cost = Math.pow(K - curLen, 2) + this.V[j + 1];
+
+        if (cost < this.V[i]) {
+          this.V[i] = cost;
+          ans[i] = j;
+        }
+
+      }
+    }
+    console.log(this.V);
+
+    var ret = [],
+      l = 0;
+
+    while (l < N) {
+      ret.push(WM.slice(l, ans[l] + 1).join(" "));
+      l = ans[l] + 1;
+    }
+
+    return ret;
+  }
 
 }
 
