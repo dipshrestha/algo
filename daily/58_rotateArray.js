@@ -22,6 +22,11 @@ class RotateArray {
   // Time: O(2^N)
   // Space: O(N)
 
+  iterative(WM, K) {
+  	return null;
+
+  }
+
 }
 
 module.exports = RotateArray;

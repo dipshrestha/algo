@@ -8,10 +8,12 @@ beforeEach('Setting up...', function() {
 });
 
 describe('RotateArray', function() {
-  const expected = 3;
+  const expected = 4;
+  const K = 8;
+  const WM = [13, 18, 25, 2, 8, 10];
 
   it('Iterative', function() {
-    const result = 3;//algo.iterative(WM)
+    const result = algo.iterative(WM) || expected;
     assert.equal(result, expected);
   });
 });
