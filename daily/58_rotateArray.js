@@ -15,16 +15,55 @@ You can assume all the integers in the array are unique.
  */
 
 /*
- Algo: Solve using backtracking
+  Algo: For binary search, do calculation based on the middle and then high;
 */
 class RotateArray {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(log(N))
+  // Space: O(1)
+  recursive(WM, K) {
+    if (WM == null || WM.length == 0)
+      return null;
+    var ret = this._recursive_helper(WM, 0, WM.length - 1, K);
+    return ret;
+  }
 
-  iterative(WM, K) {
-  	return null;
+  _recursive_helper(WM, low, high, K) {
+    if (low < 0 || high >= WM.length) return null;
+    if (low > high) return null;
 
+    let mid = Math.round((low + high) / 2);
+    if (WM[low] == K) return low;
+    if (WM[high] == K) return high;
+    if (WM[mid] == K) return mid;
+
+    //if (WM[low] < K) {
+    if (WM[mid] < K) {
+      if (WM[high] > K) {
+        // check the second half;
+        return this._recursive_helper(WM, mid, high, K);
+      } else {
+        // check the first half;
+        return this._recursive_helper(WM, low, mid, K);
+      }
+    } else {
+      // check the first half;
+      return this._recursive_helper(WM, low, mid, K);
+    }
+    /*} else {
+      if (WM[mid] < K) {
+        if (WM[high] > K) {
+          // check the second half;
+          return this._recursive_helper(WM, mid, high, K);
+        } else {
+          // check the first half;
+          return this._recursive_helper(WM, low, mid, K);
+        }
+      } else {
+        // check the first half;
+        return this._recursive_helper(WM, low, mid, K);
+      }
+    }*/
   }
 
 }
