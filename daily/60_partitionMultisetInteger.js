@@ -23,15 +23,17 @@ class PartitionMultisetInteger {
   recursive(WM) {
     var sum = WM.reduce((f, s) => f + s);
     if (sum % 2 != 0) return false;
-    var res = this._recursive_helper(WM, sum / 2);
+    //var res = this._recursive_helper(WM, sum / 2);
+    var res = this._recursive_helper_better(WM, sum / 2, WM.length);
     return res;
   }
 
 
   // Time: O(N^N) Exponential
-  // Space: O(N)
+  // Space: O(1)
   /**
    * check if it's possible to add elements to N
+   * Similar to backtracking
    **/
   _recursive_helper(WM, N, index = 0) {
     if (N == 0) return true;
@@ -48,11 +50,36 @@ class PartitionMultisetInteger {
     return false;
   }
 
+
+  // Time: O(2^N) Exponential
+  // Space: O(1)
+  // Derived from https://www.geeksforgeeks.org/partition-problem-dp-18/
+  //check if sum can be obtained by any of  
+  //      the following  
+  //      (a) including the last element  
+  //      (b) excluding the last element  
+  _recursive_helper_better(WM, N, index) {
+    if (N == 0) return true;
+    if (N != 0 && index == 0) return false;
+
+    if (WM[index - 1] > N) {
+      return this._recursive_helper_better(WM, N, index - 1);
+    }
+
+    var res =
+      // exlude
+      this._recursive_helper_better(WM, N, index - 1) ||
+      // include
+      this._recursive_helper_better(WM, N - WM[index], index - 1);
+
+    return res;
+  }
+
   /**
-  *
-  * Other method of doing the same thing
-  *
-  */
+   *
+   * Other method of doing the same thing
+   *
+   */
 
   /*
   Above is better method
