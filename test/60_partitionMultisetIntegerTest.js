@@ -13,9 +13,18 @@ describe('PartitionMultisetInteger', function() {
     const result = algo.recursive([5, 5])
     assert.equal(result, true);
   });
+  it('DP: [5, 5]', function() {
+    const result = algo.dp([5, 5])
+    assert.equal(result, true);
+  });
+
 
   it('Recursive: [5]', function() {
     const result = algo.recursive([5])
+    assert.equal(result, false);
+  });
+  it('DP: [5]', function() {
+    const result = algo.dp([5])
     assert.equal(result, false);
   });
 
@@ -23,23 +32,54 @@ describe('PartitionMultisetInteger', function() {
     const result = algo.recursive([2, 3, 5, 5, 5])
     assert.equal(result, true);
   });
+  it('DP: [2, 3, 5, 5, 5]', function() {
+    const result = algo.dp([2, 3, 5, 5, 5])
+    assert.equal(result, true);
+  });
 
   it('Recursive: [5, 5, 5, 2, 3]', function() {
     const result = algo.recursive([5, 5, 5, 2, 3])
     assert.equal(result, true);
   });
+  it('DP: [5, 5, 5, 2, 3]', function() {
+    const result = algo.dp([5, 5, 5, 2, 3])
+    assert.equal(result, true);
+  });
+
   it('Recursive: [5, 5, 5, 3, 2]', function() {
     const result = algo.recursive([5, 5, 5, 3, 2])
     assert.equal(result, true);
   });
+  it('DP: [5, 5, 5, 3, 2]', function() {
+    const result = algo.dp([5, 5, 5, 3, 2])
+    assert.equal(result, true);
+  });
+
 
   it('Recursive: [15, 5, 20, 10, 35, 1]', function() {
     const result = algo.recursive([15, 5, 20, 10, 35, 1])
     assert.equal(result, false);
   });
+  it('DP: [15, 5, 20, 10, 35, 1]', function() {
+    const result = algo.dp([15, 5, 20, 10, 35, 1])
+    assert.equal(result, false);
+  });
 
   it('Recursive: [15, 5, 20, 10, 35, 15, 10]', function() {
     const result = algo.recursive([15, 5, 20, 10, 35, 15, 10])
+    assert.equal(result, true);
+  });
+  it('DP: [15, 5, 20, 10, 35, 15, 10]', function() {
+    const result = algo.dp([15, 5, 20, 10, 35, 15, 10])
+    assert.equal(result, true);
+  });
+
+  it('Recursive: [2, 3, 5, 4, 2]', function() {
+    const result = algo.recursive([2, 2, 3, 4, 5])
+    assert.equal(result, true);
+  });
+  it('DP: [2, 3, 5, 4, 2]', function() {
+    const result = algo.dp([2, 2, 3, 4, 5])
     assert.equal(result, true);
   });
 });

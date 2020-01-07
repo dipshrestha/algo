@@ -75,28 +75,57 @@ class PartitionMultisetInteger {
     return res;
   }
 
-// https://www.techiedelight.com/partition-problem/
-// https://leetcode.com/problems/partition-equal-subset-sum/discuss/471340/Solution-using-DP-in-C%2B%2B-(single-state-DP)
-// https://www.geeksforgeeks.org/partition-problem-dp-18/
-// https://www.youtube.com/watch?v=s6FhG--P7z0
-  dp(WM, N) {
+  // Time: O(N*SUM)
+  // Space: O(N*SUM)
+  // https://www.techiedelight.com/partition-problem/
+  // https://leetcode.com/problems/partition-equal-subset-sum/discuss/471340/Solution-using-DP-in-C%2B%2B-(single-state-DP)
+  // https://www.geeksforgeeks.org/partition-problem-dp-18/
+  // https://www.youtube.com/watch?v=s6FhG--P7z0
+  dp(WM) {
+    var sum = WM.reduce((f, s) => f + s);
+    if (sum % 2 != 0) return false;
+    //var res = this._recursive_helper(WM, sum / 2);
+    var N = sum / 2;
 
-    var mem = new Array(WM.length);
+    var mem = new Array(WM.length + 1);
 
-    for (var i = 0; i < WM.length; i++) {
-      mem[i] = new Array(N);
+    for (var i = 0; i <= WM.length; i++) {
+      mem[i] = new Array(N + 1);
       mem[i][0] = true;
     }
 
-    for (var i = 0; i < N; i++) {
-      var elm = WM[i];
-      for (var j = 0; j < WM.length; j++) {
-      	var res = mem[i][j] || mem[i][j - elm];
-
+    // NOTE: BOTH LOOPS ARE INTERCHANGEABLE.
+    // RESULT IS CORRECT OR THIS OR THE COMMENTED ONE
+    //*
+    for (var i = 1; i <= N; i++) {
+      for (var j = 1; j <= WM.length; j++) {
+        var elm = WM[j - 1];
+        if (elm > i) {
+          mem[j][i] = mem[j - 1][i];
+        } else {
+          var res = mem[j - 1][i] || mem[j - 1][i - elm];
+          mem[j][i] = res;
+        }
       }
-
-
     }
+    // NOTE: BOTH LOOPS ARE INTERCHANGEABLE
+    //*/
+    /*
+    for (var i = 1; i <= WM.length; i++) {
+      for (var j = 1; j <= N; j++) {
+        var elm = WM[i - 1];
+        if (elm > j) {
+          mem[i][j] = mem[i - 1][j];
+        } else {
+          var res = mem[i - 1][j] || mem[i - 1][j - elm];
+          mem[i][j] = res;
+        }
+        // IMP: short circuit
+        if (j == N && mem[i][j]) return true;
+      }
+    }*/
+    //console.log(mem);
+    return mem[WM.length][N] || false;
 
   }
   /**
