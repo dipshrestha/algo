@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new Exponentiation();
 });
 
-describe.only('Exponentiation', function() {
+describe('Exponentiation', function() {
 
   it('Recursive: 2^3', function() {
     const expected = 8;
