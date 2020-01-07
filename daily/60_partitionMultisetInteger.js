@@ -75,7 +75,10 @@ class PartitionMultisetInteger {
     return res;
   }
 
-
+// https://www.techiedelight.com/partition-problem/
+// https://leetcode.com/problems/partition-equal-subset-sum/discuss/471340/Solution-using-DP-in-C%2B%2B-(single-state-DP)
+// https://www.geeksforgeeks.org/partition-problem-dp-18/
+// https://www.youtube.com/watch?v=s6FhG--P7z0
   dp(WM, N) {
 
     var mem = new Array(WM.length);
