@@ -67,7 +67,7 @@ class PartitionMultisetInteger {
     }
 
     var res =
-      // exlude
+      // exclude
       this._recursive_helper_better(WM, N, index - 1) ||
       // include
       this._recursive_helper_better(WM, N - WM[index], index - 1);
@@ -75,6 +75,27 @@ class PartitionMultisetInteger {
     return res;
   }
 
+
+  dp(WM, N) {
+
+    var mem = new Array(WM.length);
+
+    for (var i = 0; i < WM.length; i++) {
+      mem[i] = new Array(N);
+      mem[i][0] = true;
+    }
+
+    for (var i = 0; i < N; i++) {
+      var elm = WM[i];
+      for (var j = 0; j < WM.length; j++) {
+      	var res = mem[i][j] || mem[i][j - elm];
+
+      }
+
+
+    }
+
+  }
   /**
    *
    * Other method of doing the same thing
