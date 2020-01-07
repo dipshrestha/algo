@@ -15,7 +15,10 @@ Given the multiset {15, 5, 20, 10, 35}, it would return false, since we can't sp
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: NOTE: VVIP problem as it
+ shows backtracking and other recursive way
+ clarifies loop interchange
+ does better DP also
 */
 class PartitionMultisetInteger {
 
@@ -49,6 +52,32 @@ class PartitionMultisetInteger {
 
     return false;
   }
+  /**
+   *
+   * Other method of doing the same thing
+   *
+   */
+
+  /*
+  NOTE: Above is better method as it doesn't include splice of array
+    _recursive_helper(WM, N) {
+      if (N == 0) return true;
+      //if (N < 0) return false;
+      for (var i = 0; i < WM.length; i++) {
+        var elm = WM[i];
+        if (elm == N) return true;
+        var Y = [...WM];
+        Y.splice(i, 1);
+        var ret = false;
+        if (elm < N)
+          ret = this._recursive_helper(Y, N - elm);
+        if (ret)
+          return true;
+      }
+
+      return false;
+    }
+  */
 
 
   // Time: O(2^N) Exponential
@@ -76,17 +105,43 @@ class PartitionMultisetInteger {
   }
 
   // Time: O(N*SUM)
-  // Space: O(N*SUM)
-  // https://www.techiedelight.com/partition-problem/
-  // https://leetcode.com/problems/partition-equal-subset-sum/discuss/471340/Solution-using-DP-in-C%2B%2B-(single-state-DP)
-  // https://www.geeksforgeeks.org/partition-problem-dp-18/
-  // https://www.youtube.com/watch?v=s6FhG--P7z0
+  // Space: O(N)
   dp(WM) {
     var sum = WM.reduce((f, s) => f + s);
     if (sum % 2 != 0) return false;
     //var res = this._recursive_helper(WM, sum / 2);
     var N = sum / 2;
 
+    var res = this._dp_helper_better(WM, N)
+    return res;
+
+  }
+
+  // Time: O(N*SUM)
+  // Space: O(N)
+  // https://leetcode.com/problems/partition-equal-subset-sum/discuss/471340/Solution-using-DP-in-C%2B%2B-(single-state-DP)
+  _dp_helper_better(WM, N) {
+    var mem = new Array(N + 1);
+    for (var i = 0; i <= N; i++) {
+      mem[i] = false;
+    }
+    mem[0] = true;
+
+    for (var i = 0; i < WM.length; i++) {
+      var elm = WM[i];
+      for (var j = N; j >= elm; j--) {
+        mem[j] = mem[j] || mem[j - elm];
+      }
+    }
+    return mem[N] || false;
+  }
+
+  // Time: O(N*SUM)
+  // Space: O(N*SUM)
+  // https://www.techiedelight.com/partition-problem/
+  // https://www.geeksforgeeks.org/partition-problem-dp-18/
+  // https://www.youtube.com/watch?v=s6FhG--P7z0
+  _dp_helper(WM, N) {
     var mem = new Array(WM.length + 1);
 
     for (var i = 0; i <= WM.length; i++) {
@@ -128,32 +183,7 @@ class PartitionMultisetInteger {
     return mem[WM.length][N] || false;
 
   }
-  /**
-   *
-   * Other method of doing the same thing
-   *
-   */
 
-  /*
-  Above is better method
-    _recursive_helper(WM, N) {
-      if (N == 0) return true;
-      //if (N < 0) return false;
-      for (var i = 0; i < WM.length; i++) {
-        var elm = WM[i];
-        if (elm == N) return true;
-        var Y = [...WM];
-        Y.splice(i, 1);
-        var ret = false;
-        if (elm < N)
-          ret = this._recursive_helper(Y, N - elm);
-        if (ret)
-          return true;
-      }
-
-      return false;
-    }
-  */
 }
 
 module.exports = PartitionMultisetInteger;

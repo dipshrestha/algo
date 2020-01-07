@@ -17,7 +17,10 @@ describe('PartitionMultisetInteger', function() {
     const result = algo.dp([5, 5])
     assert.equal(result, true);
   });
-
+  it('DP: [5, 5]', function() {
+    const result = algo.dp([5, 5])
+    assert.equal(result, true);
+  });
 
   it('Recursive: [5]', function() {
     const result = algo.recursive([5])
