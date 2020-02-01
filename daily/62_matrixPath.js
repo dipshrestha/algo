@@ -24,6 +24,29 @@ Given a 5 by 5 matrix, there are 70 ways to get to the bottom-right.
 */
 class MatrixPath {
 
+  dp(N, M) {
+    if (N == M && N == 1) return 1;
+    this.V = new Array(N);
+    for (var i = 0; i < N; i++) {
+      this.V[i] = new Array(M);
+    }
+    // ways to reach element if they are in first column
+    for (var i = 0; i < N; i++) {
+      this.V[i][0] = 1;
+    }
+    // ways to reach element if they are in first row
+    for (var i = 0; i < M; i++) {
+      this.V[0][i] = 1;
+    }
+
+    for (var i = 1; i < N; i++) {
+      for (var j = 1; j < M; j++) {
+        this.V[i][j] = this.V[i - 1][j] + this.V[i][j - 1];
+      }
+    }
+    return this.V[i - 1][j - 1];
+
+  }
   // Time: O(N * M)
   // Space: O(N * M)
 
