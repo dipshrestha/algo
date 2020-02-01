@@ -7,11 +7,25 @@ beforeEach('Setting up...', function() {
   algo = new MatrixPath();
 });
 
-describe.only('MatrixPath', function() {
-  const expected = 3;
-
-  it('Iterative', function() {
-    const result = 3; //algo.iterative(WM)
+describe('MatrixPath', function() {
+  it('Recursive 1x1', function() {
+    const expected = 1;
+    const result = algo.recursive(1, 1)
+    assert.equal(result, expected);
+  })
+  it('Recursive 2x2', function() {
+    const expected = 2;
+    const result = algo.recursive(2, 2)
+    assert.equal(result, expected);
+  })
+  it('Recursive 3x3', function() {
+    const expected = 6;
+    const result = algo.recursive(3, 3)
+    assert.equal(result, expected);
+  });
+  it('Recursive 5x5', function() {
+    const expected = 70;
+    const result = algo.recursive(5, 5)
     assert.equal(result, expected);
   });
 });

@@ -19,12 +19,66 @@ Given a 5 by 5 matrix, there are 70 ways to get to the bottom-right.
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: Solve using DFS without visited nodes list.
+ NOTE: this is similar to Problem-23 Board Game.
 */
 class MatrixPath {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(N * M)
+  // Space: O(N * M)
+
+  recursive(N, M) {
+    //this._visited = {};
+    //this.totalPaths = 0;
+    if (N == M && N == 1) return 1;
+    var WM = this._createAdjacencyMatrix(N, M);
+    var res = this._recursive_helper(WM, '00', N - 1 + '' + M - 1);
+    return res;
+    //return this.totalPaths;
+  }
+
+  _getAdjacentNodes(i, j, N, M) {
+    var ret = [];
+    if (i != N - 1) {
+      ret.push(i + 1 + '' + j);
+    }
+    if (j != M - 1) {
+      ret.push(i + '' + (j + 1));
+    }
+    return ret;
+  }
+
+  _createAdjacencyMatrix(N, M) {
+    var map = {},
+      elm = null,
+      arr = null;
+    for (var i = 0; i < N; i++) {
+      for (var j = 0; j < M; j++) {
+        map[i + '' + j] = (this._getAdjacentNodes(i, j, N, M));
+      }
+    }
+    console.log(map);
+    return map;
+  }
+
+  _recursive_helper(map, start, end) {
+    //this._visited[start] = true;
+    var foundPath = 0;
+    //pick one from set
+    var adjacentNodes = map[start];
+    for (var i = 0; i < adjacentNodes.length; i++) {
+      var x = adjacentNodes[i];
+      if (x == end) {
+        //this.totalPaths++;
+        foundPath++;
+      }
+      //if (!this._visited[x]) {
+      //  this._visited[x] = true;
+      foundPath = foundPath + this._recursive_helper(map, x, end);
+      //}
+    }
+    return foundPath;
+  }
 
 }
 
