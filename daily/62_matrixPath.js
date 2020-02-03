@@ -25,7 +25,8 @@ Given a 5 by 5 matrix, there are 70 ways to get to the bottom-right.
 class MatrixPath {
   //https://www.geeksforgeeks.org/count-possible-paths-top-left-bottom-right-nxm-matrix/
 
-
+  // Time: O(N * M)
+  // Space: O(M)
   dp_better(N, M) {
     if (N == M && N == 1) return 1;
     this.V = new Array(M);
@@ -43,6 +44,8 @@ class MatrixPath {
     return this.V[M - 1];
   }
 
+  // Time: O(N * M)
+  // Space: O(N * M)
   dp(N, M) {
     if (N == M && N == 1) return 1;
     this.V = new Array(N);
@@ -66,9 +69,9 @@ class MatrixPath {
     return this.V[i - 1][j - 1];
 
   }
+
   // Time: O(N * M)
   // Space: O(N * M)
-
   recursive(N, M) {
     //this._visited = {};
     //this.totalPaths = 0;
