@@ -23,7 +23,26 @@ Given a 5 by 5 matrix, there are 70 ways to get to the bottom-right.
  NOTE: this is similar to Problem-23 Board Game.
 */
 class MatrixPath {
-//https://www.geeksforgeeks.org/count-possible-paths-top-left-bottom-right-nxm-matrix/
+  //https://www.geeksforgeeks.org/count-possible-paths-top-left-bottom-right-nxm-matrix/
+
+
+  dp_better(N, M) {
+    if (N == M && N == 1) return 1;
+    this.V = new Array(M);
+    // ways to reach element if they are in first column
+    for (var i = 0; i < M; i++) {
+      this.V[i] = 0;
+    }
+    this.V[0] = 1;
+
+    for (var i = 0; i < N; i++) {
+      for (var j = 1; j < M; j++) {
+        this.V[j] = this.V[j - 1] + this.V[j];
+      }
+    }
+    return this.V[M - 1];
+  }
+
   dp(N, M) {
     if (N == M && N == 1) return 1;
     this.V = new Array(N);
