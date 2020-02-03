@@ -1,5 +1,5 @@
 const assert = require('assert');
-const KnightTour = require('../daily/64_KnightTour.js');
+const KnightTour = require('../daily/64_knightTour.js');
 
 let algo = null;
 
