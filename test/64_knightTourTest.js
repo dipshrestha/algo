@@ -25,7 +25,7 @@ describe('KnightTour 2x2', function() {
   });
 });
 
-describe.skip('KnightTour 3x3', function() {
+describe('KnightTour 3x3', function() {
   const expected = 0;
 
   it('Recursive', function() {
@@ -43,7 +43,7 @@ describe.skip('KnightTour 4x4', function() {
   });
 });
 
-describe('KnightTour 5x5', function() {
+describe.skip('KnightTour 5x5', function() {
   const expected = 1728;
 
   it('Recursive', function() {
