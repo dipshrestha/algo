@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new LFU(3);
 });
 
-describe.only('LFU', function() {
+describe.skip('LFU', function() {
 
   it('Iterative', function() {
     const result = 3;
