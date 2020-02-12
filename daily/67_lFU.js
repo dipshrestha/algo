@@ -21,8 +21,7 @@ Each operation should run in O(1) time.
  Algo: Use double linked list with 2 HashMap
  User input <K1, V> is changed as below
  Value hashmap <K1, Node(K1, V, next, prev, K2)>
- Frequency hashmap <K2, (Double Linked List)>
- Frequency Double Linked List
+ Frequency hashmap <K2, (Linked List with 4 pointers)>
 */
 class Node {
   constructor(key, val, next = null, prev = null, freq = 0) {
@@ -49,10 +48,10 @@ class DLinkedList {
   remove(node) {
     if (!node) console.warn("Node is empty, can't be deleted")
     // special case
-    if (node.key == this.tail.key) {
+    if (node.key == this.tail && this.tail.key) {
       this.tail = node.prev;
     }
-    if (node.key == this.head.key) {
+    if (node.key == this.head && this.head.key) {
       this.head = node.next;
     }
     if (node.prev) {
@@ -84,10 +83,12 @@ class DLinkedList {
     this.size++;
   }
 
-  constructor(size = 0, head = null, tail = null) {
+  constructor(size = 0, head = null, tail = null, prev = null, next = null) {
     this.head = head;
     this.tail = tail;
     this.size = size;
+    this.prev = prev;
+    this.next = next;
   }
 }
 
@@ -114,7 +115,15 @@ class LFU {
       nodeToDelete = dlink.removeTail();
       // free up hashtable
       if (dlink.size == 0) {
-        this.fMap.delete(nodeToDelete.key)
+        if (dlink.next) {
+          dlink.next.prev = dlink.prev;
+          this.minFreq = dlink.next.head.freq;
+        }
+        if (dlink.prev) {
+          dlink.prev.next = dlink.next;
+        }
+        this.fMap.delete(nodeToDelete.freq)
+        dlink = null;
       }
     }
     this.vMap.delete(nodeToDelete.key);
@@ -150,7 +159,29 @@ class LFU {
     } else {
       dlink.remove(existingNode);
     }
-    this._addFrequency(existingNode, existingNode.freq + 1);
+    var oldF = existingNode.freq;
+    this._addFrequency(existingNode, oldF + 1);
+
+    var updatedDlink = this.fMap.get(oldF);
+    // free up hashtable
+    if (dlink.size == 0) {
+      // update minFreq pointer
+      if (this.minFreq = oldF) {
+        this.minFreq = oldF + 1;
+      }
+      if (dlink.next) {
+        dlink.next.prev = updatedDlink;
+      }
+      if (dlink.prev) {
+        dlink.prev.next = updatedDlink;
+      }
+      this.fMap.delete(existingNode.freq)
+      dlink = null;
+    } else {
+      // update
+      dlink.next = updatedDlink;
+      updatedDlink.prev = dlink;
+    }
   }
 
   _add(key, val) {
