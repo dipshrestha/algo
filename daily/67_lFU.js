@@ -21,7 +21,11 @@ Each operation should run in O(1) time.
  Algo: Use double linked list with 2 HashMap
  User input <K1, V> is changed as below
  Value hashmap <K1, Node(K1, V, next, prev, K2)>
- Frequency hashmap <K2, (Linked List with 4 pointers)>
+ Frequency hashmap <K2, (Linked List with 4 pointers )>
+ 
+ 4 pointer are as follows
+ - next & prev point to lower & higher frequencies, 
+ - head points to most recent, tail points least recent
 */
 class Node {
   constructor(key, val, next = null, prev = null, freq = 0) {
@@ -39,7 +43,7 @@ class DLinkedList {
     var h = this.head;
     var p = '';
     while (h) {
-      p += ('(' + h.key + ':' + h.val + ')');
+      p += ('(' + h.key + ':' + h.val + ':' + h.freq + ')');
       h = h.next;
     }
     return p;
@@ -48,10 +52,10 @@ class DLinkedList {
   remove(node) {
     if (!node) console.warn("Node is empty, can't be deleted")
     // special case
-    if (node.key == this.tail && this.tail.key) {
+    if ((node.key && node.key) == (this.tail && this.tail.key)) {
       this.tail = node.prev;
     }
-    if (node.key == this.head && this.head.key) {
+    if ((node.key && node.key) == (this.head && this.head.key)) {
       this.head = node.next;
     }
     if (node.prev) {
@@ -67,7 +71,6 @@ class DLinkedList {
 
   removeTail() {
     if (!this.tail) console.warn("Tail is empty, can't be removed")
-    this.size--;
     return this.remove(this.tail);
   }
 
@@ -99,7 +102,7 @@ class LFU {
     keys.sort();
     var p = '';
 
-    keys.forEach(key => p += ('(' + key + ':' + this.vMap.get(key).val + ')'));
+    keys.forEach(key => p += ('(' + key + ':' + this.vMap.get(key).val + ':' + this.vMap.get(key).freq + ')'));
     return p;
   }
 
@@ -162,22 +165,29 @@ class LFU {
     var oldF = existingNode.freq;
     this._addFrequency(existingNode, oldF + 1);
 
-    var updatedDlink = this.fMap.get(oldF);
+    var updatedDlink = this.fMap.get(oldF + 1);
     // free up hashtable
     if (dlink.size == 0) {
       // update minFreq pointer
-      if (this.minFreq = oldF) {
-        this.minFreq = oldF + 1;
+      if (this.minFreq == oldF) {
+        this.minFreq = (dlink.next && dlink.next.head && dlink.next.head.freq) || oldF + 1;
+        //this.minFreq = oldF + 1;
       }
-      if (dlink.next) {
+      if (dlink.next && dlink.prev) {
         dlink.next.prev = updatedDlink;
+      } else {
+        updatedDlink.prev = dlink.prev;
       }
       if (dlink.prev) {
         dlink.prev.next = updatedDlink;
       }
-      this.fMap.delete(existingNode.freq)
+      this.fMap.delete(oldF)
       dlink = null;
     } else {
+      if (dlink.next) {
+        dlink.next.prev = updatedDlink;
+        updatedDlink.next = dlink.next;
+      }
       // update
       dlink.next = updatedDlink;
       updatedDlink.prev = dlink;
@@ -215,8 +225,8 @@ class LFU {
   set(key, val) {
     var obj = this.vMap.get(key);
     if (!obj) {
-      this.minFreq = 1;
       this._add(key, val);
+      this.minFreq = 1;
     } else {
       this._update(key, val);
     }

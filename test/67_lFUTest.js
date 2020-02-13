@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new LFU(3);
 });
 
-describe.skip('LFU', function() {
+describe('LFU', function() {
 
   it('Iterative', function() {
     const result = 3;
@@ -15,32 +15,36 @@ describe.skip('LFU', function() {
     algo.set('b', 2);
     algo.set('c', 3);
 
-    assert.equal('(a:1)(b:2)(c:3)', algo._getAll());
+    assert.equal('(a:1:1)(b:2:1)(c:3:1)', algo._getAll());
 
+    // Check if a is deleted
     algo.set('d', 4);
-    assert.equal('(b:2)(c:3)(d:4)', algo._getAll());
+    assert.equal('(b:2:1)(c:3:1)(d:4:1)', algo._getAll());
 
+    // B has new frequency
     algo.set('b', 12);
-    assert.equal('(b:12)(c:3)(d:4)', algo._getAll());
+    assert.equal('(b:12:2)(c:3:1)(d:4:1)', algo._getAll());
 
-    debugger;
+    // Check if c is deleted
     algo.set('e', 5);
-    assert.equal('(b:12)(d:4)(e:5)', algo._getAll());
-    console.log(algo.fMap.get(1));
+    assert.equal('(b:12:2)(d:4:1)(e:5:1)', algo._getAll());
 
+    // B has new frequency
     algo.set('b', 22);
-    assert.equal('(b:22)(d:4)(e:5)', algo._getAll());
+    assert.equal('(b:22:3)(d:4:1)(e:5:1)', algo._getAll());
 
+    // Check if d is deleted
     algo.set('f', 6);
-    assert.equal('(b:22)(e:5)(f:6)', algo._getAll());
+    assert.equal('(b:22:3)(e:5:1)(f:6:1)', algo._getAll());
 
     algo.set('e', 6);
-    assert.equal('(b:22)(e:6)(f:6)', algo._getAll());
+    assert.equal('(b:22:3)(e:6:2)(f:6:1)', algo._getAll());
 
     algo.set('f', 16);
-    assert.equal('(b:22)(e:6)(f:16)', algo._getAll());
+    assert.equal('(b:22:3)(e:6:2)(f:16:2)', algo._getAll());
 
+    // Check if e is deleted
     algo.set('g', 7);
-    assert.equal('(b:22)(e:6)(g:7)', algo._getAll());
+    assert.equal('(b:22:3)(f:16:2)(g:7:1)', algo._getAll());
   });
 });
