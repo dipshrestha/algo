@@ -11,14 +11,42 @@ Given the head of a singly linked list, reverse it in-place.
 
  */
 
+
+class Node {
+  constructor(val, next = null) {
+    this.val = val;
+    this.next = next
+  }
+}
+
 /*
- Algo: Solve using backtracking
+ Algo: Use 3 pointer
 */
 class ReverseLinkedList {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(N)
+  // Space: O(1)
+  iterative(WM) {
+    var prev = WM;
+    var cur = WM.next;
+    var next = null;
+    while (cur != null) {
+      next = cur.next;
+      cur.next = prev;
+      prev = cur;
+      cur = next;
+    }
+    WM.next = null;
+    return prev;
+  }
 
+  recursive(WM) {
+
+    if (WM.next == null) {
+
+    }
+
+  }
 }
 
-module.exports = ReverseLinkedList;
+module.exports = { Node, ReverseLinkedList };
