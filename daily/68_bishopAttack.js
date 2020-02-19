@@ -32,8 +32,8 @@ You should return 2, since bishops 1 and 3 attack each other, as well as bishops
 
 /*
  Algo: For each position compute the + and - of their coordinates, this will give their relative posiiton
- Check if that number is already in the map
- Then add those number to map.
+ Check if that number is already in the posMap
+ Then add those number to posMap.
 */
 class BishopAttack {
 
@@ -68,35 +68,36 @@ class BishopAttack {
     return count / 2;
   }
 
+  _updateMap(map, sumDiff) {
+    var count = 0;
+    var val = map.get(sumDiff);
+    if (val) {
+      count = val;
+      map.set(sumDiff, ++val);
+    } else
+      map.set(sumDiff, 1);
+    return count;
+  }
+
   // Time: O(N)
   // Space: O(N)
   iterative_better(N, WM) {
-    var map = new Map(),
+    var posMap = new Map(),
+      negMap = new Map(),
       pos = null,
       count = 0,
       sum = 0,
       diff = 0;
-    debugger
+
     for (let i = 0; i < WM.length; i++) {
       pos = WM[i];
+      // positive
       sum = pos[0] + pos[1];
-      if (map.get(sum))
-        count++;
-      else
-        map.set(sum, true);
+      count += this._updateMap(posMap, sum);
+      // negative
+      diff = pos[0] - pos[1];
+      count += this._updateMap(negMap, diff);
 
-      //if (pos[0] < pos[1]) {
-      diff = pos[1] - pos[0];
-      //} else
-      //  diff = pos[0] - pos[1];
-
-      if (sum == diff) continue;
-
-      var myDiff = map.get(diff);
-      if (myDiff && ((myDiff < 1 && pos[1] > pos[0]) || (myDiff > 1 && pos[0] > pos[1])))
-        count++;
-      else
-        map.set(diff, true);
     }
 
     console.log('count: ' + count);

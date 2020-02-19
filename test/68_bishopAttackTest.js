@@ -7,7 +7,38 @@ beforeEach('Setting up...', function() {
   algo = new BishopAttack();
 });
 
-describe.skip('BishopAttack 5x5', function() {
+
+describe('BishopAttack 5x5', function() {
+  /*
+
+[b 0 0 0 0]
+[0 0 b 0 0]
+[0 0 b 0 0]
+[0 0 0 0 0]
+[b 0 0 0 b]
+
+(0, 0)
+(1, 2)
+(2, 2)
+(4, 0)
+(4, 4)
+ */
+  const expected = 4;
+  const N = 5;
+  const WM = [
+    [0, 0],
+    [1, 2],
+    [2, 2],
+    [4, 0],
+    [4, 4]
+  ];
+  it('Iterative-Better', function() {
+    const result = algo.iterative_better(N, WM)
+    assert.equal(result, expected);
+  });
+});
+
+describe('BishopAttack 5x5', function() {
   /*
 
 [b 0 0 0 0]
@@ -35,7 +66,7 @@ describe.skip('BishopAttack 5x5', function() {
   });
 });
 
-describe.skip('BishopAttack 6x6', function() {
+describe('BishopAttack 6x6', function() {
   /*
 
 [○ ○ × ○ ○ ○]
@@ -62,6 +93,47 @@ describe.skip('BishopAttack 6x6', function() {
     [1, 1],
     [1, 4],
     [2, 1],
+    [3, 4],
+    [4, 2],
+    [5, 0],
+    [5, 4],
+  ];
+  it('Iterative-Better', function() {
+    const result = algo.iterative_better(N, WM)
+    assert.equal(result, expected);
+  });
+});
+
+
+describe('BishopAttack 6x6', function() {
+  /*
+
+[○ ○ × ○ ○ ○]
+[○ × ○ ○ × ○]
+[○ × ○ ○ ○ ○]
+[○ ○ × ○ × ○]
+[○ ○ × ○ ○ ○]
+[× ○ ○ ○ × ○]
+
+
+(0, 2)
+(1, 1)
+(1, 4)
+(2, 1)
+(3, 2)
+(3, 4)
+(4, 2)
+(5, 0)
+(5, 4)
+ */
+  const expected = 7;
+  const N = 5;
+  const WM = [
+    [0, 2],
+    [1, 1],
+    [1, 4],
+    [2, 1],
+    [3, 2],
     [3, 4],
     [4, 2],
     [5, 0],
