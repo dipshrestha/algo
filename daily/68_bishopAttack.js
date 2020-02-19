@@ -31,13 +31,77 @@ You should return 2, since bishops 1 and 3 attack each other, as well as bishops
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: For each position compute the + and - of their coordinates, this will give their relative posiiton
+ Check if that number is already in the map
+ Then add those number to map.
 */
-class BishopAttack{
+class BishopAttack {
 
-  // Time: O(2^N)
+  _checkAttacked(N, WM) {
+    var pos = null,
+      count = 0;
+    for (var i = 0; i < WM.length; i++) {
+      pos = WM[i];
+      count += this._isAttacked(N, WM, pos, i)
+    }
+    return count;
+  }
+
+  _isAttacked(N, WM, pos, start) {
+    var x = pos[0];
+    var y = pos[1];
+    var x1, y1;
+    for (var i = start; i < WM.length; i++) {
+      if (x == WM[i] && y == WM[j]) continue;
+      x1 = WM[i][0] - x;
+      y1 = WM[i][1] - y
+      if (Math.abs(x1) == Math.abs(y1)) return 1;
+    }
+    return 0;
+  }
+
+  // Time: O(N^2)
+  // Space: O(1)
+  //  For each position check if any other position is attacked.
+  iterative(N, WM) {
+    var count = this._checkAttacked(N, WM);
+    return count / 2;
+  }
+
+  // Time: O(N)
   // Space: O(N)
+  iterative_better(N, WM) {
+    var map = new Map(),
+      pos = null,
+      count = 0,
+      sum = 0,
+      diff = 0;
+    debugger
+    for (let i = 0; i < WM.length; i++) {
+      pos = WM[i];
+      sum = pos[0] + pos[1];
+      if (map.get(sum))
+        count++;
+      else
+        map.set(sum, true);
 
+      //if (pos[0] < pos[1]) {
+      diff = pos[1] - pos[0];
+      //} else
+      //  diff = pos[0] - pos[1];
+
+      if (sum == diff) continue;
+
+      var myDiff = map.get(diff);
+      if (myDiff && ((myDiff < 1 && pos[1] > pos[0]) || (myDiff > 1 && pos[0] > pos[1])))
+        count++;
+      else
+        map.set(diff, true);
+    }
+
+    console.log('count: ' + count);
+    return count;
+  }
 }
 
 module.exports = BishopAttack;
