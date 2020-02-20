@@ -41,24 +41,6 @@ class ReverseLinkedList {
 
   // Time: O(N)
   // Space: O(1)
-  recursive_better(WM) {
-    var ret = this._recursive_helper_better(WM);
-    return ret;
-  }
-
-  _recursive_helper_better(WM) {
-    var cur = WM;
-    if (cur == null || cur.next == null) {
-      return cur;
-    }
-    var x = this._recursive_helper_better(cur.next);
-    cur.next.next = cur;
-    cur.next = null;
-    return x;
-  }
-
-  // Time: O(N)
-  // Space: O(1)
   recursive(WM) {
     this.head = WM;
     var ret = this._recursive_helper(WM);
@@ -66,14 +48,16 @@ class ReverseLinkedList {
   }
 
   _recursive_helper(WM) {
+    var prev = null;
     var cur = WM;
+    var next = WM && WM.next;
     if (cur == null)
       return cur;
-    if (cur.next == null) {
+    if (next == null) {
       this.head = cur;
       return cur;
     }
-    var x = this._recursive_helper(cur.next);
+    var x = this._recursive_helper(next);
     x.next = cur;
     cur.next = null;
     return cur;
