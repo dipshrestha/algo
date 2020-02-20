@@ -27,12 +27,23 @@ And there are 4 12's in the table.
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: Do not use the table, solve it with remainder and quotient
 */
 class MultiplicationTable {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(N)
+  // Space: O(1)
+  iterative(N, X) {
+    var count = 0;
+    for (var i = 1; i <= N && i <= Math.ceil(X / 2); i++) {
+      var div = X / i;
+      var rem = X % i;
+      if (div <= N && rem == 0) {
+        count++;
+      }
+    }
+    return count;
+  }
 
 }
 
