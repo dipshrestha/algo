@@ -27,8 +27,8 @@ class ReverseLinkedList {
   // Time: O(N)
   // Space: O(1)
   iterative(WM) {
-    var prev = WM;
-    var cur = WM.next;
+    var prev = null;
+    var cur = WM;
     var next = null;
     while (cur != null) {
       next = cur.next;
@@ -36,16 +36,34 @@ class ReverseLinkedList {
       prev = cur;
       cur = next;
     }
-    WM.next = null;
     return prev;
   }
 
+  // Time: O(N)
+  // Space: O(1)
   recursive(WM) {
+    var ret = this._recursive_helper(WM);
+    return ret;
+  }
 
-    if (WM.next == null) {
-
+  _recursive_helper(WM) {
+    var prev = null;
+    var cur = WM;
+    var next = WM && WM.next;
+    debugger;
+    if (cur == null || next == null) {
+      return WM;
+    } else {
+      //var prev = WM;
+      //var cur = WM.next;
+      //var next = cur.next;
+      //cur.next = prev;
+      //cur = next;
+      var x = this._recursive_helper(next);
+      x.next = cur;
+      cur.next = null;
+      return cur;
     }
-
   }
 }
 
