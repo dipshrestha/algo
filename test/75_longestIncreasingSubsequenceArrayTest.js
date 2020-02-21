@@ -8,10 +8,10 @@ beforeEach('Setting up...', function() {
 });
 
 describe('LongestIncreasingSubsequenceArray', function() {
-  const expected = 3;
-
+  const expected = 6;
+  const WM = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15];
   it('Iterative', function() {
-    const result = 3; //algo.iterative(WM)
+    const result = algo.recursive(WM)
     assert.equal(result, expected);
   });
 });
