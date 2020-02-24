@@ -66,6 +66,33 @@ class LongestIncreasingSubsequenceArray {
     return list;
   }
 
+  // Time: O(2^N)
+  // Space: O(N)
+  //https://www.dailycodingproblem.com/blog/longest-increasing-subsequence/
+  recursive(WM) {
+    var val = this._recursive_helper(WM);
+    return val;
+  }
+
+  _recursive_helper(WM) {
+    if (WM == null) return 0;
+    if (WM.length == 1) return 1;
+
+    var max = 0;
+    var last = WM.slice(-1);
+    for (var i = 1; i < WM.length; i++) {
+      // get all counts when each of the previous indices are considered as last indices
+      // then check if it's greater than the previous incides and if adding itselft
+      // will increase the count
+      var prev_Max = this._recursive_helper(WM.slice(0, i));
+      var prev = WM[i - 1];
+      if (prev < last && max < prev_Max + 1)
+        max = prev_Max + 1;
+    }
+
+    return max;
+  }
+
   /*
   * What happens if I add myself to all other previous indices considering them as the last indices?
   * SubProblem:
