@@ -65,6 +65,19 @@ class LongestIncreasingSubsequenceArray {
     }
     return list;
   }
+
+  dp(WM) {
+    if (WM == null || WM.length == 1) return 1;
+    this.V = new Array(WM.length).fill(1);
+
+    for (var i = 1; i < WM.length; i++) {
+      for (var j = 0; j < i; j++) {
+        if (WM[j] < WM[i] && this.V[i] < this.V[j] + 1)
+          this.V[i] = this.V[j] + 1;
+      }
+    }
+    return Math.max(...this.V);
+  }
   /*
   _recursive_helper1(WM, pos, list) {
     if (pos == WM.length - 1) return list;

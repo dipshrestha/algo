@@ -14,4 +14,9 @@ describe('LongestIncreasingSubsequenceArray', function() {
     const result = algo.recursive(WM)
     assert.equal(result, expected);
   });
+
+  it('DP', function() {
+    const result = algo.dp(WM)
+    assert.equal(result, expected);
+  });
 });
