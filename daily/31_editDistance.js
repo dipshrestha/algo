@@ -56,7 +56,6 @@ class EditDistance {
   // Time: O(n * m)
   // Space: O(n * m)
   dp(s1, s2) {
-    debugger
     if (s1 == null && s2 == null) return 0;
     if (Math.max(s1.length, s2.length) == 0) return 0;
     if (Math.min(s1.length, s2.length) == 0)

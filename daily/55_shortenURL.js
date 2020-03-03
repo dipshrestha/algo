@@ -53,7 +53,6 @@ class ShortenURL {
   restore(str) {
     var num = 0;
     str.split('').forEach(c => {
-      debugger;
       num = num * this.allChars.length + this.allChars.indexOf(c);
     })
     return this.V.get(num);

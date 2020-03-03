@@ -46,7 +46,6 @@ class WordInMatrix {
     var R = WM.length,
       C = WM[0].length,
       L = W.length;
-    debugger;
     if ((R < L && C < L) || R < 1 || C < 1) return false;
     for (var i = 0; i < R; i++) {
       for (var j = 0; j < C; j++) {

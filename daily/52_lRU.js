@@ -61,7 +61,6 @@ class LRU {
 
   _add(key, val) {
     if (this.map.size == this.maxSize) {
-      debugger;
       this._remove(this.tail.key);
     }
     var newNode = new Node(key, val);
