@@ -77,7 +77,7 @@ class DecodeMessage {
     for (var i = 2; i <= str.length; i++) {
       p2 = p1;
       p1 = f;
-      var obj = str.substr(-2); // last 2 digits
+      var obj = str.substr(i-2, 2); // last 2 digits
       if (obj < 27)
         f = p1 + p2;
       else
@@ -95,7 +95,7 @@ class DecodeMessage {
     x[0] = x[1] = 1;
     x[2] = 1;
     for (var i = 2; i <= str.length; i++) {
-      var obj = str.substr(-2); // last 2 digits
+      var obj = str.substr(i-2, 2); // last 2 digits
       if (obj < 27)
         x[i] = x[i - 1] + x[i - 2];
       else

@@ -106,6 +106,43 @@ describe('DecodeMessage(121)', function() {
   });
 });
 
+describe('DecodeMessage(126)', function() {
+  var str = '126';
+  const expected = 3;
+
+  it('Recursive', function() {
+    const result = algo.recursive(str)
+    assert.equal(result, expected);
+  });
+  it('Iterative', function() {
+    const result = algo.iterative(str)
+    assert.equal(result, expected);
+  });
+
+  it('DP', function() {
+    const result = algo.dp(str)
+    assert.equal(result, expected);
+  });
+});
+
+describe('DecodeMessage(1261)', function() {
+  var str = '1261';
+  const expected = 3;
+
+  it('Recursive', function() {
+    const result = algo.recursive(str)
+    assert.equal(result, expected);
+  });
+  it('Iterative', function() {
+    const result = algo.iterative(str)
+    assert.equal(result, expected);
+  });
+
+  it('DP', function() {
+    const result = algo.dp(str)
+    assert.equal(result, expected);
+  });
+});
 
 describe('DecodeMessage(1212)', function() {
   var str = '1212';
