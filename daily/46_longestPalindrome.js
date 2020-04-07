@@ -131,7 +131,6 @@ class LongestPalindrome {
 
   // go to before/after the char in search of longest palindrome
   _getPalindromeFromChar(str, pos) {
-    debugger;
     var pre = pos - 1,
       i = pos + 1,
       palindrome = "";

@@ -79,7 +79,6 @@ class SubarrayMax {
   }
 
   iterativeBest(K) {
-    debugger;
     if (this.WM == null || this.WM.length == 0) return null;
     this.max = [0, 0];
     for (var i = 1; i <= this.WM.length - K; i++) {

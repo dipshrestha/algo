@@ -22,7 +22,6 @@ class LargestThreeProduct {
   // Time: O(N)
   // Space: O(1)
   iterative(WM) {
-    debugger
     if (WM == null || WM.length < 3) return null;
     // find the max 3, min 3
     var max1, max2, max3, min1, min2, tmp;

@@ -29,7 +29,6 @@ class APShortestPath extends S {
     }
 
     find() {
-        debugger
         var dp = this._init();
         const len = this.g.V;
         for (var k = 0; k < len; k++)

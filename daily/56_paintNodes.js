@@ -61,7 +61,6 @@ class PaintNodes {
   }
 
   _recursive_helper(WM, K) {
-    debugger;
     //return condition
     if (this._isAllColored(WM)) return true;
     var node = this._pickNonColoredNode(WM);
