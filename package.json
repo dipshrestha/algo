@@ -4,7 +4,7 @@
   "description": "Algorithm",
   "main": "index.js",
   "scripts": {
-    "debug": "mocha --inspect --debug-brk './test/**/*.js'",
+    "debug": "mocha --inspect --inspect-brk './test/**/*.js'",
     "test": "mocha './test/**/*.js'",
     "test-single": "mocha "
   },

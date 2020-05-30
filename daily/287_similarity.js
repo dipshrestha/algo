@@ -26,13 +26,64 @@ so your program should return [('a', 'e')].
  */
 
 /*
- Algo: Solve using backtracking
+ Algo:
+ // create matrix
+ // find (similar/dissimilar) pairs between nodes
+ // order then to find the most similar k based on similarity 
 */
 class Similarity {
 
-  // Time: O(2^N)
-  // Space: O(N)
 
+  _createMatrix(pairs) {
+    const map = new Map();
+
+    function createMap(pair) {
+      const set = map.get(pair[0]) || new Set();
+      set.add(pair[1]);
+      map.set(pair[0], set);
+    }
+    pairs.forEach(pair => createMap(pair));
+    return map;
+  }
+
+  _getSimilarity(map) {
+    const keys = [...map.keys()];
+    let s1 = null,
+      s2 = null;
+    let pairArr = [];
+
+    for (let i = 0; i < keys.length; i++) {
+      s1 = map.get(keys[i]);
+      const setKeys = [...s1.keys()];
+      let pairName = null;
+      for (let j = i + 1; j < keys.length; j++) {
+        pairName = keys[i] + keys[j];
+
+        s2 = map.get(keys[j]);
+        let similar = 0,
+          similarity = 0;
+        setKeys.forEach(k => {
+          if (s2.has(k)) similar++;
+        })
+        similarity = similar / (s1.size + s2.size);
+        pairArr.push([pairName, similarity]);
+
+      }
+
+    }
+    return pairArr;
+  }
+
+  // Time: O(N^2)
+  // Space: O(N)
+  iterative(pairs, k) {
+
+    const map = this._createMatrix(pairs);
+    const similarity = this._getSimilarity(map);
+    console.log(similarity);
+    similarity.sort((a, b) => b[1] - a[1]);
+    return similarity.slice(0, k).map(r => r[0]);
+  }
 }
 
 module.exports = Similarity;
