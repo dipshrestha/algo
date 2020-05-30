@@ -30,6 +30,8 @@ so your program should return [('a', 'e')].
  // create matrix
  // find (similar/dissimilar) pairs between nodes
  // order then to find the most similar k based on similarity 
+
+ Also check :https://en.wikipedia.org/wiki/Jaccard_index
 */
 class Similarity {
 
