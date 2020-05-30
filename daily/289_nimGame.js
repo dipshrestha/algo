@@ -3,7 +3,7 @@
  */
 
 /*
-Daily Coding Problem: Problem # [Difficulty]
+Daily Coding Problem: Problem #289 [Hard]
 
 Good morning! Here's your coding interview problem for today.
 
