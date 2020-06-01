@@ -18,7 +18,7 @@ if the initial heap sizes are 3, 4, and 5, a game could be played as shown below
   A  |  B  |  C
 -----------------
   3  |  4  |  5
-  3  |  1  |  3
+  3  |  1  |  5
   3  |  1  |  3
   0  |  1  |  3
   0  |  1  |  0
@@ -33,7 +33,10 @@ determine whether the first player has a forced win.
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: Theory of impartial games
+
+ https://www.geeksforgeeks.org/combinatorial-game-theory-set-2-game-nim/
+ http://web.mit.edu/sp.268/www/nim.pdf
 */
 class NimGame {
 
