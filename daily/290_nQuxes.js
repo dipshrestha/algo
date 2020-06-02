@@ -32,13 +32,36 @@ it is possible to end up with a single Qux through the following steps:
  */
 
 /*
- Algo: Solve using backtracking
+ Algo:
+ L->R
+ if i & i+1 are different find next color c
+  arr[i] = c;
+  i--
+ else
+  i++
 */
 class NQuxes {
+  _getThirdColor(selectedColors, colors) {
+    return colors.filter(i => !selectedColors.includes(i));
+  }
 
-  // Time: O(2^N)
-  // Space: O(N)
-
+  // Time: O(N)
+  // Space: O(1)
+  iterative(WM, colors) {
+    for (let i = 0; i < WM.length - 1;) {
+      let a = WM[i];
+      let b = WM[i + 1];
+      if (a != b) {
+        let c = this._getThirdColor([a, b], colors)[0];
+        WM[i + 1] = c;
+        WM.splice(i, 1);
+        if (i > 0) i--;
+      } else {
+        i++;
+      }
+    }
+    return WM;
+  }
 }
 
 module.exports = NQuxes;

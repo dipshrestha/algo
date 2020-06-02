@@ -7,11 +7,26 @@ beforeEach('Setting up...', function() {
   algo = new NQuxes();
 });
 
-describe('NQuxes', function() {
-  const expected = 3;
-
+describe("NQuxes: ['R', 'G', 'B', 'G', 'B']", function() {
+  const colors = ['R', 'G', 'B'];
   it('Iterative', function() {
-    const result = 3; //algo.iterative(WM)
-    assert.equal(result, expected);
+    const expected = ['R'];
+    const WM = ['R', 'G', 'B', 'G', 'B'];
+    const result = algo.iterative(WM, colors)
+    assert.deepEqual(result, expected);
+  });
+
+  it("Iterative: ['R', 'R', 'R', 'R', 'G']", function() {
+    const expected = ['G'];
+    const WM = ['R', 'R', 'R', 'R', 'G'];
+    const result = algo.iterative(WM, colors)
+    assert.deepEqual(result, expected);
+  });
+
+  it("Iterative: ['R', 'B', 'G', 'R', 'B', 'G']", function() {
+    const expected = ['G', 'G'];
+    const WM = ['R', 'B', 'G', 'R', 'B', 'G'];
+    const result = algo.iterative(WM, colors)
+    assert.deepEqual(result, expected);
   });
 });
