@@ -19,12 +19,37 @@ and a boat limit of 200, the smallest number of boats required will be three.
  */
 
 /*
- Algo: Solve using backtracking
+ Algo:
+ 1) O(NlogN)
+ sort
+  with help of 2 pointers, head & tail
+  while head <= tail
+    move head if head + tail <=k
+
+ 2) O(N^2)
+ for each i
+   find maxV such that wi + wj <=k
 */
 class KBoats {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(NlogN)
+  // Space: O(1)
+  iterative(WM, k) {
+    WM.sort((a, b) => a - b);
+    let count = 0;
+
+    for (let i = 0, j = WM.length - 1; i <= j;) {
+      let head = WM[i];
+      let tail = WM[j];
+      // find
+      if (head + tail <= k) {
+        i++;
+      }
+      count++; // VIP
+      j--; // VIP
+    }
+    return count;
+  }
 
 }
 
