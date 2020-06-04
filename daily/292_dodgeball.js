@@ -40,12 +40,52 @@ students = {
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: 
+    // create 2 groups A,B
+    // for each k in keys
+    //   if not visited
+    //      add k and val(k) in separate groups
 */
 class Dodgeball {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // create 2 groups 1 & -1
+  _get2Groups(map) {
+    let group1 = [],
+      group2 = [];
+
+    let keys = [...map.keys()];
+    keys.forEach(k => map.get(k) == 1 ? group1.push(k) : group2.push(k))
+    return [group1, group2];
+  }
+
+  // Time: O(edges)
+  // Space: O(nodes)
+  iterative(adjacency) {
+    let keys = [];
+    for (let k in adjacency)
+      keys.push(k);
+
+
+    let visited = new Map();
+    let mygroup = null,
+      yourgroup = null;
+    for (let i = 0; i < keys.length; i++) {
+      let item = keys[i] * 1;
+      if (mygroup = visited.get(item) || 1);
+      visited.set(item, mygroup)
+      yourgroup = mygroup * -1;
+
+      let enemies = adjacency[item];
+      for (let j = 0; j < enemies.length; j++) {
+        let youritem = enemies[j] * 1;
+        if (visited.get(youritem) == mygroup)
+          return false;
+        visited.set(youritem, yourgroup);
+      }
+    }
+    console.log(visited);
+    return this._get2Groups(visited);
+  }
 
 }
 
