@@ -25,12 +25,68 @@ is to pay 2 to create [0, 1, 2, 3, 2, 1].
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: 
+ // find median
+ // find sum of the pyramid with median at middle
+ // cost = sum of input - sum of pyramid
 */
-class Pyramid{
+class Pyramid {
+  _createPyramidSum(median) {
+    if (median == 1) return 1;
+    let ret = 0;
+    for (var i = 1; i < median; i++) {
+      ret += (i * 2);
+    }
+    ret += median;
+    return ret;
+  }
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(N)
+  // Space: O(1)
+  iterativeBetter(WM) {
+    const median = Math.ceil(WM.length / 2);
+    const psum = this._createPyramidSum(median);
+    const wsum = WM.reduce((a, b) => a + b);
+    return wsum - psum;
+  }
+
+
+  // Time: O(NlogN)
+  // Space: O(1)
+  iterative(WM) {
+    // sort
+    // find median (ceil)
+    // create pyramid with median at center
+    // --------------------if median > length pay
+    // getMax() and first put median at middle
+    // then for each getMax() add on both side of the median
+    WM.sort();
+    const len = WM.length;
+    const median = Math.ceil(WM.length / 2);
+
+    let cost = 0;
+    for (let i = 0, j = WM.length - 1; i < median; i++) {
+      cost += _getCostForPosition(WM, i, j, median);
+      j--;
+
+      if (i > 0) {
+        cost += _getCostForPosition(WM, i, j, median);
+        j--;
+      }
+    }
+
+    if (len % 2 == 0)
+      cost += WM[0]; // add the first as well
+    return cost;
+
+
+    function _getCostForPosition(WM, i, j, median) {
+      let myPrice = WM[j];
+      let actualCost = (median - i);
+      let myCost = myPrice - actualCost;
+      return myCost;
+    }
+  }
 
 }
 
