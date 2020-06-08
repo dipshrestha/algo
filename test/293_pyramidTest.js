@@ -6,7 +6,7 @@ let algo = null;
 beforeEach('Setting up...', function() {
   algo = new Pyramid();
 });
-describe.only('Pyramid', function() {
+describe('Pyramid', function() {
 
   it('Iterative', function() {
     const expected = 2;
