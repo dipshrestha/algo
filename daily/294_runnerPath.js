@@ -38,6 +38,87 @@ class RunnerPath {
   // Time: O(2^N)
   // Space: O(N)
 
+  recursive(path, elevations) {
+    debugger;
+    // create adjacencyList
+    const adjacencyList = this._createAdjacency(path);
+    //console.log(adjacencyList);
+    const ret = this._recursive_helper(path, elevations, adjacencyList, null, 0, 0, {})
+    return ret;
+  }
+
+  _createAdjacency(path) {
+    const map = new Map();
+    const keys = Object.keys(path);
+    keys.forEach(k => {
+      const [src, dst] = k.split('-');
+      if (!map.get(src * 1)) {
+        map.set(src * 1, []);
+      }
+      map.get(src * 1).push(dst * 1);
+    });
+    return map;
+  }
+
+  _isVshape(before, current, next, elevations) {
+    return elevations[before] > elevations[current] && elevations[next] > elevations[current];
+  }
+
+  // - not visited
+  // - doesn't make V shape
+  _getNext(elevations, adjacencyList, before, current, END, visited) {
+    if (visited[current] && current == END) return null;
+    // get all adjacency for current
+    const list = adjacencyList.get(current);
+    if (!list) return false;
+    const ret = list.filter(next => !visited[next] && !this._isVshape(before, current, next, elevations));
+    return ret.length > 0 ? ret[0] : null;
+  }
+
+  _recursive_helper(path, elevations, adjacencyList, before, current, END, visited) {
+    console.log(before, current, END, visited);
+
+    if (before != null) {
+      visited[current] = 1;
+      if (current == END) {
+        return 0;
+      }
+    }
+
+    let dist = Infinity,
+      next = null,
+      localDist = 0,
+      subDist = 0;
+    while (true) {
+      next = this._getNext(elevations, adjacencyList, before, current, END, visited);
+      if (next == null) break;
+      // get distance to next
+      localDist = path[current + '-' + next];
+      subDist = localDist + this._recursive_helper(path, elevations, adjacencyList, current, next, END, { ...visited });
+      visited[next] = 1;
+      console.debug(' >>',dist, localDist, subDist);
+      dist = Math.min(dist, subDist);
+    }
+    return dist;
+  }
+
+  _recursive_helper1(path, elevations, adjacencyList, before, current, END, visited) {
+    console.log(before, current, END, visited);
+    if (before != null && current == END)
+      return path[before + '-' + current];
+    visited.add(current);
+    let dist = 0,
+      next = null;
+    do {
+      next = this._getNext(elevations, adjacencyList, before, current, END, visited);
+      dist = Math.max(dist, this._recursive_helper(path, elevations, adjacencyList, current, next, END, visited));
+    } while (typeof next !== 'undefined' && next != END);
+    //visited.delete(current);
+    console.log('ret: ' + dist);
+    return dist;
+  }
+
+
 }
 
 module.exports = RunnerPath;
