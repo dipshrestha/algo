@@ -31,22 +31,65 @@ In this case, the shortest valid path would be 0 -> 2 -> 4 -> 0, with a distance
  */
 
 /*
- Algo: Solve using backtracking
+ Algo:
+ Recursive:
+    for each adjacent node from source
+        until it reached the destination or there is no route to destination
+            find the distance till destination with the conditions met (no V shape)
+    return the min from all the distances
 */
 class RunnerPath {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  dp(path, elevations, start = 0, end = 0) {
+    debugger
+    const adjacencyList = this._createAdjacency(path);
+    const beforeList = new Map();
+    const distList = new Map();
 
-  recursive(path, elevations) {
+    distList.set(0,0);
+
+    for (var k of adjacencyList.entries()) {
+      let current = k[0];
+      let before = beforeList.get(current);
+
+      let edges = adjacencyList.get(current); // or k[1];
+      let dist = null,
+        next = null,
+        localDist = 0,
+        subDist = 0;
+      for (let j = 0; j < edges.length; j++) {
+        next = edges[j];
+        dist = distList.get(next) || Infinity;
+        if (!before && this._isVshape(before, current, next, elevations))
+          continue;
+        // get distance to next
+        localDist = path[current + '-' + next];
+        subDist = localDist + distList.get(current);
+        if (dist > subDist) {
+          dist = subDist;
+          beforeList.set(current, before);
+        }
+        distList.set(next, dist);
+      }
+    }
+    console.log(distList);
+    return distList.get(start);
+  }
+
+  // Time: O(N^2)
+  // Space: O(E)
+  recursive(path, elevations, start = 0, end = 0) {
     debugger;
     // create adjacencyList
     const adjacencyList = this._createAdjacency(path);
-    //console.log(adjacencyList);
-    const ret = this._recursive_helper(path, elevations, adjacencyList, null, 0, 0, {})
+    const ret = this._recursive_helper(path, elevations, adjacencyList, null, start, end, {})
     return ret;
   }
 
+  /**
+   *
+   * Create a map with list of adjacent nodes for each node
+   */
   _createAdjacency(path) {
     const map = new Map();
     const keys = Object.keys(path);
@@ -96,7 +139,7 @@ class RunnerPath {
       localDist = path[current + '-' + next];
       subDist = localDist + this._recursive_helper(path, elevations, adjacencyList, current, next, END, { ...visited });
       visited[next] = 1;
-      console.debug(' >>',dist, localDist, subDist);
+      console.debug(' >>', dist, localDist, subDist);
       dist = Math.min(dist, subDist);
     }
     return dist;

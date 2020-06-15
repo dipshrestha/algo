@@ -6,8 +6,9 @@ let algo = null;
 beforeEach('Setting up...', function() {
   algo = new RunnerPath();
 });
-describe.only('Template', function() {
-  it('Recursive - No allowed route', function() {
+
+describe.only('RunnerPath', function() {
+  describe('No allowed route', function() {
     const expected = Infinity;
     const elevations = { 0: 10, 1: 2, 2: 3 }
     const paths = {
@@ -15,10 +16,17 @@ describe.only('Template', function() {
       '1-2': 3,
       '2-0': 5,
     }
-    const result = algo.recursive(paths, elevations)
-    assert.equal(result, expected);
+    it('Recursive', function() {
+      const result = algo.recursive(paths, elevations)
+      assert.equal(result, expected);
+    })
+    it.skip('DP', function() {
+      const result = algo.dp(paths, elevations)
+      assert.equal(result, expected);
+    })
   });
-  it('Recursive - Single route', function() {
+
+  describe('Single route', function() {
     const expected = 9;
     const elevations = { 0: 1, 1: 2, 2: 1 }
     const paths = {
@@ -26,10 +34,17 @@ describe.only('Template', function() {
       '1-2': 3,
       '2-0': 5,
     }
-    const result = algo.recursive(paths, elevations)
-    assert.equal(result, expected);
+    it('Recursive', function() {
+      const result = algo.recursive(paths, elevations)
+      assert.equal(result, expected);
+    });
+    it('DP', function() {
+      const result = algo.dp(paths, elevations)
+      assert.equal(result, expected);
+    })
   });
-  it('Recursive - Multiple route', function() {
+
+  describe('Multiple route', function() {
     const expected = 6;
     const elevations = { 0: 1, 1: 2, 2: 1 }
     const paths = {
@@ -38,10 +53,17 @@ describe.only('Template', function() {
       '1-2': 3,
       '2-0': 5,
     }
-    const result = algo.recursive(paths, elevations)
-    assert.equal(result, expected);
+    it('Recursive', function() {
+      const result = algo.recursive(paths, elevations)
+      assert.equal(result, expected);
+    });
+    it('DP', function() {
+      const result = algo.dp(paths, elevations)
+      assert.equal(result, expected);
+    })
   });
-  it('Recursive - Original route', function() {
+
+  describe('Original route', function() {
     const expected = 28;
     const elevations = { 0: 5, 1: 25, 2: 15, 3: 20, 4: 10 }
     const paths = {
@@ -54,7 +76,13 @@ describe.only('Template', function() {
       '3-0': 17,
       '4-0': 10
     }
-    const result = algo.recursive(paths, elevations)
-    assert.equal(result, expected);
+    it('Recursive', function() {
+      const result = algo.recursive(paths, elevations)
+      assert.equal(result, expected);
+    });
+    it('DP', function() {
+      const result = algo.dp(paths, elevations)
+      assert.equal(result, expected);
+    })
   });
 });
