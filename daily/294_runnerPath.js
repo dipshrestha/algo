@@ -37,11 +37,20 @@ In this case, the shortest valid path would be 0 -> 2 -> 4 -> 0, with a distance
         until it reached the destination or there is no route to destination
             find the distance till destination with the conditions met (no V shape)
     return the min from all the distances
+
+ DP:
+    similar to DP of ShortestPath
+    for each node
+        for each adjacent node (k) such that k meets conditions (no V shape)
+            if(dist(k) > dist(before) + dist(current)) then
+                dist(k) = dist(before) + dist(current)
+
 */
 class RunnerPath {
 
+  // Time: O(V.E)
+  // Space: O(E)
   dp(path, elevations, start = 0, end = 0) {
-    debugger
     const adjacencyList = this._createAdjacency(path);
     const beforeList = new Map();
     const distList = new Map();
@@ -60,14 +69,14 @@ class RunnerPath {
       for (let j = 0; j < edges.length; j++) {
         next = edges[j];
         dist = distList.get(next) || Infinity;
-        if (!before && this._isVshape(before, current, next, elevations))
+        if (this._isVshape(before, current, next, elevations))
           continue;
         // get distance to next
         localDist = path[current + '-' + next];
         subDist = localDist + distList.get(current);
         if (dist > subDist) {
           dist = subDist;
-          beforeList.set(current, before);
+          beforeList.set(next, current);
         }
         distList.set(next, dist);
       }
@@ -79,7 +88,6 @@ class RunnerPath {
   // Time: O(N^2)
   // Space: O(E)
   recursive(path, elevations, start = 0, end = 0) {
-    debugger;
     // create adjacencyList
     const adjacencyList = this._createAdjacency(path);
     const ret = this._recursive_helper(path, elevations, adjacencyList, null, start, end, {})
@@ -104,6 +112,7 @@ class RunnerPath {
   }
 
   _isVshape(before, current, next, elevations) {
+    if (!before && elevations[next] < elevations[current]) return false;
     return elevations[before] > elevations[current] && elevations[next] > elevations[current];
   }
 

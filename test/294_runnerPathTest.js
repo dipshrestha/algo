@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new RunnerPath();
 });
 
-describe.only('RunnerPath', function() {
+describe('RunnerPath', function() {
   describe('No allowed route', function() {
     const expected = Infinity;
     const elevations = { 0: 10, 1: 2, 2: 3 }
@@ -20,7 +20,7 @@ describe.only('RunnerPath', function() {
       const result = algo.recursive(paths, elevations)
       assert.equal(result, expected);
     })
-    it.skip('DP', function() {
+    it('DP', function() {
       const result = algo.dp(paths, elevations)
       assert.equal(result, expected);
     })
