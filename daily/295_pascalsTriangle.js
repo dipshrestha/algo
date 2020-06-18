@@ -31,6 +31,23 @@ class PascalsTriangle {
 
   // Time: O(2^N)
   // Space: O(N)
+  iterative(k) {
+  	k--;
+  	debugger;
+    var prev = [],
+      cur = [];
+    for (var j = 0; j <= k; j++) {
+      for (var i = 0; i <= j; i++) {
+        if (i == 0 || i == j)
+          cur[i] = 1;
+        else
+          cur[i] = prev[i - 1] + prev[i];
+      }
+      prev = [...cur];
+      console.log(cur);
+    }
+    return cur;
+  }
 
 }
 

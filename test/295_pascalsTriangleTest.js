@@ -8,10 +8,20 @@ beforeEach('Setting up...', function() {
 });
 
 describe('PascalsTriangle', function() {
-  const expected = 3;
 
-  it('Iterative', function() {
-    const result = 3;//algo.iterative(WM)
-    assert.equal(result, expected);
+  it('Iterative: 3', function() {
+    const expected = [1, 2, 1];
+    const result = algo.iterative(3)
+    assert.deepEqual(result, expected);
+  });
+  it('Iterative: 5', function() {
+    const expected = [1, 4, 6, 4, 1];
+    const result = algo.iterative(5)
+    assert.deepEqual(result, expected);
+  });
+  it('Iterative: 8', function() {
+    const expected = [1, 7, 21, 35, 35, 21, 7, 1];
+    const result = algo.iterative(8)
+    assert.deepEqual(result, expected);
   });
 });
