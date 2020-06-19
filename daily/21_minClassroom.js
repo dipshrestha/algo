@@ -19,7 +19,7 @@ class MinClassroom {
   // Space: O(1)
   iterative(WM) {
     // sort first
-    WM.sort((a, b) => a[0] > b[0]);
+    WM.sort((a, b) => a[0] - b[0]);
     console.log(WM);
     var conflict = 1,
       rooms = 1,
