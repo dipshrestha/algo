@@ -29,8 +29,8 @@ Bonus: Can you do this using only O(k) space?
 */
 class PascalsTriangle {
 
-  // Time: O(2^N)
-  // Space: O(N)
+  // Time: O(k)
+  // Space: O(2*k)
   iterative(k) {
   	k--;
   	debugger;
