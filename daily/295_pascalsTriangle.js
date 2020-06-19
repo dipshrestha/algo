@@ -13,11 +13,12 @@ The first row consists of the number 1.
 For each subsequent row, each element is the sum of the numbers directly above it, on either side.
 For example, here are the first few rows:
 
-    1
-   1 1
-  1 2 1
- 1 3 3 1
-1 4 6 4 1
+     1
+    1 1
+   1 2 1
+  1 3 3 1
+ 1 4 6 4 1
+1 5 10 10 5 1
 Given an input k, return the kth row of Pascal's triangle.
 
 Bonus: Can you do this using only O(k) space?
@@ -25,15 +26,30 @@ Bonus: Can you do this using only O(k) space?
  */
 
 /*
- Algo: Solve using backtracking
+ Algo: Store previous values and add 
 */
 class PascalsTriangle {
 
-  // Time: O(k)
+  // Time: O(k^2)
+  // Space: O(k)
+  dp_better(k) {
+    k--;
+    var cur = [];
+    for (var i = 0; i <= k; i++) {
+      for (var j = i; j > 0; j--) {
+        cur[j] = (cur[j] || 0) + cur[j - 1];
+      }
+      cur[i] = 1;
+      console.log(cur);
+    }
+    return cur;
+  }
+
+
+  // Time: O(k^2)
   // Space: O(2*k)
-  iterative(k) {
-  	k--;
-  	debugger;
+  dp(k) {
+    k--;
     var prev = [],
       cur = [];
     for (var j = 0; j <= k; j++) {
