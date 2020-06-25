@@ -8,10 +8,32 @@ beforeEach('Setting up...', function() {
 });
 
 describe('Bartender', function() {
-  const expected = 3;
-
-  it('Iterative', function() {
-    const result = 3;//algo.iterative(WM)
-    assert.equal(result, expected);
-  });
+  describe('2 Common', function() {
+    const expected = 2;
+    let preferences = [
+      [0, 1, 3, 6],
+      [1, 4, 7],
+      [2, 4, 7, 5],
+      [3, 2, 5],
+      [5, 8]
+    ];
+    it('Recursive', function() {
+      const result = algo.recursive(preferences)
+      assert.equal(result, expected);
+    });
+  })
+  describe('3 Common', function() {
+    const expected = 3;
+    let preferences = [
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 4, 7, 5],
+      [3, 2, 5],
+      [5, 8]
+    ];
+    it('Recursive', function() {
+      const result = algo.recursive(preferences)
+      assert.equal(result, expected);
+    });
+  })
 });
