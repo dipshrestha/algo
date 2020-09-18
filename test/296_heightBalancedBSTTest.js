@@ -8,7 +8,7 @@ beforeEach('Setting up...', function() {
   algo = new HeightBalancedBST();
 });
 
-describe.only('HeightBalancedBST - 5 nodes', function() {
+describe('HeightBalancedBST - 5 nodes', function() {
   it('Recursive', function() {
     const WM = ['1', '2', '3', '4', '5'];
     const result = algo.recursive(WM);
@@ -17,7 +17,7 @@ describe.only('HeightBalancedBST - 5 nodes', function() {
   });
 });
 
-describe.only('HeightBalancedBST - 7 nodes', function() {
+describe('HeightBalancedBST - 7 nodes', function() {
   it('Recursive', function() {
     const WM = ['1', '2', '3', '4', '5', '6', '7'];
     const result = algo.recursive(WM);
@@ -26,7 +26,7 @@ describe.only('HeightBalancedBST - 7 nodes', function() {
   });
 });
 
-describe.only('HeightBalancedBST - 12 nodes', function() {
+describe('HeightBalancedBST - 12 nodes', function() {
   it('Recursive', function() {
     const WM = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     const result = algo.recursive(WM);
