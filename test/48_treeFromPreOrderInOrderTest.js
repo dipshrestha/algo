@@ -8,7 +8,7 @@ beforeEach('Setting up...', function() {
   algo = new TreeFromPreOrderInOrder();
 });
 
-describe.only('TreeFromPreOrderInOrder', function() {
+describe('TreeFromPreOrderInOrder', function() {
 
   it('Recursive-complete tree, height 3', function() {
     const preT = ['a', 'b', 'd', 'e', 'c', 'f', 'g'];
@@ -20,7 +20,7 @@ describe.only('TreeFromPreOrderInOrder', function() {
   });
 
 
-  it('Recursive-complete tree, height 3', function() {
+  it('Recursive- incomplete tree, height 3', function() {
     const preT = [5, 4, 2, 1, 6, 7, 9, 10]
     const inT = [1, 2, 4, 6, 5, 7, 10, 9];
     const expected = new Node(5, new Node(4, new Node(2, new Node(1)), new Node(6)),

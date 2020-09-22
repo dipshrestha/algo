@@ -14,6 +14,7 @@ Given a sorted array, convert it into a height-balanced binary search tree.
 const { Node } = require('../daily/3_serializeTree.js');
 
 /*
+ This is very similar to 48_treeFromPreOrderInOrder
  Algo: 
  Find the center
   For each half (right/left) of center create BST
