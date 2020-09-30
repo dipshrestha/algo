@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new ApplePicking();
 });
 
-describe.only('ApplePicking', function() {
+describe('ApplePicking', function() {
 
   it('Iterative - default', function() {
     const expected = 4;
