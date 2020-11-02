@@ -729,8 +729,8 @@ class Battleships {
               if (this._isFinished()) {
                 //console.log('count: ' + count, result);
                 let signature = this._isNewSolutionBoard(this.board)
-                this._printBoard(N);
                 if (signature) {
+                  this._printBoard(N);
                   this.V1.push(signature);
                 }
               }
