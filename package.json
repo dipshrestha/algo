@@ -18,6 +18,7 @@
     "mocha": "^5.2.0"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
     "heap": "^0.2.6",
     "stackjs": "^0.1.0"
   }

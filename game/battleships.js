@@ -727,9 +727,9 @@ class Battleships {
               var result = this._recursive_helper(N);
               //count += result;
               if (this._isFinished()) {
-                this._printBoard(N);
                 //console.log('count: ' + count, result);
                 let signature = this._isNewSolutionBoard(this.board)
+                this._printBoard(N);
                 if (signature) {
                   this.V1.push(signature);
                 }
