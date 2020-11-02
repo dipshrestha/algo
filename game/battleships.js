@@ -434,28 +434,36 @@ class Battleships {
     let invalidPatternPairRow = [
       //↑ → ↓ ← ■ ×
       // type 0
-      [],
+      [
+        ['(0)', '(Infinity),(5),(Infinity)']
+      ],
       // type 1
       [
-        ['(4),(2)', '(Infinity),(5),(Infinity)']
+        ['(4),(2)', '(Infinity),(5),(Infinity)'],
+        ['(1)', '(Infinity),(5),(Infinity)'],
       ],
       // type 2
       [
-        ['(4),(5),(2)', '(Infinity),(5),(Infinity)']
+        ['(4),(5),(2)', '(Infinity),(5),(Infinity)'],
+        ['(1)', '(Infinity),(5),(Infinity)'],
       ]
     ];
 
     let invalidPatternPairColumn = [
       //↑ → ↓ ← ■ ×
       // type 0
-      [],
+      [
+        ['(0)', '(Infinity),(5),(Infinity)']
+      ],
       // type 1
       [
-        ['(1),(3)', '(Infinity),(5),(Infinity)']
+        ['(1),(3)', '(Infinity),(5),(Infinity)'],
+        ['(4)', '(Infinity),(5),(Infinity)'],
       ],
       // type 2
       [
-        ['(1),(5),(3)', '(Infinity),(5),(Infinity)']
+        ['(1),(5),(3)', '(Infinity),(5),(Infinity)'],
+        ['(4)', '(Infinity),(5),(Infinity)'],
       ]
     ];
     let pairs = invalidPatternPairRow[shipType];
@@ -716,7 +724,6 @@ class Battleships {
               })
 
 
-              //this._printBoard(N);
               var result = this._recursive_helper(N);
               //count += result;
               if (this._isFinished()) {
