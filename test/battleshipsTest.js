@@ -53,7 +53,7 @@ describe.skip('Battleships', function() {
     assert.equal(result, expected);
   });
 
-  it.only('Recursive: 10x10 : Bay Area News Group Aug 9, 2020', function() {
+  it.skip('Recursive: 10x10 : Bay Area News Group Aug 9, 2020', function() {
 
     const N = 10,
       expected = 34,
