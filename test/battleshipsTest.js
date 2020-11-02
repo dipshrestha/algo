@@ -7,12 +7,11 @@ beforeEach('Setting up...', function() {
   algo = new Battleships();
 });
 
-describe.skip('Battleships', function() {
+describe('Battleships', function() {
 
-  it.only('Recursive', function() {
-
+  it.skip('Recursive', function() {
     const N = 10,
-      expected = 10;
+      expected = 34;
     /*shipsSegments = [
         ['8-4', '5-7'],
         [],
@@ -38,6 +37,38 @@ describe.skip('Battleships', function() {
     const result = algo.recursive(N, shipsSegments, shipsSegmentsCount, shipsCount);
     assert.equal(result, expected);
   });
+
+  it.skip('Recursive: 10x10 : Bay Area News Group Sept 27, 2020', function() {
+
+    const N = 10,
+      expected = 34;
+    /*shipsSegments = [
+        ['8-4', '5-7'],
+        [],
+        ['3-7'],
+        [],
+        [],
+        ['0-4']
+    ],*/
+    shipsSegments = [
+        ['7-2'],
+        ['2-4'],
+        [],
+        [],
+        [],
+        ['0-8'],
+        ['3-2']
+      ],
+      shipsSegmentsCount = [
+        [2, 1, 3, 2, 4, 0, 1, 2, 1, 4],
+        [3, 1, 1, 3, 0, 6, 0, 2, 1, 3]
+      ],
+      shipsCount = [4, 3, 2, 1];
+
+    const result = algo.recursive(N, shipsSegments, shipsSegmentsCount, shipsCount);
+    assert.equal(result, expected);
+  });
+
 
   it('Recursive: 3x3: one type one place', function() {
     /*
@@ -75,8 +106,9 @@ describe.skip('Battleships', function() {
         [1, 1, 1]
       ],
       shipsCount = [3];
-
+    //console.time('1bc');
     const result = algo.recursive(N, shipsSegments, shipsSegmentsCount, shipsCount);
+    //console.timeEnd('1bc');
     assert.equal(result, expected);
   });
 

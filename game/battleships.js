@@ -10,6 +10,8 @@
  4 5 2
    3
 
+ index 6 for -1
+
 2) Get count of ships types
    if count = 3
     then 0: round, 1: 2 block, 2: 3 block, 3: 4 blocks based on size of ships
@@ -19,6 +21,9 @@ Algo: Solve using backtracking
 
 
 */
+
+const chalk = require('chalk');
+
 class Battleships {
   /**
    *
@@ -34,6 +39,8 @@ class Battleships {
    * @return {[type]}                    [description]
    */
   recursive(N, shipsSegments, shipsSegmentsCount, shipsCount) {
+    const startTime = Date.now();
+
     this.V = []; // all valid finished boards
     this.V1 = []; // all row signatures of the finished board
     this.board = [];
@@ -46,6 +53,17 @@ class Battleships {
 
     this._printBoard(N);
     let ret = this._recursive_helper(N);
+
+    const endTime = Date.now();
+    let diff = (endTime - startTime);
+    if (diff > 1000 * 60)
+      diff = (diff / (1000 * 60)) + ' min';
+    else if (diff > 1000)
+      diff = (diff / 1000) + ' s';
+    else
+      diff = diff + ' ms';
+    console.log(chalk.blue(diff));
+
     return this.V1.length;
     //return ret;
   }
@@ -146,12 +164,13 @@ class Battleships {
       segments.forEach((segment, j) => {
         cell = segment.split('-');
         if (cell.length < 1) return;
-        this.board[cell[0]][cell[1]] = i;
+        this.board[cell[0]][cell[1]] = i == 6 ? -1 : i;
 
         if (!isInit)
           // if this is same as given by default ignore;
           if (this.shipsSegments[i].indexOf(segment) > -1) return;
 
+        if (i == 6) return;
         this.shipsSegmentsCountCurrent[0][cell[1]]--;
         this.shipsSegmentsCountCurrent[1][cell[0]]--;
       })
@@ -643,10 +662,13 @@ class Battleships {
     for (var rowIndex = 0; rowIndex < N; rowIndex++) {
 
       // we can add ship to any column in the row
-      for (let j = 0; j < this.board.length; j++) {
+      for (let j = 0; j < this.board.length && rowIndex < this.board.length; j++) {
 
         pos = { i: rowIndex, j: j };
         //console.log('adding for pos: ', pos);
+
+        // can't add to this cell
+        if (this.board[pos.i][pos.j] == -1) continue;
 
         // pick ship types one by one
         for (let shipType = 0; shipType < shipCount && pos.i < N && pos.j < N; shipType++) {
