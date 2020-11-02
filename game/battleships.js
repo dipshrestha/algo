@@ -57,6 +57,15 @@ class Battleships {
     }
     return row;
   }
+
+  _getColumnSignature(board, j) {
+    let column = '';
+    for (let i = 0; i < board.length; i++) {
+      column += '(' + this.board[i][j] + ')' + ',';
+    }
+    return column;
+  }
+
   _getBoardSignature(board) {
     let res = [];
     for (let i = 0; i < board.length; i++) {
@@ -292,20 +301,15 @@ class Battleships {
       }
     }
 
-    // TODO: Infer possible mistakes
-    // ○  ?  ?  ?  ■  ?  ? 4 (2)
-    // ○  ←  →  ?  ■  ?  ? 4 (0)
-    // 
-    // if ■ is present, we can assume at least 2 more places will be occupied,
-    // which means there is no use of adding type 1
+
     // 
     // check for invalid patterns in horizontal & vertical
     let invalidPatternHorizontal = [
       //↑ → ↓ ← ■ ×
       // o ■, → ■, x ■, ↑ ■, ↓ ■
-      '(0),(5)', '(2),(5)', '(-1),(5)', '(1),(5)', '(3)(5)',
+      '(0),(5)', '(2),(5)', '(-1),(5)', '(1),(5)', '(3),(5)',
       // ■ o, ■ ←, ■ x, ■ ↑, ■ ↓ 
-      '(5),(0)', '(5),(4)', '(5),(-1)', '(5),(1)', '(5)(3)',
+      '(5),(0)', '(5),(4)', '(5),(-1)', '(5),(1)', '(5),(3)',
 
       // ← o, ← x, ← ↑, ← ↓
       '(4),(0)', '(4),(-1)', '(4),(1)', '(4),(3)',
@@ -338,11 +342,8 @@ class Battleships {
 
     // vertical pattern search for first/last column
     for (let i = 0; i < N; i += (N - 1)) {
-      let column = '',
+      let column = this._getColumnSignature(this.board, i),
         pattern = '';
-      for (let j = 0; j < N; j++) {
-        column += '(' + this.board[j][i] + ')' + ',';
-      }
       for (let k = 0; k < invalidPatternVertical.length; k++) {
         pattern = invalidPatternVertical[k];
         if (column.indexOf(pattern) > -1)
@@ -351,9 +352,16 @@ class Battleships {
     }
 
 
+    // TODO: Infer possible mistakes
+    // ○  ?  ?  ?  ■  ?  ? 4 (2)
+    // ○  ←  →  ?  ■  ?  ? 4 (0)
+    // 
+    // if ■ is present, we can assume at least 2 more places will be occupied,
+    // which means there is no use of adding type 1
+    
     // conditional invalid pattern search based on the type and shipsSegmentsCount
     // ←  →  ?  ?  ■  ?  ?  ?  ?  ? 4 (1) 
-    let invalidPatternPair = [
+    let invalidPatternPairRow = [
       //↑ → ↓ ← ■ ×
       // type 0
       [],
@@ -366,7 +374,21 @@ class Battleships {
         ['(4),(5),(2)', '(Infinity),(5),(Infinity)']
       ]
     ];
-    let pairs = invalidPatternPair[shipType];
+
+    let invalidPatternPairColumn = [
+      //↑ → ↓ ← ■ ×
+      // type 0
+      [],
+      // type 1
+      [
+        ['(1),(3)', '(Infinity),(5),(Infinity)']
+      ],
+      // type 2
+      [
+        ['(1),(5),(3)', '(Infinity),(5),(Infinity)']
+      ]
+    ];
+    let pairs = invalidPatternPairRow[shipType];
     if (pairs && pairs.length > 0) {
       for (let i = 0; i < pairs.length; i++) {
         let pair = pairs[i];
@@ -374,6 +396,29 @@ class Battleships {
 
         for (let i = 0; i < N; i++) {
           let row = this._getRowSignature(this.board, i),
+            pattern = '';
+          //console.log('pair', pair, ' row', row);
+          if (row.indexOf(pair[0]) > -1 && row.indexOf(pair[1]) > -1) {
+            let emptyPos = pair.flatMap(f => f.split(',')).filter(f => f == '(Infinity)').length;
+            let total = pair.flatMap(f => f.split(',')).length;
+            let net = total - emptyPos;
+            let actual_col = this.shipsSegmentsCountCurrent[0][pos.j];
+            let actual_row = this.shipsSegmentsCountCurrent[1][pos.i];
+            if (actual_col < total || actual_row < total)
+              return false
+          }
+        }
+      }
+    }
+
+    pairs = invalidPatternPairColumn[shipType];
+    if (pairs && pairs.length > 0) {
+      for (let i = 0; i < pairs.length; i++) {
+        let pair = pairs[i];
+        if (pair.length < 1) break;
+
+        for (let i = 0; i < N; i++) {
+          let row = this._getColumnSignature(this.board, i),
             pattern = '';
           //console.log('pair', pair, ' row', row);
           if (row.indexOf(pair[0]) > -1 && row.indexOf(pair[1]) > -1) {
