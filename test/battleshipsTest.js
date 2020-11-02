@@ -7,7 +7,7 @@ beforeEach('Setting up...', function() {
   algo = new Battleships();
 });
 
-describe.ignore('Battleships', function() {
+describe.skip('Battleships', function() {
 
   it.skip('Recursive', function() {
     const N = 10,
