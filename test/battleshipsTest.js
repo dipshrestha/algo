@@ -9,9 +9,9 @@ beforeEach('Setting up...', function() {
 
 describe.skip('Battleships', function() {
 
-  it.skip('Recursive', function() {
+  it('Recursive', function() {
     const N = 10,
-      expected = 34,
+      expected = 37, // 34
       shipsSegments = [
         ['8-4', '5-7'],
         [],
@@ -30,7 +30,7 @@ describe.skip('Battleships', function() {
     assert.equal(result, expected);
   });
 
-  it.skip('Recursive: 10x10 : Bay Area News Group Sept 27, 2020', function() {
+  it('Recursive: 10x10 : Bay Area News Group Sept 27, 2020', function() {
 
     const N = 10,
       expected = 34,
@@ -53,7 +53,7 @@ describe.skip('Battleships', function() {
     assert.equal(result, expected);
   });
 
-  it.skip('Recursive: 10x10 : Bay Area News Group Aug 9, 2020', function() {
+  it('Recursive: 10x10 : Bay Area News Group Aug 9, 2020', function() {
 
     const N = 10,
       expected = 34,
@@ -478,6 +478,7 @@ describe.skip('Battleships', function() {
     const result = algo.recursive(N, shipsSegments, shipsSegmentsCount, shipsCount);
     assert.equal(result, expected);
   });
+
 
 });
 

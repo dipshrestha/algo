@@ -125,6 +125,9 @@ class Battleships {
    * 
    * Filll board with shipsSegmentsCount and update shipsSegmentsCountCurrent.
    * Also fill empty column/row with -1
+   *
+   * Fill -1 for possible rows/columns
+   * 
    * @return {[type]} [description]
    */
   _setupBoard(N) {
@@ -156,8 +159,48 @@ class Battleships {
         if (this.board[i][j] == 0) this.shipsCount[0]--;
       }
     }
+
+    for (let i = 0; i < this.board.length; i++) {
+      if (this._isRowFinished(i))
+        this._fillRowWithIfEmpty(this.board, i, -1);
+    }
+
+    for (let i = 0; i < this.board.length; i++) {
+      if (this._isColumnFinished(i))
+        this._fillColumnWithIfEmpty(this.board, i, -1);
+    }
   }
 
+  _containsShip(shipsSegments, shipType) {
+    let segments = shipsSegments[shipType];
+    return segments && segments.length > 0;
+  }
+
+  _containsSegmentAtRow(shipsSegments, segmentType, rowIndex) {
+    //for (var i = 0; i < shipsSegments.length; i++) {
+    let segments = shipsSegments[segmentType];
+    if (!segments) return false;
+    let cell = null;
+
+    for (var j = 0; j < segments.length; j++) {
+      let segment = segments[j];
+      // if this is same as given by default ignore;
+      //if (this.shipsSegments[i].indexOf(segment) > -1) continue;
+      cell = segment.split('-');
+      if (cell.length < 1) continue;
+      if (cell[0] == rowIndex) true;
+    }
+    return false;
+  }
+
+  /**
+   * Apply ship segments
+   * Update the current counters
+   *
+   * @param  {[type]}  shipsSegments [description]
+   * @param  {Boolean} isInit        [description]
+   * @return {[type]}                [description]
+   */
   _applyShipSegments(shipsSegments, isInit) {
     let cell = null;
     shipsSegments.forEach((segments, i) => {
@@ -169,12 +212,32 @@ class Battleships {
         if (!isInit)
           // if this is same as given by default ignore;
           if (this.shipsSegments[i].indexOf(segment) > -1) return;
-
         if (i == 6) return;
         this.shipsSegmentsCountCurrent[0][cell[1]]--;
         this.shipsSegmentsCountCurrent[1][cell[0]]--;
       })
     })
+
+  }
+
+  _fillRowWithIfEmpty(board, rowIndex, segment) {
+    let pos = null;
+    for (let j = 0; j < board.length; j++) {
+      pos = { i: rowIndex, j: j };
+      if (this._isCellFillable(pos) && !this._isCellFilled(pos)) {
+        this.board[rowIndex][j] = segment;
+      }
+    }
+  }
+
+  _fillColumnWithIfEmpty(board, columnIndex, segment) {
+    let pos = null;
+    for (let i = 0; i < board.length; i++) {
+      pos = { i: i, j: columnIndex };
+      if (this._isCellFillable(pos) && !this._isCellFilled(pos)) {
+        this.board[i][columnIndex] = segment;
+      }
+    }
   }
 
   /**
@@ -644,6 +707,35 @@ class Battleships {
     return this.shipsSegmentsCountCurrent[1][index] <= 0;
   }
 
+  /**
+   * 
+   * If only x is present in row
+   * If ↑ isn't present by default in row which is already finished
+   * //If ↑ isn't present in row which is already finished
+   * @param  {[type]} index [description]
+   * @return {[type]}       [description]
+   */
+  _canRowBeFinished(index) {
+    if (this.shipsSegmentsCount[1][index] == 0) return true;
+
+    //let pattern = '(1)';
+    //let rowPattern = this._getRowSignature(index);
+    //if (this._isRowFinished(index) && rowPattern.indexOf(pattern) < 0) {
+    if (this._isRowFinished(index) && !this._containsSegmentAtRow(this.shipsSegments, 1, index)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  _isCellFillable(pos) {
+    return this.board[pos.i][pos.j] != -1;
+  }
+
+  _isCellFilled(pos) {
+    return this.board[pos.i][pos.j] != Infinity;
+  }
+
   _isColumnFinished(index) {
     return this.shipsSegmentsCountCurrent[0][index] <= 0;
   }
@@ -669,6 +761,13 @@ class Battleships {
     // you can start filling for any of the row
     for (var rowIndex = 0; rowIndex < N; rowIndex++) {
 
+      if (this._canRowBeFinished(rowIndex)) continue;
+      // TODO: move to the first ↑ if available
+      /*
+      if (this._isRowFinished(rowIndex)) {
+        
+      }*/
+
       // we can add ship to any column in the row
       for (let j = 0; j < this.board.length && rowIndex < this.board.length; j++) {
 
@@ -676,7 +775,13 @@ class Battleships {
         //console.log('adding for pos: ', pos);
 
         // can't add to this cell
-        if (this.board[pos.i][pos.j] == -1) continue;
+        //if (this.board[pos.i][pos.j] == -1) continue;
+        if (!this._isCellFillable(pos)) continue;
+
+        if (this._isCellFilled(pos)) {
+
+        }
+
 
         // pick ship types one by one
         for (let shipType = 0; shipType < shipCount && pos.i < N && pos.j < N; shipType++) {
@@ -685,7 +790,7 @@ class Battleships {
           if (shipType == 0 && this.board[pos.i][pos.j] != Infinity) continue;
 
           // row already filled
-          if (shipType == 0 && this._isRowFinished(rowIndex)) continue;
+          //if (shipType == 0 && this._isRowFinished(rowIndex)) continue;
           // column already filled
           if (shipType == 0 && this._isColumnFinished(j)) continue;
 
